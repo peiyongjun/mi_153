@@ -30,4 +30,18 @@ class Users extends Model
 		}
 		return null;//用户名 密码不存在都返回空
     }
+
+    public function checkUser (Request $request)
+    {
+        //验证用户名密码是否正确 
+        $name = $request->input('user');
+        $pass = $request->input('pwd');
+        $db = Users::where("username",$name)->where("status","!=","0")->first();
+        if($db){
+            if ($db->password == md5($pass)) {
+                return $db;//返回当前对象
+            }
+        }
+        return null;//用户名 密码不存在都返回空
+    }
 }

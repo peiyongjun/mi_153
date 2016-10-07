@@ -54,7 +54,7 @@
                 </div>
                 <div class="fixed_bot mar_phone_dis1">
                   <div id='btn'>
-                    <input class="btn332 btn_reg_1 submit-step" data-to="phone-step2" type="submit" value="立即注册">
+                    <input class="btn332 btn_reg_1 submit-step" name='but' disabled="disabled" data-to="phone-step2" type="submit" value="立即注册">
                   </div>
                   <img style="display:none;" src="Picture/36913bf9bc4c4c349e6f4b37734aac7f.gif" />
                   <p class="msg">
@@ -90,4 +90,17 @@
 </style>
 </body>
 <script type="text/javascript" src='home/js/register.js'></script>
+<script type="text/javascript">
+  $("input[name='icode']").focus(function(){
+    $('div[id="checkcode"]').next('span').remove();
+  }).blur(function(){
+    $('div[id="checkcode"]').next('span').remove();
+    // var v = $(this).val();
+    // alert("<?php echo $_SESSION['piccode'] ?>");
+    if($(this).val() != "<?php echo $_SESSION['piccode'] ?>" ){
+      $("<span>验证码不正确</span>").css('color','red').insertAfter('div[id="checkcode"]');
+      $("input[id='btn']").attr('disabled','disabled');
+    };
+  });
+</script>
 </html>

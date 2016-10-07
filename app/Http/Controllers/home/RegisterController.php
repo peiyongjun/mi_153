@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
 use App\Http\Controllers\Controller;
+
+use App\Models\Users;
 
 class RegisterController extends Controller
 {
@@ -16,8 +19,10 @@ class RegisterController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->username);
-    
+        $data = $request->only('username','email','password');
+        $data['password'] = md5($data['password']);
+        $id = Users::insert($data);
+        return redirect('/');
     }
 
 }

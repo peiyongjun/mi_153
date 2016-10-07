@@ -23,41 +23,45 @@ Route::get('/demo1', function () {
     return view('home.detail');
 });
 
-Route::get('/login', function () {
-    return view('home.login');
+Route::get('/login',"home\LoginController@index");
+Route::post('/login',"home\LoginController@doLogin");
+
+Route::group(['middleware'=>'homelogin'],function(){
+    Route::get('/user', function () {
+        return view('home.user.userCenter');
+    });
+
+    Route::get('/myOrder', function () {
+        return view('home.user.myOrder');
+    });
+
+    Route::get('/showOrder', function () {
+        return view('home.user.showOrder');
+    });
+
+    Route::get('/message', function () {
+        return view('home.user.message');
+    });
+
+    Route::get('/like', function () {
+        return view('home.user.like');
+    });
+
+    Route::get('/address', function () {
+        return view('home.user.address');
+    });
+
+    Route::get('/server', function () {
+        return view('home.user.server');
+    });
 });
 
 Route::get('/register/{uname}',"RegisterController@checkName");
 
-Route::post('/register',['middleware'=>'register'],"RegisterController@index");
-
-Route::get('/user', function () {
-	return view('home.user.userCenter');
+Route::group(['middleware'=>'register'],function(){
+    Route::post('/register',"home\RegisterController@index");
 });
 
-Route::get('/myOrder', function () {
-	return view('home.user.myOrder');
-});
-
-Route::get('/showOrder', function () {
-	return view('home.user.showOrder');
-});
-
-Route::get('/message', function () {
-	return view('home.user.message');
-});
-
-Route::get('/like', function () {
-	return view('home.user.like');
-});
-
-Route::get('/address', function () {
-	return view('home.user.address');
-});
-
-Route::get('/server', function () {
-	return view('home.user.server');
-});
 
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////后台相关路由///////////////////////////////////

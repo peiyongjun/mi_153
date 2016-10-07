@@ -21,7 +21,6 @@ class LoginController extends Controller
         //验证数据库中的用户信息 使用model类 
     	$user = new Users();
         $db = $user->checkAdmin($request);
-
     	//2 写入到session 
         if($db){
             session(['adminuser'=>$db]);//中间件验证的session
@@ -32,7 +31,7 @@ class LoginController extends Controller
             return back()->with('msg',"用户名或密码错误");
         }
     }
-    //3 执行退出 
+    //执行退出 
     public function logout()
     {
     	//清空session
