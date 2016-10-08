@@ -31,26 +31,26 @@
 				</div>
 			</div>
 		</div>
+		@if (session('user'))
 		<div class="topbar-info" id="J_userInfo">
-			@if (session('user'))
-			<div class="topbar-info" id="J_userInfo">
-				
-
-				<span class="user"><a rel="nofollow" class="user-name" href="//my.mi.com/portal" target="_blank" data-stat-id="5d33825e5b1cea4b" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-5d33825e5b1cea4b', '//my.mi.com/portal', 'pcpid']);"><span class="name"><?php session_start(); echo $_SESSION['user']; ?></span><i class="iconfont"></i></a><ul class="user-menu" style="display: none;"><li><a rel="nofollow" href="//my.mi.com/portal" target="_blank" data-stat-id="e0b9e1d1fa8052a2" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-e0b9e1d1fa8052a2', '//my.mi.com/portal', 'pcpid']);">个人中心</a></li><li><a rel="nofollow" href="//order.mi.com/user/comment" target="_blank" data-stat-id="6d05445058873c2c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-6d05445058873c2c', '//order.mi.com/user/comment', 'pcpid']);">评价晒单</a></li><li><a rel="nofollow" href="//order.mi.com/user/favorite" target="_blank" data-stat-id="32e2967e9a749d3d" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-32e2967e9a749d3d', '//order.mi.com/user/favorite', 'pcpid']);">我的喜欢</a></li><li><a rel="nofollow" href="http://account.xiaomi.com/" target="_blank" data-stat-id="6c2aba14bc7f649a" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-6c2aba14bc7f649a', 'http://account.xiaomi.com/', 'pcpid']);">小米账户</a></li><li><a rel="nofollow" href="//order.mi.com/site/logout" data-stat-id="770a31519c713b11" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-770a31519c713b11', '//order.mi.com/site/logout', 'pcpid']);">退出登录</a></li></ul></span>
-
-				<span class="sep">|</span>
-				<span class="message">
-					<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
-				</span>
-				<span class="sep">|</span>
-				<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
-			</div>
-			@else
+			<span class="user">
+				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
+				<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span></a>
+			</span>
+			<span class="sep">|</span>
+			<span class="message">
+				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
+			</span>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+		</div>
+		@else
+		<div class="topbar-info" id="J_userInfo">			
 			<a rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link" href="/register">注册</a>
-			@endif
 		</div>
+		@endif
 	</div>
 </div>
 <div class="site-header">
@@ -261,6 +261,7 @@
 		    s.parentNode.insertBefore(ms, s);
 		})();
 	</script>
+<<<<<<< HEAD
 	<script type="text/javascript">
 		// var username = document.getElementById('username')
 		// var ul = document.getElementById('userul');
@@ -271,5 +272,7 @@
 		// 	ul.style.display = 'none';
 		// }
 	</script>
+=======
+>>>>>>> 773568091fea19fd931ef4f96436ab1befc1bdc4
 </body>
 </html>
