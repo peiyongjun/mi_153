@@ -18,7 +18,6 @@
 
 Route::get('/','IndexController@index');
 
-
 Route::get('/demo1', function () {
     return view('home.detail');
 });
@@ -26,6 +25,8 @@ Route::get('/demo1', function () {
 Route::post('/login',"home\LoginController@doLogin");
 
 Route::get('/login',"home\LoginController@index");
+
+Route::get('/userlogout',"home\LoginController@logOut");
 
 Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/user', "home\UserController@index");

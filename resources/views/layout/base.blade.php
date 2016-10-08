@@ -35,7 +35,8 @@
 		<div class="topbar-info" id="J_userInfo">
 			<span class="user">
 				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
-				<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span></a>
+					<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span>
+				</a>
 			</span>
 			<span class="sep">|</span>
 			<span class="message">
@@ -43,6 +44,8 @@
 			</span>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>
 		@else
 		<div class="topbar-info" id="J_userInfo">			
