@@ -36,7 +36,7 @@
             <div class="container">
                 <div class="title">
                     <h2>
-       小米Max
+                  {{ $detail->name }}  
                     </h2>
                 </div>
                 <div class="nav">
@@ -60,7 +60,9 @@
                     <a href="//item.mi.com/buyphone/mimax" target="_blank" class="btn btn-primary btn-small J_buyBtn">立即购买</a>
                 </div>
             </div>
+            
         </div>
+        
         <div id="overall" class="mimax-overall J_visibleSectionContainer">
             <!-- 图片区域 -->
         </div>

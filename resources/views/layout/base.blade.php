@@ -81,12 +81,12 @@
 							@if($vv->pid == $v->id && $vv->status == 1)				
 								<li class="first">
 									<div class="figure figure-thumb">
-										<a href="/{{ $v->id }}/{{ $vv->id }}">
+										<a href="{{ URL(('/detail/').($vv->id)) }}">
 											<img src="Uploads/picture/{{ $vv->img }}" alt="{{ $vv->name }}" width="160" height="110"/>
 										</a>
 									</div>
 									<div class="title">
-										<a href="/{{ $v->id }}/{{ $vv->id }}">{{ $vv->name }}</a>
+										<a href="{{ URL(('/detail/').($vv->id)) }}">{{ $vv->name }}</a>
 									</div>
 									<p class="price">
 										 {{ $vv->price }}元起

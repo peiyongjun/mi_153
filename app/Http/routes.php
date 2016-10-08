@@ -18,9 +18,11 @@
 
 Route::get('/','IndexController@index');
 
-Route::get('/demo1', function () {
-    return view('home.detail');
-});
+//商品详情页
+Route::get('/detail/{id}','DetailController@index');
+
+//
+Route::get('/login',"home\LoginController@index");
 
 Route::post('/login',"home\LoginController@doLogin");
 
