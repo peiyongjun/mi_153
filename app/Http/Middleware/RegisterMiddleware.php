@@ -17,6 +17,7 @@ class RegisterMiddleware
      */
     public function handle($request, Closure $next)
     {
+        session_start();
         $db = Users::where("username",$request->username)->first();
         if(empty($request->username)){
             return redirect('/register');
@@ -27,6 +28,8 @@ class RegisterMiddleware
         }else if(empty($request->password) || ($request->password != $request->repass)){
             return redirect('/register');
         }else if(empty($request->icode)){
+            return redirect('/register');
+        }else if($request->icode != $_SESSION['piccode']){
             return redirect('/register');
         }
         return $next($request);

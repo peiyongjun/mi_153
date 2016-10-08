@@ -23,37 +23,24 @@ Route::get('/demo1', function () {
     return view('home.detail');
 });
 
-Route::get('/login',"home\LoginController@index");
 Route::post('/login',"home\LoginController@doLogin");
 
+Route::get('/login',"home\LoginController@index");
+
 Route::group(['middleware'=>'homelogin'],function(){
-    Route::get('/user', function () {
-        return view('home.user.userCenter');
-    });
+    Route::get('/user', "home\UserController@index");
+    
+    Route::get('/myOrder', "home\UserController@myOrder");
 
-    Route::get('/myOrder', function () {
-        return view('home.user.myOrder');
-    });
+    Route::get('/showOrder', "home\UserController@showOrder");
 
-    Route::get('/showOrder', function () {
-        return view('home.user.showOrder');
-    });
+    Route::get('/message', "home\UserController@message");
 
-    Route::get('/message', function () {
-        return view('home.user.message');
-    });
+    Route::get('/like', "home\UserController@like");
 
-    Route::get('/like', function () {
-        return view('home.user.like');
-    });
+    Route::get('/address', "home\UserController@address");
 
-    Route::get('/address', function () {
-        return view('home.user.address');
-    });
-
-    Route::get('/server', function () {
-        return view('home.user.server');
-    });
+    Route::get('/server', "home\UserController@server");
 });
 
 //注册页面
