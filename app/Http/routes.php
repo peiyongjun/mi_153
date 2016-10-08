@@ -43,7 +43,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/server', "home\UserController@server");
 });
 
-Route::get('/register/{uname}',"RegisterController@checkName");
+//注册页面
+Route::get('/register',"code\CodeController@captcha");
 
 Route::group(['middleware'=>'register'],function(){
     Route::post('/register',"home\RegisterController@index");
@@ -69,7 +70,7 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
-
+    Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
 	// Route::get('/goods_list_off', function () {
 	//     return view('admin.goods_list_off');
 	// });
@@ -77,11 +78,7 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
 	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
-
-    Route::get('/order_list_cancel', function () {
-        return view('admin.order_list_cancel');
-    });
-
+    
     Route::get('/order_list_all', function () {
         return view('admin.order_list_all');
     });
@@ -94,6 +91,3 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////其 它 路 由////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
-//注册页面
-Route::get('/register',"code\CodeController@captcha");
