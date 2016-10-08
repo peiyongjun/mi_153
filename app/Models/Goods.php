@@ -31,4 +31,10 @@ class Goods extends Model
     	$list = Goods::where("pid","!=","0")->get();
     	return $list;
     }
+
+    public function detail($id)
+    {
+        $detail = Goods::where("id","=","$id")->first();
+        return $detail;
+    }
 }
