@@ -227,11 +227,6 @@
 		        staticSite: '//static.mi.com',
 		        quickLoginUrl: 'https://account.xiaomi.com/pass/static/login.html'
 		    };
-		    MI.setLoginInfo.orderUrl = MI.GLOBAL_CONFIG.orderSite + '/user/order';
-		    MI.setLoginInfo.logoutUrl = MI.GLOBAL_CONFIG.logoutUrl;
-		    MI.setLoginInfo.init(MI.GLOBAL_CONFIG);
-		    MI.miniCart.init();
-		    MI.updateMiniCart();
 		})();
 	</script>
 	<script src="/home/js/home.min.js"></script>
