@@ -23,39 +23,31 @@ Route::get('/detail/{id}','DetailController@index');
 
 //
 Route::get('/login',"home\LoginController@index");
+
 Route::post('/login',"home\LoginController@doLogin");
 
+Route::get('/login',"home\LoginController@index");
+
+Route::get('/userlogout',"home\LoginController@logOut");
+
 Route::group(['middleware'=>'homelogin'],function(){
-    Route::get('/user', function () {
-        return view('home.user.userCenter');
-    });
+    Route::get('/user', "home\UserController@index");
+    
+    Route::get('/myOrder', "home\UserController@myOrder");
 
-    Route::get('/myOrder', function () {
-        return view('home.user.myOrder');
-    });
+    Route::get('/showOrder', "home\UserController@showOrder");
 
-    Route::get('/showOrder', function () {
-        return view('home.user.showOrder');
-    });
+    Route::get('/message', "home\UserController@message");
 
-    Route::get('/message', function () {
-        return view('home.user.message');
-    });
+    Route::get('/like', "home\UserController@like");
 
-    Route::get('/like', function () {
-        return view('home.user.like');
-    });
+    Route::get('/address', "home\UserController@address");
 
-    Route::get('/address', function () {
-        return view('home.user.address');
-    });
-
-    Route::get('/server', function () {
-        return view('home.user.server');
-    });
+    Route::get('/server', "home\UserController@server");
 });
 
-Route::get('/register/{uname}',"RegisterController@checkName");
+//注册页面
+Route::get('/register',"code\CodeController@captcha");
 
 Route::group(['middleware'=>'register'],function(){
     Route::post('/register',"home\RegisterController@index");
@@ -81,7 +73,7 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
-
+    Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
 	// Route::get('/goods_list_off', function () {
 	//     return view('admin.goods_list_off');
 	// });
@@ -89,11 +81,7 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
 	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
-
-    Route::get('/order_list_cancel', function () {
-        return view('admin.order_list_cancel');
-    });
-
+    
     Route::get('/order_list_all', function () {
         return view('admin.order_list_all');
     });
@@ -106,6 +94,3 @@ Route::group(["middleware"=>"AdminLogin"],function () {//设置路由组
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////其 它 路 由////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
-//注册页面
-Route::get('/register',"code\CodeController@captcha");

@@ -31,9 +31,29 @@
 				</div>
 			</div>
 		</div>
+		@if (session('user'))
 		<div class="topbar-info" id="J_userInfo">
-			<a rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a><span class="sep">|</span><a rel="nofollow" class="link" href="/register">注册</a>
+			<span class="user">
+				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
+					<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span>
+				</a>
+			</span>
+			<span class="sep">|</span>
+			<span class="message">
+				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
+			</span>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>
+		@else
+		<div class="topbar-info" id="J_userInfo">
+			<a rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link" href="/register">注册</a>
+		</div>
+		@endif
 	</div>
 </div>
 <div class="site-header">
@@ -227,11 +247,6 @@
 		        staticSite: '//static.mi.com',
 		        quickLoginUrl: 'https://account.xiaomi.com/pass/static/login.html'
 		    };
-		    MI.setLoginInfo.orderUrl = MI.GLOBAL_CONFIG.orderSite + '/user/order';
-		    MI.setLoginInfo.logoutUrl = MI.GLOBAL_CONFIG.logoutUrl;
-		    MI.setLoginInfo.init(MI.GLOBAL_CONFIG);
-		    MI.miniCart.init();
-		    MI.updateMiniCart();
 		})();
 	</script>
 	<script src="/home/js/home.min.js"></script>

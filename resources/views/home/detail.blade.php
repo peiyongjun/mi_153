@@ -2,7 +2,35 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="home/css/detailindex.min.css"/>
 <div class="xm-product-box">
-    
+    <div class="hd nav-bar J_headNav">
+        <div class="container">
+            <div class="title">
+                <h2>
+                    小米Max
+                </h2>
+            </div>
+            <div class="nav">
+                <span class="nav-switch">
+                <a class="link active" href="/mimax/">概述</a>
+                <span class="sep">|</span>
+                <a class="link" href="/mimax/experience/">体验</a>
+                <span class="sep">|</span>
+                <a class="link" href="/mimax/performance/">性能</a>
+                <span class="sep">|</span>
+                <a class="link" href="/mimax/miui/">MIUI 8</a>
+                <span class="sep">|</span>
+                <a class="link" href="/mimax/design/">设计</a>
+                <span class="sep">|</span>
+                <a class="link" href="/mimax/specs/">参数</a>
+                <span class="sep">|</span>
+                <a class="link" href="//www.mi.com/service/safe" target="_blank">意外保</a>
+                <span class="sep">|</span>
+                <a class="link" href="//order.mi.com/queue/f2code" target="_blank">F码通道</a>
+                </span>
+                <a href="//item.mi.com/buyphone/mimax" target="_blank" class="btn btn-primary btn-small J_buyBtn">立即购买</a>
+            </div>
+        </div>
+    </div>
     <div class="bd">
         <div class="nav-bar nav-bar-hidden J_fixNarBar">
             <div class="container">
