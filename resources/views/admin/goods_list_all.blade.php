@@ -5,11 +5,7 @@
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
-		editForm.action = "/user_list/"+id;
-		var phoneValue = $("#userPhone"+id).html();
-		var emailValue = $("#userEmail"+id).html();
-		$("#updatePhone").val(phoneValue);
-		$("#updateEmail").val(emailValue);
+		editForm.action = "/goods_list_all/"+id;
 	}
 </script>
 <div class="col-xs-12">
@@ -53,6 +49,9 @@
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
 					商品名
 				</th>
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
+					所属分类
+				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
 					缩略图
 				</th>
@@ -70,21 +69,24 @@
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
-			@foreach($data as $v)
-			@if($v->pid != 0)
+				<!-- <tr class="odd" align='center'>
+					<td colspan="2"><h3><b>类别</b></h3></td>
+					<td colspan="4"><h3><b>  <b></h3></td>
+					<td>
+						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>&nbsp;&nbsp;
+							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>&nbsp;&nbsp;
+							<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>
+						</div>
+					</td>
+				</tr> -->
+				@foreach($data as $v)
 				<tr class="odd" align='center'>
-					<td>
-						<h4>{{ $v->id }}</h4>
-					</td>
-					<td>
-						<h4>{{ $v->name }}</h4>
-					</td>
-					<td>
-						<img height=70 src="Uploads/picture/{{ $v->img }}">
-					</td>
-					<td>
-						{{ $v->price}}
-					</td>
+					<td><h4>{{ $v->id }}</h4></td>
+					<td><h4>{{ $v->name }}</h4></td>
+					<td><h3><b>{{ $type[$v->pid] }}</b></h3></td>
+					<td><img height=70 src="Uploads/picture/{{ $v->img }}"></td>
+					<td>{{ $v->price}}</td>
 					<td>
 						@if($v->status == 1)
 							<span class="label label-success arrowed-in arrowed-in-right">上架中</span>
@@ -94,10 +96,8 @@
 							<span class="label label-info arrowed-right arrowed-in">无库存</span>
 						@endif
 					</td>
+					<td>{{ $v->num }}</td>
 					<td>
-						{{ $v->num }}
-					</td>
-					<td class=" ">
 						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 							<a class="blue" href="#">
 								<i class="icon-zoom-in bigger-130"></i>
@@ -121,30 +121,7 @@
 						</div>
 					</td>
 				</tr>
-			@else
-				<tr class="odd" align='center'>
-				<td colspan="2">
-					<h3><b>类别</b></h3>
-				</td>
-				<td colspan="4">
-					<h3><b>{{ $v->name }}<b></h3>
-				</td>
-				<td class=" ">
-					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="blue" href="#">
-							<i class="icon-zoom-in bigger-130"></i>
-						</a>&nbsp;&nbsp;
-						<a class="green" href="#">
-							<i class="icon-pencil bigger-130"></i>
-						</a>&nbsp;&nbsp;
-						<a class="red" href="#">
-							<i class="icon-trash bigger-130"></i>
-						</a>
-					</div>
-				</td>
-			</tr>
-			@endif
-			@endforeach
+				@endforeach
 			</tbody>
 			</table>
 			<div class="row">
@@ -178,10 +155,8 @@
 							<label for="form-field-8">所属分类(不选默认添加新类别)</label>
 							<select class="form-control" id="form-field-select-1" name="pid">
 								<option value="type">--请选择--</option>
-								@foreach($data as $v)
-								@if($v->pid == 0)
-								<option value="{{ $v->id }}">{{ $v->name }}</option>
-								@endif
+								@foreach($type as $k => $v)
+								<option value="{{ $k }}">{{ $v }}</option>
 								@endforeach
 							</select>
 						</div>
@@ -224,22 +199,21 @@
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-       		<form action="" method="post" enctype="multipart/form-data">
+       		<form action="" method="post" enctype="multipart/form-data" name="editForm">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	                <h4 class="modal-title" id="myModalLabel">新增商品</h4>
 	            </div>
 	            <div class="modal-body">
-            		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       			<input type="hidden" name="_method" value="put">
 					<div class="widget-main">
 						<div>
 							<label for="form-field-8">所属分类(不选默认不做修改)</label>
 							<select class="form-control" id="form-field-select-1" name="pid">
 								<option value="type">--请选择--</option>
-								@foreach($data as $v)
-								@if($v->pid == 0)
-								<option value="{{ $v->id }}">{{ $v->name }}</option>
-								@endif
+								@foreach($type as $k => $v)
+								<option value="{{ $k }}">{{ $v }}</option>
 								@endforeach
 							</select>
 						</div>

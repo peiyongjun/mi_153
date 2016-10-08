@@ -6,7 +6,7 @@
         <div class="container">
             <div class="title">
                 <h2>
-       小米Max
+                    小米Max
                 </h2>
             </div>
             <div class="nav">

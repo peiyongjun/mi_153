@@ -15,21 +15,24 @@ class GoodsListController extends Controller
      *
      * @return 返回到所有商品视图
      */
-    public function index(Request $request)
+    public function index (Request $request)
     {
-        // $data = Goods::OrderBy("pid")->paginate(8);
-        // return view('admin.goods_list_all')->with(['data'=>$data]);
         $search = [];            //存放搜索条件的空数组
         if($request->has('name')){  //搜索条件查询
             //进行了搜索
             $name = $request->input('name');
-            $data = Goods::where("name","like","%{$name}%")->orderBy("pid")->paginate(8);
+            $data = Goods::where("pid","!=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(6);
             $search['name'] = $name; // 条件放进数组
         }else{
             //没有进行搜索
-            $data = Goods::orderBy("pid")->paginate(8);
+            $data = Goods::where("pid","!=",0)->OrderBy("pid")->paginate(6);
         }
-        return view('admin.goods_list_all')->with(['data'=>$data])->with(["search"=>$search]);
+        $types = Goods::where("pid","=",0)->get();
+        $type = [];
+        foreach ($types as $k => $v) {
+            $type[$v->id] = $v->name;
+        }
+        return view('admin.goods_list_all')->with(['data'=>$data])->with(["type"=>$type])->with(["search"=>$search]);
     }
 
     /**
@@ -71,7 +74,7 @@ class GoodsListController extends Controller
                 $filename = time().rand(1000,9999).".".$ext;//新文件名
                 $file->move("./Uploads/Picture/",$filename);
             }
-             // 执行缩放
+            // 执行缩放
             $img = new Image();
             $img->open("./Uploads/Picture/".$filename)->thumb(160,110)->save("./Uploads/Picture/".$filename);
             $data['img'] = $filename;
@@ -81,5 +84,59 @@ class GoodsListController extends Controller
         return back();
     }
 
+    /**
+     * 修改商品信息
+     * @param  Request $request 请求数据
+     * @param  int  $id         接收到的id
+     * @return None             上一页面
+     */
+    public function update (Request $request,$id)
+    {
+        $db = Goods::find($id);
+        //更新模型数据
+        $db->name = $request->input("name");
+        $db->price = $request->input("price");
+        $db->num = $request->input("num");
+        $db->pid = $request->input("pid");
+        $db->goodsTitle = $request->input("goodsTitle");
+        if ($request->file('img')) {
+            $file = $request->file('img');
+            if($file->isValid()){
+                $ext = $file->getClientOriginalExtension();//获得后缀 
+                $filename = time().rand(1000,9999).".".$ext;//新文件名
+                $file->move("./Uploads/Picture/",$filename);
+            }
+            // 执行缩放
+            $img = new Image();
+            $img->open("./Uploads/Picture/".$filename)->thumb(160,110)->save("./Uploads/Picture/".$filename);
+            $db->img = $filename;
+        }
+        $db->save();
+        return back();
+    }
 
+    /**
+     * 获取下架的货物信息
+     *
+     * @return 返回到所有商品视图
+     */
+    public function offIndex (Request $request)
+    {
+        $search = [];            //存放搜索条件的空数组
+        if($request->has('name')){  //搜索条件查询
+            //进行了搜索
+            $name = $request->input('name');
+            $data = Goods::where("pid","!=",0)->where("status","=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(6);
+            $search['name'] = $name; // 条件放进数组
+        }else{
+            //没有进行搜索
+            $data = Goods::where("pid","!=",0)->where("status","=",0)->OrderBy("pid")->paginate(6);
+        }
+        $types = Goods::where("pid","=",0)->get();
+        $type = [];
+        foreach ($types as $k => $v) {
+            $type[$v->id] = $v->name;
+        }
+        return view('admin.goods_list_all')->with(['data'=>$data])->with(["type"=>$type])->with(["search"=>$search]);
+    }
 }
