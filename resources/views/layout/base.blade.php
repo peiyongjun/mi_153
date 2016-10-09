@@ -64,7 +64,7 @@
 		<div class="header-nav">
 			<ul class="nav-list J_navMainList clearfix">
 				<li id="J_navCategory" class="nav-category">
-				<a class="link-category" href="//list.mi.com"><span class="text">全部商品分类</span></a>
+				<a class="link-category" href="/"><span class="text">全部商品分类</span></a>
 				</li>
 				@foreach($list as $v)
 				<li class="nav-item">
@@ -81,12 +81,12 @@
 							@if($vv->pid == $v->id && $vv->status == 1)				
 								<li class="first">
 									<div class="figure figure-thumb">
-										<a href="/{{ $vv->id }}">
+										<a href="/detail?id={{ $vv->id }}">
 											<img src="Uploads/picture/{{ $vv->img }}" alt="{{ $vv->name }}" width="160" height="110"/>
 										</a>
 									</div>
 									<div class="title">
-										<a href="/{{ $vv->id }}">{{ $vv->name }}</a>
+										<a href="/detail?id={{ $vv->id }}">{{ $vv->name }}</a>
 									</div>
 									<p class="price">
 										 {{ $vv->price }}元起
@@ -110,9 +110,7 @@
 		</div>
 	</div>
 </div>
-
 @yield('content')
-
 	<div class="site-footer">
 		<div class="container">
 			<div class="footer-service">
