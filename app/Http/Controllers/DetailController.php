@@ -17,7 +17,7 @@ class DetailController extends Controller
     public function index(Request $request)
     {
         $goods = new Goods();
-        $id = $request->id;  
+        $id = $request->id;
         $list = $goods->getType();
         $data = $goods->getAll();
         $detail = $goods->find($id);

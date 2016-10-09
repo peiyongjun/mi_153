@@ -19,17 +19,26 @@
 Route::get('/','IndexController@index');
 
 //商品详情页
-Route::get('/detail','DetailController@index');
+Route::get('/detail/{id}','DetailController@index');
 
+//注册页面
+Route::get('/register',"home\RegisterController@view");
+
+Route::get('/captcha/{tmp}',"home\RegisterController@captche");
+
+Route::group(['middleware'=>'register'],function(){
+    Route::post('/register',"home\RegisterController@index");
+});
+
+//登录页面
 Route::get('/login',"home\LoginController@index");
+
 Route::post('/login',"home\LoginController@doLogin");
 
 Route::get('/userlogout',"home\LoginController@logOut");
 
+//个人中心页面
 Route::group(['middleware'=>'homelogin'],function(){
-    //购买相关路由
-    Route::get("/buy","home\GoodsController@index");
-
     Route::get('/user', "home\UserController@index");
     
     Route::get('/myOrder', "home\UserController@myOrder");
@@ -49,12 +58,6 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/Info',"home\UserController@Info");
 });
 
-//注册页面
-Route::get('/register',"code\CodeController@captcha");
-Route::group(['middleware'=>'register'],function(){
-    Route::post('/register',"home\RegisterController@index");
-});
-
 
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////后台相关路由///////////////////////////////////
@@ -67,25 +70,28 @@ Route::post("/admin/login","Admin\LoginController@doLogin");//登录表单
 //后台页面路由群组
 Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设置路由组
 
-    Route::get("logout","Admin\LoginController@logout");//退出登陆
+    Route::get("/logout","Admin\LoginController@logout");//退出登陆
 
-    Route::get("user_list/toggle","Admin\UserListController@ToggleAccess");
-    Route::resource("user_list","Admin\UserListController");
+    Route::get("/user_list/toggle","Admin\UserListController@ToggleAccess");
+    Route::resource("/user_list","Admin\UserListController");
 
     //操作货物信息的路由
-    Route::get("goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
-    Route::resource("goods_list_all","Admin\GoodsListController");
-    Route::get("goods_list_off","Admin\GoodsListController@offIndex");
+    Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
+    Route::resource("/goods_list_all","Admin\GoodsListController");
+    Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
+	// Route::get('/goods_list_off', function () {
+	//     return view('admin.goods_list_off');
+	// });
 
-	Route::get('order_list_cancel', function () {
+	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
     
-    Route::get('order_list_all', function () {
+    Route::get('/order_list_all', function () {
         return view('admin.order_list_all');
     });
 
-    Route::get('order_list_off', function () {
+    Route::get('/order_list_off', function () {
         return view('admin.order_list_off');
     });
 });
