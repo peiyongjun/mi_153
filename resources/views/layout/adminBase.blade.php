@@ -83,7 +83,7 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="{{ asset('admin/assets/avatars/user.jpg') }}" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
 									<?php session_start();echo $_SESSION['adminname']; ?>
@@ -99,7 +99,7 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="/logout">
+									<a href="/admin/logout">
 										<i class="icon-off"></i>
 										退出登录
 									</a>

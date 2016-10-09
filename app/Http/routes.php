@@ -57,8 +57,8 @@ Route::group(['middleware'=>'register'],function(){
 /////////////////////////////////////////////////////////////////////////////////
 
 //后台登录路由配置
-Route::get("/admin_login","Admin\LoginController@index");//登录表单
-Route::post("/admin_login","Admin\LoginController@doLogin");//登录表单
+Route::get("/admin/login","Admin\LoginController@index");//登录表单
+Route::post("/admin/login","Admin\LoginController@doLogin");//登录表单
 
 //后台页面路由群组
 Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设置路由组

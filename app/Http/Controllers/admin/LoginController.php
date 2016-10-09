@@ -26,7 +26,7 @@ class LoginController extends Controller
             session(['adminuser'=>$db]);//中间件验证的session
             session_start();//开启session
             $_SESSION['adminname'] = $db->username; //username存入到全局session中
-            return redirect("/user_list");
+            return redirect("/admin/user_list");
         }else{
             return back()->with('msg',"用户名或密码错误");
         }
@@ -37,6 +37,6 @@ class LoginController extends Controller
     	//清空session
     	session()->forget("adminuser");
     	//实现页面跳转
-    	return redirect("/admin_login");
+    	return redirect("/admin/login");
     }
 }
