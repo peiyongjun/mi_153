@@ -19,7 +19,7 @@
 Route::get('/','IndexController@index');
 
 //商品详情页
-Route::get('/detail/{id}','DetailController@index');
+Route::get('/{id}','DetailController@index');
 
 //
 Route::get('/login',"home\LoginController@index");

@@ -6,6 +6,12 @@
 	{
 		var editForm = document.editForm;
 		editForm.action = "/goods_list_all/"+id;
+		var name = $("#name"+id).html();
+		var num = $("#num"+id).html();
+		var price = $("#price"+id).html();
+		$("#updateName").val(name);
+		$("#updateNum").val(num);
+		$("#updatePrice").val(price);
 	}
 </script>
 <div class="col-xs-12">
@@ -69,24 +75,13 @@
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
-				<!-- <tr class="odd" align='center'>
-					<td colspan="2"><h3><b>类别</b></h3></td>
-					<td colspan="4"><h3><b>  <b></h3></td>
-					<td>
-						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>&nbsp;&nbsp;
-							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>&nbsp;&nbsp;
-							<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>
-						</div>
-					</td>
-				</tr> -->
 				@foreach($data as $v)
 				<tr class="odd" align='center'>
 					<td><h4>{{ $v->id }}</h4></td>
-					<td><h4>{{ $v->name }}</h4></td>
+					<td><h4 id="name{{ $v->id }}">{{ $v->name }}</h4></td>
 					<td><h3><b>{{ $type[$v->pid] }}</b></h3></td>
 					<td><img height=70 src="Uploads/picture/{{ $v->img }}"></td>
-					<td>{{ $v->price}}</td>
+					<td id="price{{ $v->id }}">{{ $v->price}}</td>
 					<td>
 						@if($v->status == 1)
 							<span class="label label-success arrowed-in arrowed-in-right">上架中</span>
@@ -96,7 +91,7 @@
 							<span class="label label-info arrowed-right arrowed-in">无库存</span>
 						@endif
 					</td>
-					<td>{{ $v->num }}</td>
+					<td id="num{{ $v->id }}">{{ $v->num }}</td>
 					<td>
 						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 							<a class="blue" href="#">
@@ -220,17 +215,17 @@
 						<hr>
 						<div>
 							<label for="form-field-8">商品名</label>
-							<input class="form-control" id="form-field-8" name="name" placeholder="Goodsname">
+							<input class="form-control" id="updateName" name="name">
 						</div>
 						<hr>
 						<div>
 							<label for="form-field-9">单价</label>
-							<input class="form-control limited" id="form-field-9" name="price" placeholder="price">
+							<input class="form-control limited" id="updatePrice" name="price">
 						</div>
 						<hr>
 						<div>
 							<label for="form-field-9">库存数量</label>
-							<input class="form-control limited" id="form-field-9" name="num" placeholder="stock">
+							<input class="form-control limited" id="UpdateNum" name="num">
 						</div>
 						<hr>
 						<div>
