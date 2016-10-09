@@ -21,7 +21,12 @@ class LoginController extends Controller
         //验证数据库中的用户信息 使用model类 
     	$user = new Users();
         $db = $user->checkAdmin($request);
-    	//2 写入到session 
+        if($request->icode != session()->get('code')){
+            $mycode = session()->get("code");
+            // dd($mycode);
+            return back()->with("msg",'验证码错误');
+        }
+    	//写入到session 
         if($db){
             session(['adminuser'=>$db]);//中间件验证的session
             session_start();//开启session
@@ -38,5 +43,14 @@ class LoginController extends Controller
     	session()->forget("adminuser");
     	//实现页面跳转
     	return redirect("/admin/login");
+    }
+
+    public function captche(Request $request)
+    {
+        $builder = new CaptchaBuilder;
+        $builder->build(120,40); 
+        $phrase = $builder->getPhrase();
+        session()->flash('code',$phrase); //存储验证码
+        return response($builder->output())->header('Content-Type','image/jpeg');
     }
 }

@@ -80,18 +80,29 @@
 															<i class="icon-lock"></i>
 														</span>
 													</label>
-
 													<div class="space"></div>
 													@if(session("msg"))
 											            <span style="color:red">{{session("msg")}}</span>
 											        @endif
+											        <div class="row">
+											            <label class="col-xs-6 block clearfix">
+											              <!-- 验证码框 -->
+											              <span class="form-group input-icon input-icon-right">
+											                <input type="text" class="form-control" placeholder="Code" name="icode">
+											                <i class="icon-th"></i>
+											              </span>
+											            </label>
+											            <span class="col-xs-6">
+											              	<!-- 验证码图片 -->
+											              	<img id="code" alt="图片验证码"  title="看不清换一张" src="{{ URL('/captcha/time()') }}" onclick="this.src='{{ URL('/captcha') }}/'+Math.random()">
+											            </span>
+											        </div>
 													<div class="clearfix">
 														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="icon-key"></i>
 															登录
 														</button>
 													</div>
-
 													<div class="space-4"></div>
 												</fieldset>
 											</form>
