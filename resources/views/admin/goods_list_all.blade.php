@@ -5,12 +5,12 @@
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
-		editForm.action = "/goods_list_all/"+id;
+		editForm.action = "goods_list_all/"+id;
 		var name = $("#name"+id).html();
 		var num = $("#num"+id).html();
 		var price = $("#price"+id).html();
 		$("#updateName").val(name);
-		$("#updateNum").val(num);
+		$("#UpdateNum").val(num);
 		$("#updatePrice").val(price);
 	}
 </script>
@@ -80,7 +80,7 @@
 					<td><h4>{{ $v->id }}</h4></td>
 					<td><h4 id="name{{ $v->id }}">{{ $v->name }}</h4></td>
 					<td><h3><b>{{ $type[$v->pid] }}</b></h3></td>
-					<td><img height=70 src="Uploads/picture/{{ $v->img }}"></td>
+					<td><img height=70 src='{!! asset('Uploads/picture/'."$v->img") !!}'></td>
 					<td id="price{{ $v->id }}">{{ $v->price}}</td>
 					<td>
 						@if($v->status == 1)
@@ -102,13 +102,13 @@
 							</a>&nbsp;&nbsp;
 							@if($v->status != 0)
 								<!-- 下架 -->
-								<a class="red" href="/goods_list_all/toggle?id={{$v->id }}">
+								<a class="red" href="goods_list_all/toggle?id={{$v->id }}">
 									<i class="icon-ban-circle bigger-130"></i>
 								</a>
 								&nbsp;&nbsp;
 							@elseif($v->status == 0)
 								<!-- 上架 -->
-								<a class="green" href="/goods_list_all/toggle?id={{$v->id }}">
+								<a class="green" href="goods_list_all/toggle?id={{$v->id }}">
 									<i class="icon-check bigger-130"></i>
 								</a>
 								&nbsp;&nbsp;
@@ -149,7 +149,7 @@
 						<div>
 							<label for="form-field-8">所属分类(不选默认添加新类别)</label>
 							<select class="form-control" id="form-field-select-1" name="pid">
-								<option value="type">--请选择--</option>
+								<option value="0">--请选择--</option>
 								@foreach($type as $k => $v)
 								<option value="{{ $k }}">{{ $v }}</option>
 								@endforeach

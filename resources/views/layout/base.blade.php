@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=1226"/>
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="home/css/buy-choose.min.css">
 <link rel="stylesheet" href="/home/css/base.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
@@ -89,7 +90,7 @@
 										<a href="/detail?id={{ $vv->id }}">{{ $vv->name }}</a>
 									</div>
 									<p class="price">
-										 {{ $vv->price }}元起
+										{{ $vv->price }}元起
 									</p>
 								</li>
 							@endif

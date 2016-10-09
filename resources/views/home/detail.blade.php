@@ -15,7 +15,7 @@
                 <span class="sep">|</span>
                 <a class="link" href="/mimax/specs/">参数</a>
                 </span>
-                <a href="//item.mi.com/buyphone/mimax" target="_blank" class="btn btn-primary btn-small J_buyBtn">立即购买</a>
+                <a href="/buy?id={{ $detail->id }}" target="_blank" class="btn btn-primary btn-small J_buyBtn">立即购买</a>
             </div>
         </div>
     </div>

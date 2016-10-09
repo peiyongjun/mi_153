@@ -94,11 +94,13 @@ class GoodsListController extends Controller
     {
         $db = Goods::find($id);
         //更新模型数据
-        $db->name = $request->input("name");
-        $db->price = $request->input("price");
-        $db->num = $request->input("num");
-        $db->pid = $request->input("pid");
-        $db->goodsTitle = $request->input("goodsTitle");
+        $db->name = $request->name;
+        $db->price = $request->price;
+        $db->num = $request->num;
+        if (!($db->pid)) {
+           $db->pid = $request->pid;
+        }
+        $db->goodsTitle = $request->goodsTitle;
         if ($request->file('img')) {
             $file = $request->file('img');
             if($file->isValid()){

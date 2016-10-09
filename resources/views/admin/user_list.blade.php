@@ -6,7 +6,7 @@
 	{
 		if (confirm('确定删除该用户吗?')) {
 			var myform = document.myform;
-			myform.action = "/user_list/"+id;
+			myform.action = "user_list/"+id;
 			myform.submit();
 		}
 	}
@@ -15,7 +15,7 @@
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
-		editForm.action = "/user_list/"+id;
+		editForm.action = "user_list/"+id;
 		var phoneValue = $("#userPhone"+id).html();
 		var emailValue = $("#userEmail"+id).html();
 		$("#updatePhone").val(phoneValue);
@@ -100,13 +100,13 @@
 						&nbsp;&nbsp;
 						@if($v->status != 0)
 							<!-- 禁用 -->
-							<a class="red" href="/user_list/toggle?id={{$v->id }}">
+							<a class="red" href="user_list/toggle?id={{$v->id }}">
 								<i class="icon-ban-circle bigger-130"></i>
 							</a>
 							&nbsp;&nbsp;
 						@elseif($v->status == 0)
 							<!-- 启用 -->
-							<a class="green" href="/user_list/toggle?id={{$v->id }}">
+							<a class="green" href="user_list/toggle?id={{$v->id }}">
 								<i class="icon-check bigger-130"></i>
 							</a>
 							&nbsp;&nbsp;
