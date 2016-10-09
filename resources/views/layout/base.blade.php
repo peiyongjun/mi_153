@@ -264,18 +264,5 @@
 		    s.parentNode.insertBefore(ms, s);
 		})();
 	</script>
-<<<<<<< HEAD
-	<script type="text/javascript">
-		// var username = document.getElementById('username')
-		// var ul = document.getElementById('userul');
-		// username.onmouseover = function(){
-		// 	ul.style.display = '';
-		// }
-		// username.onmouseout = function(){
-		// 	ul.style.display = 'none';
-		// }
-	</script>
-=======
->>>>>>> 773568091fea19fd931ef4f96436ab1befc1bdc4
 </body>
 </html>

@@ -26,8 +26,6 @@ Route::get('/login',"home\LoginController@index");
 
 Route::post('/login',"home\LoginController@doLogin");
 
-Route::get('/login',"home\LoginController@index");
-
 Route::get('/userlogout',"home\LoginController@logOut");
 
 Route::group(['middleware'=>'homelogin'],function(){
@@ -44,6 +42,10 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/address', "home\UserController@address");
 
     Route::get('/server', "home\UserController@server");
+
+    Route::get('/userSafe',"home\UserController@userSafe");
+
+    Route::get('/Info',"home\UserController@Info");
 });
 
 //注册页面
