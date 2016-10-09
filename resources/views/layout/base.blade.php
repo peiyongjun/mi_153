@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=1226"/>
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="home/css/buy-choose.min.css">
 <link rel="stylesheet" href="/home/css/base.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
@@ -31,9 +32,29 @@
 				</div>
 			</div>
 		</div>
+		@if (session('user'))
 		<div class="topbar-info" id="J_userInfo">
-			<a rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a><span class="sep">|</span><a rel="nofollow" class="link" href="/register">注册</a>
+			<span class="user">
+				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
+					<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span>
+				</a>
+			</span>
+			<span class="sep">|</span>
+			<span class="message">
+				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
+			</span>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>
+		@else
+		<div class="topbar-info" id="J_userInfo">			
+			<a rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
+			<span class="sep">|</span>
+			<a rel="nofollow" class="link" href="/register">注册</a>
+		</div>
+		@endif
 	</div>
 </div>
 <div class="site-header">
@@ -44,7 +65,7 @@
 		<div class="header-nav">
 			<ul class="nav-list J_navMainList clearfix">
 				<li id="J_navCategory" class="nav-category">
-				<a class="link-category" href="//list.mi.com"><span class="text">全部商品分类</span></a>
+				<a class="link-category" href="/"><span class="text">全部商品分类</span></a>
 				</li>
 				@foreach($list as $v)
 				<li class="nav-item">
@@ -61,15 +82,15 @@
 							@if($vv->pid == $v->id && $vv->status == 1)				
 								<li class="first">
 									<div class="figure figure-thumb">
-										<a href="/{{ $v->id }}/{{ $vv->id }}">
+										<a href="/detail?id={{ $vv->id }}">
 											<img src="Uploads/picture/{{ $vv->img }}" alt="{{ $vv->name }}" width="160" height="110"/>
 										</a>
 									</div>
 									<div class="title">
-										<a href="/{{ $v->id }}/{{ $vv->id }}">{{ $vv->name }}</a>
+										<a href="/detail?id={{ $vv->id }}">{{ $vv->name }}</a>
 									</div>
 									<p class="price">
-										 {{ $vv->price }}元起
+										{{ $vv->price }}元起
 									</p>
 								</li>
 							@endif
@@ -90,9 +111,7 @@
 		</div>
 	</div>
 </div>
-
 @yield('content')
-
 	<div class="site-footer">
 		<div class="container">
 			<div class="footer-service">
@@ -227,11 +246,6 @@
 		        staticSite: '//static.mi.com',
 		        quickLoginUrl: 'https://account.xiaomi.com/pass/static/login.html'
 		    };
-		    MI.setLoginInfo.orderUrl = MI.GLOBAL_CONFIG.orderSite + '/user/order';
-		    MI.setLoginInfo.logoutUrl = MI.GLOBAL_CONFIG.logoutUrl;
-		    MI.setLoginInfo.init(MI.GLOBAL_CONFIG);
-		    MI.miniCart.init();
-		    MI.updateMiniCart();
 		})();
 	</script>
 	<script src="/home/js/home.min.js"></script>

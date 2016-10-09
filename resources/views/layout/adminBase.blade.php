@@ -6,8 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="_token" content="{{ csrf_token() }}"/>
 		<!-- basic styles -->
-		<link href="admin/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="admin/assets/css/font-awesome.min.css" />
+		<link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/font-awesome.min.css') }}" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="admin/assets/css/font-awesome-ie7.min.css" />
@@ -21,9 +21,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="admin/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="admin/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="admin/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/ace.min.css') }}" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/ace-rtl.min.css') }}" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/ace-skins.min.css') }}" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="admin/assets/css/ace-ie.min.css" />
@@ -33,7 +33,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="admin/assets/js/ace-extra.min.js"></script>
+		<script src="{{ asset('admin/assets/js/ace-extra.min.js') }}"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -83,7 +83,7 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="{{ asset('admin/assets/avatars/user.jpg') }}" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
 									<?php session_start();echo $_SESSION['adminname']; ?>
@@ -99,7 +99,7 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="/logout">
+									<a href="/admin/logout">
 										<i class="icon-off"></i>
 										退出登录
 									</a>
@@ -158,9 +158,9 @@
 
 					<ul class="nav nav-list" id="left-list">
 						<li>
-							<a href="/user_list">
+							<a href="/admin/user_list">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text" id="/user_list"> 用户管理 </span>
+								<span class="menu-text" id="user_list"> 用户管理 </span>
 							</a>
 						</li>
 
@@ -173,26 +173,19 @@
                             </a>
                             <ul class="submenu">
                                 <li id="/goods_list_all">
-                                    <a href="/goods_list_all">
+                                    <a href="/admin/goods_list_all">
                                         <i class="icon-double-angle-right"></i>
                                         所有商品
                                     </a>
                                 </li>
-                                <li id="goods_list_on">
-                                    <a href="/goods_list_on">
-                                        <i class="icon-double-angle-right"></i>
-                                        已上架商品
-                                    </a>
-                                </li>
                                 <li id="goods_list_off">
-                                    <a href="/goods_list_off">
+                                    <a href="/admin/goods_list_off">
                                         <i class="icon-double-angle-right"></i>
                                         已下架商品
                                     </a>
                                 </li>
                             </ul>
                         </li>
-
 						<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-desktop"></i>
@@ -201,19 +194,19 @@
 							</a>
 							<ul class="submenu">
 								<li id="order_list_all">
-									<a href="/order_list_all">
+									<a href="/admin/order_list_all">
 										<i class="icon-double-angle-right"></i>
 										所有订单
 									</a>
 								</li>
                                 <li>
-                                    <a href="/order_list_off">
+                                    <a href="/admin/order_list_off">
                                         <i class="icon-double-angle-right"></i>
                                         未发货订单
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/order_list_cancel">
+                                    <a href="/admin/order_list_cancel">
                                         <i class="icon-double-angle-right"></i>
                                         已取消订单
                                     </a>
@@ -347,7 +340,7 @@
 		<!--[if !IE]> -->
 
 		<!--<script src="admin/assets/js/jquery-2.0.3.min.js"></script>-->
-		<script src="admin/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="{{ asset('admin/assets/js/jquery-2.0.3.min.js') }}"></script>
 		
 
 		<!-- <![endif]-->
@@ -373,8 +366,8 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>
-		<script src="admin/assets/js/bootstrap.min.js"></script>
-		<script src="admin/assets/js/typeahead-bs2.min.js"></script>
+		<script src="{{ asset('admin/assets/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/typeahead-bs2.min.js') }}"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -382,20 +375,20 @@
 		  <script src="admin/assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="/admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="/admin/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="/admin/assets/js/jquery.slimscroll.min.js"></script>
-		<script src="/admin/assets/js/jquery.easy-pie-chart.min.js"></script>
-		<script src="/admin/assets/js/jquery.sparkline.min.js"></script>
-		<script src="/admin/assets/js/flot/jquery.flot.min.js"></script>
-		<script src="/admin/assets/js/flot/jquery.flot.pie.min.js"></script>
-        <script src="/admin/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="{{ asset('admin/assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/jquery.ui.touch-punch.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/jquery.slimscroll.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/jquery.easy-pie-chart.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/jquery.sparkline.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/flot/jquery.flot.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/flot/jquery.flot.pie.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/flot/jquery.flot.resize.min.js') }}"></script>
 		<!-- <script src="/admin/assets/js/jquery-1.8.3.min.js"></script> -->
 
 		<!-- ace scripts -->
 
-		<script src="/admin/assets/js/ace-elements.min.js"></script>
-		<script src="/admin/assets/js/ace.min.js"></script>
+		<script src="{{ asset('admin/assets/js/ace-elements.min.js') }}"></script>
+		<script src="{{ asset('admin/assets/js/ace.min.js') }}"></script>
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">

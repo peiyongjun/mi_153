@@ -28,7 +28,7 @@
                         <i class="iconfont"></i>
                         添加新地址
                     </div>
-                                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -7,8 +7,8 @@
 
 		<!-- basic styles -->
 
-		<link href="admin/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="admin/assets/css/font-awesome.min.css" />
+		<link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/font-awesome.min.css') }}" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="admin/assets/css/font-awesome-ie7.min.css" />
@@ -18,12 +18,12 @@
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="admin/assets/css/font-Open-Sans.css" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/font-Open-Sans.css') }}" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="admin/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="admin/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/ace.min.css') }}" />
+		<link rel="stylesheet" href="{{ asset('admin/assets/css/ace-rtl.min.css') }}" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="admin/assets/css/ace-ie.min.css" />
@@ -104,8 +104,5 @@
 				</div><!-- /.row -->
 			</div>
 		</div><!-- /.main-container -->
-
-		
-	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
