@@ -100,7 +100,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="https://account.xiaomi.com/" target="_blank" data-stat-id="35eef2fd7467d6ca" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-35eef2fd7467d6ca', 'https://account.xiaomi.com/', 'pcpid']);">个人信息</a></li>
+                                <li><a href="/userSafe" target="_blank" data-stat-id="35eef2fd7467d6ca" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-35eef2fd7467d6ca', 'https://account.xiaomi.com/', 'pcpid']);">个人信息</a></li>
                                 <li><a href="https://account.xiaomi.com/pass/auth/security/home#service=setPassword" target="_blank" data-stat-id="ae5ee0188510f1e6" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-ae5ee0188510f1e6', 'https://account.xiaomi.com/pass/auth/security/home#service=setPassword', 'pcpid']);">修改密码</a></li>
                             </ul>
                         </div>

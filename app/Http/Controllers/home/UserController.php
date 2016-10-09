@@ -71,4 +71,14 @@ class UserController extends Controller
         return view('home.user.server')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
+    public function userSafe()
+    {
+        return view('home.user.userSafe');
+    }
+
+    public function Info()
+    {
+        return view('home.user.Info');
+    }
+
 }

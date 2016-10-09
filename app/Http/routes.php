@@ -43,6 +43,10 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/address', "home\UserController@address");
 
     Route::get('/server', "home\UserController@server");
+
+    Route::get('/userSafe',"home\UserController@userSafe");
+
+    Route::get('/Info',"home\UserController@Info");
 });
 
 //注册页面

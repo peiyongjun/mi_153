@@ -21,7 +21,7 @@
           <h4 class="title_big30">注册小米帐号</h4>
         </div>
         <div id="register_form">
-          <form action="/register" method="post" name='myform'>
+          <form action="/home/register" method="post" name='myform'>
               <input type='hidden' name='_token' value={{ csrf_token() }}>
               <div class="phone_step1">
                 <div class="inputbg">
