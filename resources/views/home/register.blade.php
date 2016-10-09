@@ -21,7 +21,7 @@
           <h4 class="title_big30">注册小米帐号</h4>
         </div>
         <div id="register_form">
-          <form action="/home/register" method="post" name='myform'>
+          <form action="/register" method="post" name='myform'>
               <input type='hidden' name='_token' value={{ csrf_token() }}>
               <div class="phone_step1">
                 <div class="inputbg">
@@ -48,15 +48,17 @@
                   <label class="labelbox" for="">
                     <input class="code" type="text" name="icode" autocomplete="off" placeholder="图片验证码">
                   </label>
-                  <img id="code" alt="图片验证码"  title="看不清换一张" src="{{ $bb }}">
+                  <img id="code" alt="图片验证码"  title="看不清换一张" src="{{ URL('/captcha/time()') }}" onclick="this.src='{{ URL('/captcha') }}/'+Math.random()">
                 </div>
+                @if(session('msg'))
+                <p class="login-box-msg" style="color:red;">{{ session('msg') }}</p>
+                @endif
                 <div class="err_tip send-left-times">
                 </div>
                 <div class="fixed_bot mar_phone_dis1">
                   <div id='btn'>
                     <input class="btn332 btn_reg_1 submit-step" name='but' disabled="disabled" data-to="phone-step2" type="submit" value="立即注册">
                   </div>
-                  <img style="display:none;" src="Picture/36913bf9bc4c4c349e6f4b37734aac7f.gif" />
                   <p class="msg">
                   点击“立即注册”，即表示您同意并愿意遵守小米
                   <a href="http://www.miui.com/res/doc/eula/cn.html"  target="_blank" title="用户协议">用户协议</a>
@@ -90,17 +92,4 @@
 </style>
 </body>
 <script type="text/javascript" src='home/js/register.js'></script>
-<script type="text/javascript">
-  $("input[name='icode']").focus(function(){
-    $('div[id="checkcode"]').next('span').remove();
-  }).blur(function(){
-    $('div[id="checkcode"]').next('span').remove();
-    // var v = $(this).val();
-    // alert("<?php echo $_SESSION['piccode'] ?>");
-    if($(this).val() != "<?php echo $_SESSION['piccode'] ?>" ){
-      $("<span>验证码不正确</span>").css('color','red').insertAfter('div[id="checkcode"]');
-      $("input[id='btn']").attr('disabled','disabled');
-    };
-  });
-</script>
 </html>
