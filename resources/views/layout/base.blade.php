@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=1226"/>
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="home/css/buy-choose.min.css">
 <link rel="stylesheet" href="/home/css/base.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
@@ -64,7 +65,7 @@
 		<div class="header-nav">
 			<ul class="nav-list J_navMainList clearfix">
 				<li id="J_navCategory" class="nav-category">
-				<a class="link-category" href="//list.mi.com"><span class="text">全部商品分类</span></a>
+				<a class="link-category" href="/"><span class="text">全部商品分类</span></a>
 				</li>
 				@foreach($list as $v)
 				<li class="nav-item">
@@ -81,15 +82,15 @@
 							@if($vv->pid == $v->id && $vv->status == 1)				
 								<li class="first">
 									<div class="figure figure-thumb">
-										<a href="{{ URL(('/detail/').($vv->id)) }}">
+										<a href="/detail?id={{ $vv->id }}">
 											<img src="Uploads/picture/{{ $vv->img }}" alt="{{ $vv->name }}" width="160" height="110"/>
 										</a>
 									</div>
 									<div class="title">
-										<a href="{{ URL(('/detail/').($vv->id)) }}">{{ $vv->name }}</a>
+										<a href="/detail?id={{ $vv->id }}">{{ $vv->name }}</a>
 									</div>
 									<p class="price">
-										 {{ $vv->price }}元起
+										{{ $vv->price }}元起
 									</p>
 								</li>
 							@endif
@@ -110,9 +111,7 @@
 		</div>
 	</div>
 </div>
-
 @yield('content')
-
 	<div class="site-footer">
 		<div class="container">
 			<div class="footer-service">
