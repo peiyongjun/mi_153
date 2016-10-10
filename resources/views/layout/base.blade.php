@@ -10,6 +10,7 @@
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
+<link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
 <body>
@@ -82,7 +83,7 @@
 								<li class="first">
 									<div class="figure figure-thumb">
 										<a href="{{ URL(('/detail/').($vv->id)) }}">
-											<img src="Uploads/picture/{{ $vv->img }}" alt="{{ $vv->name }}" width="160" height="110"/>
+											<img src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="160" height="110"/>
 										</a>
 									</div>
 									<div class="title">
@@ -191,10 +192,10 @@
 				</p>
 			</div>
 			<div class="info-links">
-				<a rel="nofollow" href="//privacy.truste.com/privacy-seal/validation?rid=4fc28a8c-6822-4980-9c4b-9fdc69b94eb8&lang=zh-cn" target="_blank"><img rel="nofollow" src="home/Picture/0fa32abd71d7434c81f2c9589d6201a4.gif" alt="TRUSTe Privacy Certification"/></a>
-				<a rel="nofollow" href="//search.szfw.org/cert/l/CX20120926001783002010" target="_blank"><img rel="nofollow" src="home/Picture/v-logo-2.png" alt="诚信网站"/></a>
-				<a rel="nofollow" href="https://ss.knet.cn/verifyseal.dll?sn=e12033011010015771301369&ct=df&pa=461082" target="_blank"><img rel="nofollow" src="home/Picture/v-logo-1.png" alt="可信网站"/></a>
-				<a rel="nofollow" href="http://www.315online.com.cn/member/315140007.html" target="_blank"><img rel="nofollow" src="home/Picture/v-logo-3.png" alt="网上交易保障中心"/></a>
+				<a rel="nofollow" href="//privacy.truste.com/privacy-seal/validation?rid=4fc28a8c-6822-4980-9c4b-9fdc69b94eb8&lang=zh-cn" target="_blank"><img rel="nofollow" src="{{  asset('home/Picture/0fa32abd71d7434c81f2c9589d6201a4.gif') }}" alt="TRUSTe Privacy Certification"/></a>
+				<a rel="nofollow" href="//search.szfw.org/cert/l/CX20120926001783002010" target="_blank"><img rel="nofollow" src="{{  asset('home/Picture/v-logo-2.png') }}" alt="诚信网站"/></a>
+				<a rel="nofollow" href="https://ss.knet.cn/verifyseal.dll?sn=e12033011010015771301369&ct=df&pa=461082" target="_blank"><img rel="nofollow" src="{{  asset('home/Picture/v-logo-1.png') }}" alt="可信网站"/></a>
+				<a rel="nofollow" href="http://www.315online.com.cn/member/315140007.html" target="_blank"><img rel="nofollow" src="{{  asset('home/Picture/v-logo-3.png') }}" alt="网上交易保障中心"/></a>
 			</div>
 		</div>
 		<div class="slogan ir">

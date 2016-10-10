@@ -39,6 +39,8 @@ Route::get('/userlogout',"home\LoginController@logOut");
 
 //个人中心页面
 Route::group(['middleware'=>'homelogin'],function(){
+    Route::get("/buy","DetailController@buyNow");
+
     Route::get('/user', "home\UserController@index");
     
     Route::get('/myOrder', "home\UserController@myOrder");
