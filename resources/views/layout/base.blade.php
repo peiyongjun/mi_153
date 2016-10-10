@@ -10,6 +10,7 @@
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
+<link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
 <body>
