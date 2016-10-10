@@ -60,6 +60,10 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/Info',"home\UserController@Info");
 
     Route::post('/Info',"home\UserController@addInfo");
+
+    Route::post('/doUpload',"home\UserController@doUpload");
+
+    Route::post('/pwd',"home\UserController@pwd");
 });
 
 
