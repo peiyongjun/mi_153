@@ -1,6 +1,6 @@
 ﻿@extends('layout.base')
 @section('content')
-<link rel="stylesheet" type="text/css" href="home/css/detailindex.min.css"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('home/css/detailindex.min.css') }}"/>
 <div class="xm-product-box">
     <div class="hd nav-bar J_headNav">
         <div class="container">
@@ -23,7 +23,7 @@
         <center>
             <div id="overall" class="mimax-overall J_visibleSectionContainer">
             <!-- 图片区域 -->
-                <img width="1226" src="/Uploads/detail/{{ $detail->detail }}">
+                <img width="1226" src='{!! asset('Uploads/detail/'."$detail->detail") !!}'>
             </div>
         </center>
         
@@ -47,8 +47,8 @@
         </div>
     </div>
 </div>
-<script src="home/js/base.min.js"></script>
-<script type="text/javascript" src="home/js/index.min.js"></script>
-<script src="home/js/xmsg_ti.js"></script>
+<script src="{{ asset('home/js/base.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('home/js/index.min.js')}}"></script>
+<script src="{{ asset('home/js/xmsg_ti.js')}}"></script>
 @endsection
 
