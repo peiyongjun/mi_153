@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Goods;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Users;
 
 class UserController extends Controller
 {
@@ -78,7 +79,28 @@ class UserController extends Controller
 
     public function Info()
     {
-        return view('home.user.Info');
+        $id = session()->get('user')['id'];
+        $user = Users::find($id);
+        if($user->birthday){
+            $birthday = explode('/',$user->birthday);
+        }else{
+            $birthday = "111";
+        }
+        // dd($birthday);
+        return view('home.user.Info')->with(["user"=>$user])->with(['birthday'=>$birthday]);
+    }
+
+    public function addInfo(Request $request)
+    {
+        $id = $request->id;
+        $user = Users::find($id);
+        $user->name = $request->nickname;
+        if(!empty($request->YYYY) && !empty($request->MM) && !empty($request->DD)){
+            $user->birthday = $request->YYYY.'/'.$request->MM.'/'.$request->DD;
+        }
+        $user->sex = $request->sex;
+        $user->save();
+        return redirect('/Info');
     }
 
 }

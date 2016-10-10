@@ -56,6 +56,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/userSafe',"home\UserController@userSafe");
 
     Route::get('/Info',"home\UserController@Info");
+
+    Route::post('/Info',"home\UserController@addInfo");
 });
 
 

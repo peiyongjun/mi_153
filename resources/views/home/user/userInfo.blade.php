@@ -10,7 +10,6 @@
 </script>
 <link type="text/css" rel="stylesheet" href="/home/css/reset.css">
 <link type="text/css" rel="stylesheet" href="/home/css/layout.css">
-<link type="text/css" rel="stylesheet" href="/home/css/modacctip.css">
 <style type="text/css">
 .score_1{color:rgb(255,0,0)}
 .score_2{color:rgb(255,102,0)}
@@ -300,10 +299,10 @@
       <div class="n-main-nav clearfix">
         <ul>
           <li id="safe">
-            <a href="/userSafe" title="帐号安全">帐号安全</a>
+            <a href="{{ URL('/userSafe') }}" title="帐号安全">帐号安全</a>
           </li>
           <li id='info'>
-            <a href="/Info" title="个人信息">个人信息</a>
+            <a href="{{ URL('/Info') }}" title="个人信息">个人信息</a>
           </li>
           <!--<li>
             <a href="">登录设备</a>
