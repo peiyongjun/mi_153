@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="col-xs-12">
-	<h3 class="header smaller lighter blue">所有商品管理</h3>
+	<h3 class="header smaller lighter blue">待发货订单管理</h3>
 	<div class="table-responsive">
 		<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 			<div class="row">
@@ -40,10 +40,10 @@
 					商品数量
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
-					总价
+					收件人姓名/联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
-					地址
+					地址:省-市-地区
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					状态
@@ -53,27 +53,29 @@
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
+			@foreach($list as $v)
+			@if($v->order_status == 2)
 			<tr class="odd">
 				<td class=" ">
-					654816849685
+				{{ $v->id }}		
 				</td>
 				<td class=" ">
-					xmm
+				{{ $v->username }}
 				</td>
 				<td class=" ">
-					小米5
+				{{ $v->name }}
 				</td>
 				<td class=" ">
-					5
+				{{ $v->goods_num }}
 				</td>
 				<td class=" ">
-					6666
+				{{ $v->del_name }}/{{ $v->phone }}
 				</td>
 				<td class="hidden-480 ">
-					北京市昌平区撒旦法撒旦法撒旦法
+				{{ $v->province }}-{{ $v->city }}-{{ $v->district }}
 				</td>
 				<td class=" ">
-					已发货
+					<span class="label label-danger arrowed">待发货</span>
 				</td>
 				<td class=" ">
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -89,6 +91,8 @@
 					</div>
 				</td>
 			</tr>
+			@endif
+			@endforeach
 			</tbody>
 			</table>
 			<div class="row">
@@ -99,13 +103,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
-						<ul class="pagination"> 
-							<li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li>
-						</ul>  
+						{!! $list->render() !!}
 					</div>
 				</div>
 			</div>

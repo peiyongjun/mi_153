@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="col-xs-12">
-	<h3 class="header smaller lighter blue">所有商品管理</h3>
+	<h3 class="header smaller lighter blue">所有商品订单管理</h3>
 	<div class="table-responsive">
 		<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 			<div class="row">
@@ -20,7 +20,15 @@
 				</div> -->
 				<div class="col-sm-3">
 					<div class="dataTables_filter" id="sample-table-2_filter">
-						<label>Search: <input type="text" aria-controls="sample-table-2"></label>
+						<form action="" class="form-search">
+							<!-- 搜索表单 -->
+								<input type="text" placeholder="请输入关键字" name="name" autocomplete="off">
+								<button type="submit" class="bn  bigger-110 blue">
+									<a>
+										<i class="icon-search nav-search-icon"></i>
+									</a>
+								</button>
+							</form>s
 					</div>
 				</div>
 			</div>
@@ -40,10 +48,10 @@
 					商品数量
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
-					总价
+					收件人姓名/联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
-					地址
+					地址:省-市-地区
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					状态
@@ -53,32 +61,39 @@
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
+			@foreach($list as $kk)
 			<tr class="odd">
 				<td class=" ">
-					654816849685
+				{{ $kk->id }}
 				</td>
 				<td class=" ">
-					xmm
+				{{ $kk->username }}
 				</td>
 				<td class=" ">
-					小米5
+				{{ $kk->name }}
 				</td>
 				<td class=" ">
-					5
+				{{ $kk->goods_num }}
 				</td>
 				<td class=" ">
-					6666
+				{{ $kk->del_name }}/{{ $kk->phone }}
 				</td>
-				<td class="hidden-480 ">
-					北京市昌平区撒旦法撒旦法撒旦法
+				<td class="hidden-480">
+				{{ $kk->province }}-{{ $kk->city }}-{{ $kk->district }}
 				</td>
 				<td class=" ">
-					已发货
+				@if($kk->order_status == 1)
+					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
+					@elseif($kk->order_status == 2)
+					<span class="label label-danger arrowed">待发货</span>
+					@elseif($kk->order_status == 3)
+					<span class="label label-info arrowed-right arrowed-in">缺货</span>
+				@endif
 				</td>
 				<td class=" ">
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 						<a class="blue" href="#">
-							<i class="icon-zoom-in bigger-130"></i>
+							<i class="icon-ban-circle bigger-130"></i>
 						</a>&nbsp;
 						<a class="green" href="#">
 							<i class="icon-pencil bigger-130"></i>
@@ -89,6 +104,7 @@
 					</div>
 				</td>
 			</tr>
+			@endforeach
 			</tbody>
 			</table>
 			<div class="row">
@@ -99,13 +115,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
-						<ul class="pagination"> 
-							<li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li>
-						</ul>  
+						{!! $list->appends($where)->render() !!}
 					</div>
 				</div>
 			</div>

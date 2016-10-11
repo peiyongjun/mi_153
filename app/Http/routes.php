@@ -83,17 +83,11 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
 	//     return view('admin.goods_list_off');
 	// });
 
-	Route::get('/order_list_cancel', function () {
-        return view('admin.order_list_cancel');
-    });
-    
-    Route::get('/order_list_all', function () {
-        return view('admin.order_list_all');
-    });
-
-    Route::get('/order_list_off', function () {
-        return view('admin.order_list_off');
-    });
+	Route::get('/order_list_cancel','Admin\OrderController@Offorder');
+    //所有订单管理    
+    Route::get('/order_list_all','Admin\OrderController@order');
+    //待发货订单
+    Route::get('/order_list_off', 'Admin\OrderController@Onorder');
 });
 
 /////////////////////////////////////////////////////////////////////////////////
