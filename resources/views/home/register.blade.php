@@ -43,7 +43,7 @@
                   <label class="labelbox" id="repass" for="">
                     <input type="password" name="repass" data-type="PH" placeholder="再次确认密码">
                   </label>
-                </div>
+                </div> 
                 <div class="inputbg inputcode dis_box" id="checkcode">
                   <label class="labelbox" for="">
                     <input class="code" type="text" name="icode" autocomplete="off" placeholder="图片验证码">

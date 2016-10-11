@@ -23,4 +23,30 @@ class DetailController extends Controller
         $detail = $goods->find($id);
         return view('home.detail')->with(['list'=>$list])->with(["data"=>$data])->with(["detail"=>$detail]);
     }
+
+    /*
+     * Display a listing of the resource.
+     *  商品详情页
+     * @return \Illuminate\Http\Response
+     */
+    public function specs(Request $request)
+    {
+        $goods = new Goods();
+        $id = $request->id;
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $detail = $goods->find($id);
+        return view('home.goods.specs')->with(['list'=>$list])->with(["data"=>$data])->with(["detail"=>$detail]);
+    }
+
+    public function buyNow(Request $request)
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $id = $request->id;
+        $info = $goods->find($id);
+        return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info]);
+    }
+
 }

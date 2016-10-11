@@ -17,9 +17,11 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/','IndexController@index');
+Route::get('/list','IndexController@goodslist');
 
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
+Route::get('/specs/{id}','DetailController@specs');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
@@ -39,6 +41,8 @@ Route::get('/userlogout',"home\LoginController@logOut");
 
 //个人中心页面
 Route::group(['middleware'=>'homelogin'],function(){
+    Route::get("/buy","DetailController@buyNow");
+
     Route::get('/user', "home\UserController@index");
     
     Route::get('/myOrder', "home\UserController@myOrder");
@@ -56,6 +60,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/userSafe',"home\UserController@userSafe");
 
     Route::get('/Info',"home\UserController@Info");
+
+    Route::post('/Info',"home\UserController@addInfo");
+
+    Route::post('/doUpload',"home\UserController@doUpload");
+
+    Route::post('/pwd',"home\UserController@pwd");
 });
 
 
@@ -79,10 +89,6 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
-	// Route::get('/goods_list_off', function () {
-	//     return view('admin.goods_list_off');
-	// });
-
 	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
