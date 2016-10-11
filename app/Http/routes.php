@@ -39,6 +39,8 @@ Route::get('/userlogout',"home\LoginController@logOut");
 
 //个人中心页面
 Route::group(['middleware'=>'homelogin'],function(){
+    Route::get("/buy","DetailController@buyNow");
+
     Route::get('/user', "home\UserController@index");
     
     Route::get('/myOrder', "home\UserController@myOrder");
@@ -56,6 +58,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/userSafe',"home\UserController@userSafe");
 
     Route::get('/Info',"home\UserController@Info");
+
+    Route::post('/Info',"home\UserController@addInfo");
+
+    Route::post('/doUpload',"home\UserController@doUpload");
+
+    Route::post('/pwd',"home\UserController@pwd");
 });
 
 

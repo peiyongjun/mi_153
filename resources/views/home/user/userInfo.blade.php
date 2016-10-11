@@ -8,9 +8,10 @@
   var userPhoneList=[];
   userPhoneList.push({address:"180******14",key:"ADA1147053FB9328"});
 </script>
+@section('css2')
+@show
 <link type="text/css" rel="stylesheet" href="/home/css/reset.css">
 <link type="text/css" rel="stylesheet" href="/home/css/layout.css">
-<link type="text/css" rel="stylesheet" href="/home/css/modacctip.css">
 <style type="text/css">
 .score_1{color:rgb(255,0,0)}
 .score_2{color:rgb(255,102,0)}
@@ -238,11 +239,11 @@
   .n-account-area,
   .n-frame,
   .n-main-nav,
-  .n-footer{display : none; }
+  .n-footer{display : none; },
 </style>
 @yield("css")
 </head>
-<body class="zh_CN" style="overflow-y: scroll;">
+<body class="zh_CN" style="overflow-y: scroll;background-color:#F9F9F9;">
   <div class="popup_mask" style="display: none;" id="loadingMask">
     <div class="bkc"></div>
     <div class="mod_wrap loadingmask">
@@ -282,7 +283,13 @@
       </div>
       <div class="na-img-area fl-l">
       <!--na-img-bg-area不能插入任何子元素-->
-      <div class="na-img-bg-area"></div>
+      <div class="na-img-bg-area">
+        @if (!empty($user->photo))
+          <img src="./home/Photo/{{ $user->photo }}">
+        @else
+          <img src="./home/Photo/default.jpg">
+        @endif
+      </div>
       </div>
     </div>
   </div>
@@ -300,10 +307,10 @@
       <div class="n-main-nav clearfix">
         <ul>
           <li id="safe">
-            <a href="/userSafe" title="帐号安全">帐号安全</a>
+            <a href="{{ URL('/userSafe') }}" title="帐号安全">帐号安全</a>
           </li>
           <li id='info'>
-            <a href="/Info" title="个人信息">个人信息</a>
+            <a href="{{ URL('/Info') }}" title="个人信息">个人信息</a>
           </li>
           <!--<li>
             <a href="">登录设备</a>
