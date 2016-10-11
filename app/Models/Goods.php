@@ -31,4 +31,14 @@ class Goods extends Model
     	$list = Goods::where("pid","!=","0")->get();
     	return $list;
     }
+
+    /**
+     * 关联skus表
+     * 
+     * @return Object  $list    查询到的数据
+     */
+    public function hasSkus ()
+    {
+        return Goods::hasMany('App\Models\Skus','goods_id','id');
+    }
 }

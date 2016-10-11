@@ -65,22 +65,39 @@ class GoodsListController extends Controller
         if ($request->pid == "type") { //没有选择，添加大类
             $data = $request->only("name");//获取信息
             $data['pid'] = 0;
+            $data['status'] = 1;
+            $id = Goods::insert($data);//写入数据库
+            return back()->with(["msg"=>"添加类别成功"]);
         }else{ //选择分类，添加商品
             $data = $request->only("name","price","num","pid","goodsTitle");//获取信息
-            //执行上传
-            $file = $request->file('img');
-            if($file->isValid()){
-                $ext = $file->getClientOriginalExtension();//获得后缀 
-                $filename = time().rand(1000,9999).".".$ext;//新文件名
-                $file->move("./Uploads/Picture/",$filename);
+            $imgfile = $request->file('img');
+            $detailfile = $request->file('detail');
+            $specsfile = $request->file('specs');
+            if($imgfile->isValid()){
+                //执行上传img
+                $ext = $imgfile->getClientOriginalExtension();//获得后缀 
+                $imgname = time().rand(1000,9999).".".$ext;//新文件名
+                $imgfile->move("./Uploads/Picture/",$imgname);
+                // 执行缩放
+                $img = new Image();
+                $img->open("./Uploads/Picture/".$imgname)->thumb(160,110)->save("./Uploads/Picture/".$imgname);
+                //执行上传detail
+                $ext = $detailfile->getClientOriginalExtension();//获得后缀 
+                $detailname = time().rand(1000,9999).".".$ext;//新文件名
+                $detailfile->move("./Uploads/detail/",$detailname);
+                //执行上传specs
+                $ext = $specsfile->getClientOriginalExtension();//获得后缀 
+                $specsname = time().rand(1000,9999).".".$ext;//新文件名
+                $specsfile->move("./Uploads/specs/",$specsname);
+                //储存文件名
+                $data['img'] = $imgname;
+                $data['detail'] = $detailname;
+                $data['specs'] = $specsname;
+                $data['status'] = 1;
+                $id = Goods::insert($data);//写入数据库
+                return back();
             }
-            // 执行缩放
-            $img = new Image();
-            $img->open("./Uploads/Picture/".$filename)->thumb(160,110)->save("./Uploads/Picture/".$filename);
-            $data['img'] = $filename;
         }
-        $data['status'] = 1;
-        $id = Goods::insert($data);//写入数据库
         return back();
     }
 

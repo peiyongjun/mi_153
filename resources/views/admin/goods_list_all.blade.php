@@ -94,7 +94,7 @@
 					<td id="num{{ $v->id }}">{{ $v->num }}</td>
 					<td>
 						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-							<a class="blue" href="#">
+							<a class="blue" href="{{ URL('detail/'.$v->id) }}">
 								<i class="icon-zoom-in bigger-130"></i>
 							</a>&nbsp;&nbsp;
 							<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $v->id }})">
@@ -149,7 +149,7 @@
 						<div>
 							<label for="form-field-8">所属分类(不选默认添加新类别)</label>
 							<select class="form-control" id="form-field-select-1" name="pid">
-								<option value="0">--请选择--</option>
+								<option value="type">--请选择--</option>
 								@foreach($type as $k => $v)
 								<option value="{{ $k }}">{{ $v }}</option>
 								@endforeach
@@ -179,6 +179,14 @@
 						<div>
 							<label for="form-field-9">缩略图</label>
 							<input class="form-control limited" type="file" name="img">
+						</div>
+						<div>
+							<label for="form-field-9">详情图</label>
+							<input class="form-control limited" type="file" name="detail">
+						</div>
+						<div>
+							<label for="form-field-9">参数图</label>
+							<input class="form-control limited" type="file" name="specs">
 						</div>
 					</div>
 	            </div>

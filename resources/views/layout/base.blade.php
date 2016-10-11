@@ -11,6 +11,7 @@
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
 <link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
+<link rel="stylesheet" href="/home/css/category.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
 <body>
@@ -64,9 +65,45 @@
 		</div>
 		<div class="header-nav">
 			<ul class="nav-list J_navMainList clearfix">
-				<li id="J_navCategory" class="nav-category">
-				<a class="link-category" href="//list.mi.com"><span class="text">全部商品分类</span></a>
+				<!-- 全部商品竖向遍历 -->
+				<div class="site-category" id="goodsCols" style="margin-left: 29px;margin-top: 13px;"> 
+				    <ul id="J_categoryList" class="site-category-list clearfix">
+				    	@foreach($list as $v)
+				        <li class="category-item">
+				            <a class="title" href="#">
+				                {{ $v->name }}<i class="iconfont"></i>
+				            </a>
+				            <div class="children clearfix children-col-3">
+				            	<!-- 单列信息 -->
+				                <ul class="children-list children-list-col children-list-col-1">
+				                	@foreach($data as $vv)
+									@if($vv->pid == $v->id && $vv->status == 1)	
+				                    <li class="star-goods">
+				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
+				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
+				                            <span class="text">{{ $vv->name }}</span>
+				                        </a>
+				                        <a class="btn btn-line-primary btn-small btn-buy" href="{{ URL(('/detail/').($vv->id)) }}">
+				                            选购
+				                        </a>
+				                    </li>
+				                    @endif
+									@endforeach
+				                </ul>
+				            </div>
+				        </li>
+				        @endforeach
+				    </ul>
+				</div>
+				<li class="nav-item">
+					<a class="link" href="/list">
+						<span class="text">
+							全部商品
+						</span>
+						<span class="arrow"></span>
+					</a>
 				</li>
+				<!-- 全部商品横向遍历 -->
 				@foreach($list as $v)
 				<li class="nav-item">
 					<a class="link" href="javascript:void(0);">
@@ -103,9 +140,9 @@
 			</ul>
 		</div>
 		<div class="header-search">
-			<form id="J_searchForm" class="search-form clearfix" action="//search.mi.com/search" method="get">
+			<form id="J_searchForm" class="search-form clearfix" action="/list" method="get">
 				<label for="search" class="hide">站内搜索</label>
-				<input class="search-text" type="search" id="search" name="keyword" autocomplete="off"/>
+				<input class="search-text" type="search" id="search" name="s" autocomplete="off"/>
 				<input type="submit" class="search-btn iconfont" value="&#xe616;"/>
 			</form>
 		</div>
