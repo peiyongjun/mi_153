@@ -278,11 +278,6 @@
 	       			<input type="hidden" name="goods_id" id="goods_id" value="">
 	       			<div>
 						<label for="form-field-8">型号</label>
-						<input class="form-control" name="name">
-					</div>
-					<hr>
-	       			<div>
-						<label for="form-field-8">参数</label>
 						<input class="form-control" name="attr">
 					</div>
 					<hr>

@@ -168,7 +168,7 @@ class GoodsListController extends Controller
     public function addSkus (Request $request)
     {
         $skus = new Skus();
-        $data = $request->only("attr","color","goods_id","price","num","name");
+        $data = $request->only("attr","color","goods_id","price","num");
         $skus->insert($data);
         return back();
     }

@@ -49,12 +49,17 @@
 			<div class="pro-choose-result hide" id="J_chooseResult">
 			</div>
 			<div class="pro-choose-result" id="J_chooseResultInit">
+				<a href="javascript:void(0);" class="btn btn-large btn-primary btn-dakeLight">加入购物车</a>
+				<!-- 按钮变色在class加btn-primary -->
 				<a href="javascript:void(0);" class="btn btn-large btn-dakeLight">下一步</a>
 				<!-- <span class="next-desc">请选择商品</span> -->
 			</div>
 		</div>
 		<!-- pro-info END -->
 	</div>
+	<hr>
+	<div class="main-pro-box" id="J_proDetailBox">
+		<img src="/Uploads/specs/{{ $info->specs }}">
+	</div>
 </div>
-
 @endsection
