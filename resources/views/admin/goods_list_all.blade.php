@@ -1,7 +1,7 @@
 @extends("layout.adminBase")
 @section("content")
 <script type="text/javascript">
-	//控制模态框内信息
+	//控制修改信息模态框内信息
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
@@ -12,6 +12,12 @@
 		$("#updateName").val(name);
 		$("#UpdateNum").val(num);
 		$("#updatePrice").val(price);
+	}
+
+	//控制添加型号颜色模态框内信息
+	function doSkus(id)
+	{
+		$("#goods_id").val(id);
 	}
 </script>
 <div class="col-xs-12">
@@ -94,6 +100,9 @@
 					<td id="num{{ $v->id }}">{{ $v->num }}</td>
 					<td>
 						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+							<a class="blue" href="" data-toggle="modal" data-target="#skusModal" onclick="doSkus({{ $v->id }})">
+								<i class="icon-cogs bigger-130"></i>
+							</a>&nbsp;&nbsp;
 							<a class="blue" href="{{ URL('detail/'.$v->id) }}">
 								<i class="icon-zoom-in bigger-130"></i>
 							</a>&nbsp;&nbsp;
@@ -246,6 +255,52 @@
 							<input class="form-control limited" type="file" name="img">
 						</div>
 					</div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="submit" class="btn btn-primary">确认添加</button>
+	            </div>
+	        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（添加商品型号和颜色） -->
+<div class="modal fade" id="skusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+       		<form action="{{ URL('/admin/goods_list_all/skus') }}" method="post" name="skusForm">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">添加型号</h4>
+	            </div>
+	            <div class="modal-body">
+	       			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       			<input type="hidden" name="goods_id" id="goods_id" value="">
+	       			<div>
+						<label for="form-field-8">型号</label>
+						<input class="form-control" name="name">
+					</div>
+					<hr>
+	       			<div>
+						<label for="form-field-8">参数</label>
+						<input class="form-control" name="attr">
+					</div>
+					<hr>
+					<div>
+						<label for="form-field-9">颜色</label>
+						<input class="form-control limited"  name="color">
+					</div>
+					<hr>
+					<div>
+						<label for="form-field-9">库存</label>
+						<input class="form-control limited"  name="num">
+					</div>
+					<hr>
+					<div>
+						<label for="form-field-9">价格</label>
+						<input class="form-control limited"  name="price">
+					</div>
+					<hr>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

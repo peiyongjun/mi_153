@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Goods; //Goods表模型
+use App\Models\Skus; //Goods表模型
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Events\Image; //图片处理插件
@@ -93,7 +94,7 @@ class GoodsListController extends Controller
                 $data['img'] = $imgname;
                 $data['detail'] = $detailname;
                 $data['specs'] = $specsname;
-                $data['status'] = 1;
+                $data['status'] = 0;
                 $id = Goods::insert($data);//写入数据库
                 return back();
             }
@@ -157,5 +158,18 @@ class GoodsListController extends Controller
             $type[$v->id] = $v->name;
         }
         return view('admin.goods_list_all')->with(['data'=>$data])->with(["type"=>$type])->with(["search"=>$search]);
+    }
+
+    /**
+     * 添加型号和颜色
+     *
+     * @return 返回上一视图
+     */
+    public function addSkus (Request $request)
+    {
+        $skus = new Skus();
+        $data = $request->only("attr","color","goods_id","price","num","name");
+        $skus->insert($data);
+        return back();
     }
 }

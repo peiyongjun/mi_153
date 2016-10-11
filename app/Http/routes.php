@@ -88,7 +88,9 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
+    Route::post("/goods_list_all/skus","Admin\GoodsListController@addSkus");//添加型号
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
+
 	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
