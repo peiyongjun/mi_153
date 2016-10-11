@@ -64,9 +64,37 @@
 		</div>
 		<div class="header-nav">
 			<ul class="nav-list J_navMainList clearfix">
-				<li id="J_navCategory" class="nav-category">
-				<a class="link-category" href="//list.mi.com"><span class="text">全部商品分类</span></a>
-				</li>
+				<!-- 全部商品竖向遍历 -->
+				<div class="site-category" id="goodsCols" style="margin-left: 29px;margin-top: 13px;"> 
+				    <ul id="J_categoryList" class="site-category-list clearfix">
+				    	@foreach($list as $v)
+				        <li class="category-item">
+				            <a class="title" href="#">
+				                {{ $v->name }}<i class="iconfont"></i>
+				            </a>
+				            <div class="children clearfix children-col-3">
+				            	<!-- 单列信息 -->
+				                <ul class="children-list children-list-col children-list-col-1">
+				                	@foreach($data as $vv)
+									@if($vv->pid == $v->id && $vv->status == 1)	
+				                    <li class="star-goods">
+				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
+				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
+				                            <span class="text">{{ $v->name }}</span>
+				                        </a>
+				                        <a class="btn btn-line-primary btn-small btn-buy" href="{{ URL(('/detail/').($vv->id)) }}">
+				                            选购
+				                        </a>
+				                    </li>
+				                    @endif
+									@endforeach
+				                </ul>
+				            </div>
+				        </li>
+				        @endforeach
+				    </ul>
+				</div>
+				<!-- 全部商品横向遍历 -->
 				@foreach($list as $v)
 				<li class="nav-item">
 					<a class="link" href="javascript:void(0);">

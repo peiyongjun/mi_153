@@ -27,24 +27,6 @@
             </div>
         </center>
     </div>
-    <div class="fenqi-qa hide" id="J_fenqiQa">
-    8月30日早10点-9月6日 ，购小米Max享花呗分期 / 小米钱包 3期免息，每单仅限1台。
-        <br>
-        <a href="http://www.mi.com/c/payrule/antchecklater/" target="_blank">了解详情 &gt;</a>
-        <i class="arrow arrow-a"></i><i class="arrow arrow-b"></i>
-    </div>
-</div>
-<div id="J_modalVideo" class="modal modal-video fade modal-hide">
-    <div class="modal-hd">
-        <h3 class="title">视频播放</h3>
-        <a class="close" data-dismiss="modal" href="javascript: void(0);"><i class="iconfont">&#xe602;</i></a>
-    </div>
-    <div class="modal-bd">
-        <div class="loading">
-            <div class="loader">
-            </div>
-        </div>
-    </div>
 </div>
 <script src="{{ asset('home/js/base.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('home/js/index.min.js')}}"></script>
