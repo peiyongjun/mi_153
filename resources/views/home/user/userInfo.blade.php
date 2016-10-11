@@ -8,6 +8,8 @@
   var userPhoneList=[];
   userPhoneList.push({address:"180******14",key:"ADA1147053FB9328"});
 </script>
+@section('css2')
+@show
 <link type="text/css" rel="stylesheet" href="/home/css/reset.css">
 <link type="text/css" rel="stylesheet" href="/home/css/layout.css">
 <style type="text/css">
@@ -237,11 +239,11 @@
   .n-account-area,
   .n-frame,
   .n-main-nav,
-  .n-footer{display : none; }
+  .n-footer{display : none; },
 </style>
 @yield("css")
 </head>
-<body class="zh_CN" style="overflow-y: scroll;">
+<body class="zh_CN" style="overflow-y: scroll;background-color:#F9F9F9;">
   <div class="popup_mask" style="display: none;" id="loadingMask">
     <div class="bkc"></div>
     <div class="mod_wrap loadingmask">
@@ -281,7 +283,13 @@
       </div>
       <div class="na-img-area fl-l">
       <!--na-img-bg-area不能插入任何子元素-->
-      <div class="na-img-bg-area"></div>
+      <div class="na-img-bg-area">
+        @if (!empty($user->photo))
+          <img src="./home/Photo/{{ $user->photo }}">
+        @else
+          <img src="./home/Photo/default.jpg">
+        @endif
+      </div>
       </div>
     </div>
   </div>

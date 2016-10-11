@@ -12,35 +12,41 @@
 @section('content')
 
 <div class="n-frame">
-    <div class="uinfo c_b">
+	<div class="uinfo c_b">
       <div class="">
         <div class="main_l">
           <div class="naInfoImgBox t_c">
             <div class="na-img-area marauto">
               <!--na-img-bg-area不能插入任何子元素-->
-              <div class="na-img-bg-area"></div>
+              <div class="na-img-bg-area">
+                @if (!empty($user->photo))
+                  <img src="./home/Photo/{{ $user->photo }}">
+                @else
+                  <img src="./home/Photo/default.jpg">
+                @endif
+              </div>
               <em class="na-edit"></em>
             </div>
             <div class="naImgLink">
-                <a class="color4a9" href="" title="设置头像" id="editInfo" data-toggle="modal" data-target="#myModal">设置头像</a>
-                  </div>
+            	<a class="color4a9" href="" title="设置头像" id="editInfo" data-toggle="modal" data-target="#myModal">设置头像</a>
+			      </div>
           </div>        
         </div>
         <div class="main_r">
           <div class="framedatabox">
             <div class="fdata">
               <a class="color4a9 fr" href='#' title="编辑" id="editInfo" data-toggle="modal" data-target="#setModal">
-                <i class="iconpencil"></i>
-                编辑
+              	<i class="iconpencil"></i>
+              	编辑
               </a>
               <h3>基础资料</h3>    
             </div>
             <div class="fdata lblnickname">
               <p>
-                <span>姓名：</span>
-                <span class="value" _empty="">
-                    <span style="color:#999;">{{ $user->name }}</span>
-                        </span>    
+              	<span>姓名：</span>
+              	<span class="value" _empty="">
+              		<span style="color:#999;">{{ $user->name }}</span>
+				        </span>
             </div>
             <div class="fdata lblbirthday">
               <p>
@@ -54,15 +60,15 @@
                 <span class="value">{{ $user->sex?"男":"女" }}</span>
               </p>     
             </div>
-                  <div class="btn_editinfo">
+			      <div class="btn_editinfo">
               <a id="editInfoWap" class="btnadpt bg_normal" href="">编辑基础资料</a>
             </div>
           </div>
         </div>
       </div>
-          <div class="logout_wap">
-              <a class="btnadpt bg_white" href="/pass/logout?userId=1157822905&amp;callback=https://account.xiaomi.com">退出</a>
-          </div>
+		  <div class="logout_wap">
+			  <a class="btnadpt bg_white" href="/pass/logout?userId=1157822905&amp;callback=https://account.xiaomi.com">退出</a>
+		  </div>
   </div>
 </div>
 
@@ -127,17 +133,16 @@
                 <h4 class="modal-title" id="myModalLabel">头像设置</h4>
             </div>
             <div class="modal-body">
-              <form action="https://account.xiaomi.com/pass/auth/profile/requestUpload" method="POST" enctype="multipart/form-data" target="uploadPhoto" id="photoUploader">   
+              <form action="{{ URL('/doUpload') }}" method="POST" enctype="multipart/form-data" id="photoUploader">
+              <input type='hidden' name="_token" value="{{ csrf_token() }}">
+              <input type='hidden' name='id' value="{{ session()->get('user')['id'] }}">
                 <div class="wapbox accset">
                   <dl>
                     <dt><strong class="wap_title_big">请上传图片：</strong></dt>
                     <dd>
                       <div class="uplode_img">
-                <!--
-                      <a class="btn_tip btn_commom" href="" title="上传头像">上传头像</a>
-                -->
-                        <input type="button" onclick="return false;" class="btn_tip btn_commom" value="上传头像">
-                        <input class="uplodefile" name="userfile" type="file" autocomplete="off" disableautocomplete="">
+                        <input name="upload" type="file" autocomplete="off" disableautocomplete="">
+                        <input class="btn_tip btn_commom" type="submit" value="上传头像">
                       </div>
                       <p>jpg 或 png，大小不超过2M</p>
                     </dd>              
