@@ -22,4 +22,17 @@ class IndexController extends Controller
         return view('home.index')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function goodslist ()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();   
+        return view('home.list')->with(['list'=>$list])->with(["data"=>$data]);
+        // return view('home.list');
+    }
 }

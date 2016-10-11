@@ -11,6 +11,7 @@
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
 <link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
+<link rel="stylesheet" href="/home/css/category.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
 <body>
@@ -80,7 +81,7 @@
 				                    <li class="star-goods">
 				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
 				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
-				                            <span class="text">{{ $v->name }}</span>
+				                            <span class="text">{{ $vv->name }}</span>
 				                        </a>
 				                        <a class="btn btn-line-primary btn-small btn-buy" href="{{ URL(('/detail/').($vv->id)) }}">
 				                            选购

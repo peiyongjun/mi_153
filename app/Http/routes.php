@@ -17,6 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/','IndexController@index');
+Route::get('/list','IndexController@goodslist');
 
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
