@@ -95,6 +95,14 @@
 				        @endforeach
 				    </ul>
 				</div>
+				<li class="nav-item">
+					<a class="link" href="/list">
+						<span class="text">
+							全部商品
+						</span>
+						<span class="arrow"></span>
+					</a>
+				</li>
 				<!-- 全部商品横向遍历 -->
 				@foreach($list as $v)
 				<li class="nav-item">
@@ -132,9 +140,9 @@
 			</ul>
 		</div>
 		<div class="header-search">
-			<form id="J_searchForm" class="search-form clearfix" action="//search.mi.com/search" method="get">
+			<form id="J_searchForm" class="search-form clearfix" action="/list" method="get">
 				<label for="search" class="hide">站内搜索</label>
-				<input class="search-text" type="search" id="search" name="keyword" autocomplete="off"/>
+				<input class="search-text" type="search" id="search" name="s" autocomplete="off"/>
 				<input type="submit" class="search-btn iconfont" value="&#xe616;"/>
 			</form>
 		</div>
