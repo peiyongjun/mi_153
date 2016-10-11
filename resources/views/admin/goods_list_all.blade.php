@@ -94,7 +94,7 @@
 					<td id="num{{ $v->id }}">{{ $v->num }}</td>
 					<td>
 						<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-							<a class="blue" href="#">
+							<a class="blue" href="{{ URL('detail/'.$v->id) }}">
 								<i class="icon-zoom-in bigger-130"></i>
 							</a>&nbsp;&nbsp;
 							<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $v->id }})">

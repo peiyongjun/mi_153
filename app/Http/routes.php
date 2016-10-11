@@ -20,6 +20,7 @@ Route::get('/','IndexController@index');
 
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
+Route::get('/specs/{id}','DetailController@specs');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
@@ -87,10 +88,6 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
-	// Route::get('/goods_list_off', function () {
-	//     return view('admin.goods_list_off');
-	// });
-
 	Route::get('/order_list_cancel', function () {
         return view('admin.order_list_cancel');
     });
