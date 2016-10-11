@@ -21,7 +21,9 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data]);
+        $id = session()->get('user')['id'];
+        $user = Users::find($id);
+        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user]);
     }
 
     public function myOrder()
@@ -131,13 +133,56 @@ class UserController extends Controller
 
     public function pwd(Request $request)
     {
+        // dd($request);
         $id = $request->id;
         $user = Users::find($id);
         $pwd = md5($request->prePwd);
         if($pwd != $user->password){
+            $msg = "原密码不正确";
+            return response()->json(array('msg'=> $msg), 200);
+        }else{
             return back();
         }
         // dd($request);
     }
 
+    public function email(Request $request)
+    {
+        // dd($request);
+        if($request->email == ''  || !preg_match("/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/",$request->email)){
+            return redirect('userSafe');
+        }else{
+            $id = $request->id;
+            $user = Users::find($id);
+            $email = $request->email;
+            $user->email = $email;
+            $user->save();
+            return redirect('/userSafe');
+        }
+    }
+
+    public function phone(Request $request)
+    {
+        if($request->phone == ''  || !preg_match("/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/",$request->phone)){
+            return redirect('userSafe');
+        }else{
+            $id = $request->id;
+            $user = Users::find($id);
+            $phone = $request->phone;
+            $user->phone = $phone;
+            $user->save();
+            return redirect('/userSafe');
+        }
+    }
+
+    public function updatePhone(Request $request)
+    {
+        $id = $request->id;
+        $user = Users::find($id);
+        $phone = $request->upphone;
+        $user->phone = $phone;
+        $user->save();
+        // dd($request);
+        return redirect('/userSafe');
+    }
 }

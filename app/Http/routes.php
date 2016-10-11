@@ -64,6 +64,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/doUpload',"home\UserController@doUpload");
 
     Route::post('/pwd',"home\UserController@pwd");
+
+    Route::post('/email',"home\UserController@email");
+
+    Route::post('/phone',"home\UserController@phone");
+
+    Route::post('/updatePhone',"home\UserController@updatePhone");
 });
 
 
