@@ -13,15 +13,15 @@
 				</h1>
 				<a href="{{ URL('/detail/'.$info->id) }}" class="pro-more" target="_blank" id="J_proMore">深入了解产品></a>
 			</div>
-			<div id="J_proStep">
+			<div id="J_proStep" style="height: 450px">
 				<div class="pro-choose-step J_step" data-index="1">
 					<div class="step-title">
 	        			1. 选择版本 <i class="pro-version-desc-icon">!</i>
 					</div>
 					<ul class="step-list clearfix J_stepList">
-						<!-- 选中class加active -->
-						@foreach($skus as $v)
-						<li class="J_stepItem"> {{ $v->attr }} </li>
+						<!-- 选中在class加active -->
+						@foreach($attr as $v)
+						<li class="J_stepItem"> {{ $v }} </li>
 						@endforeach
 					</ul>
 				</div>
@@ -32,19 +32,20 @@
 						<span class="pro-version-desc J_verDesc" data-index="2"></span>
 					</div>
 					<ul class="step-list clearfix J_stepList">
-						<!-- 选中class加active -->
-						@foreach($skus as $v)
-						<li class="J_stepItem"> {{ $v->color }} </li>
+						<!-- 选中在class加active -->
+						@foreach($color as $v)
+						<li class="J_stepItem"> {{ $v }} </li>
 						@endforeach
 					</ul>
 				</div>
 			</div>
-			<div class="choose-result-msg" id="J_chooseResultMsg">
+			<!-- 当前选择产品显示 -->
+			<!-- <div class="choose-result-msg" id="J_chooseResultMsg">
 				<span class="msg-tit">您选择了以下产品:</span>
 				<p class="msg-bd">
 					小米Max 全网通 3GB内存+64GB容量
 				</p>
-			</div>
+			</div> -->
 			<div class="pro-choose-result hide" id="J_chooseResult">
 			</div>
 			<div class="pro-choose-result" id="J_chooseResultInit">
@@ -55,4 +56,5 @@
 		<!-- pro-info END -->
 	</div>
 </div>
+
 @endsection

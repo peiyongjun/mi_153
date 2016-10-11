@@ -53,7 +53,18 @@ class DetailController extends Controller
         $info = $goods->find($id);
         //获得商品型号和颜色信息
         $skus = $goods->find($id)->hasSkus;
-        return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info])->with(["skus"=>$skus]);
+        $attr = [];//存放属性
+        foreach ($skus as $v) {
+            $attr[] = $v->attr;
+        }
+        // var_dump($attr);die;
+        $attr = array_unique($attr);//去除重复
+        $color = [];//存放颜色
+        foreach ($skus as $v) {
+            $color[] = $v->color;
+        }
+        $color = array_unique($color);//去除重复
+        return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info])->with(["attr"=>$attr])->with(["color"=>$color]);
     }
 
 }
