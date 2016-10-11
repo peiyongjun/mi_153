@@ -123,7 +123,6 @@ class UserController extends Controller
                 $user = Users::find($id);
                 $user->photo = $photo;
                 $user->save();
-
                 return redirect('/Info');
             }
         }

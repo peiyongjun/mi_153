@@ -25,8 +25,8 @@ class DetailController extends Controller
     }
 
     /*
-     * Display a listing of the resource.
-     *  商品详情页
+     * 参数页面
+     *  
      * @return \Illuminate\Http\Response
      */
     public function specs(Request $request)
@@ -39,6 +39,11 @@ class DetailController extends Controller
         return view('home.goods.specs')->with(['list'=>$list])->with(["data"=>$data])->with(["detail"=>$detail]);
     }
 
+    /*
+     * 购买页面
+     *  
+     * @return \Illuminate\Http\Response
+     */
     public function buyNow(Request $request)
     {
         $goods = new Goods();
@@ -46,7 +51,9 @@ class DetailController extends Controller
         $data = $goods->getAll();
         $id = $request->id;
         $info = $goods->find($id);
-        return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info]);
+        //获得商品型号和颜色信息
+        $skus = $goods->find($id)->hasSkus;
+        return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info])->with(["skus"=>$skus]);
     }
 
 }
