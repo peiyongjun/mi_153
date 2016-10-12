@@ -8,51 +8,13 @@
 <link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2016d30">
 @yield("css")
 <link rel="stylesheet" type="text/css" href="//s01.mifile.cn/css/user/main.min.css?v=2016053001">
-<div id="J_navMenu" class="header-nav-menu" style="display: none;"><div class="container"><ul class="children-list clearfix">
-                                                            <li class="first">
-                                    <div class="figure figure-thumb">
-                                        <a href="//www.mi.com/hezimini/" data-stat-id="10d5a2f4a9bccc86" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-10d5a2f4a9bccc86', '//www.mi.com/hezimini/', 'pcpid']);"><img src="//c1.mifile.cn/f/i/15/goods/nav/hezimini.png" data-src="//c1.mifile.cn/f/i/15/goods/nav/hezimini.png" srcset="//c1.mifile.cn/f/i/15/goods/nav/hezimini.png 2x" alt="小米盒子mini版" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//www.mi.com/hezimini/" data-stat-id="9896a6b18574443d" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-9896a6b18574443d', '//www.mi.com/hezimini/', 'pcpid']);">小米盒子mini版</a></div>
-                                    <p class="price">199元</p>                                                                    </li>
-                                                            <li>
-                                    <div class="figure figure-thumb">
-                                        <a href="//www.mi.com/hezi3/" data-stat-id="4a6940612a38a852" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-4a6940612a38a852', '//www.mi.com/hezi3/', 'pcpid']);"><img src="//c1.mifile.cn/f/i/15/goods/nav/hezi3.png" data-src="//c1.mifile.cn/f/i/15/goods/nav/hezi3.png" srcset="//c1.mifile.cn/f/i/15/goods/nav/hezi3.png 2x" alt="小米盒子3" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//www.mi.com/hezi3/" data-stat-id="056fb7e4ea8dd552" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-056fb7e4ea8dd552', '//www.mi.com/hezi3/', 'pcpid']);">小米盒子3</a></div>
-                                    <p class="price">249元</p>                                                                    </li>
-                                                            <li>
-                                    <div class="figure figure-thumb">
-                                        <a href="//www.mi.com/hezi3s/" data-stat-id="32a01e59d20f9fa7" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-32a01e59d20f9fa7', '//www.mi.com/hezi3s/', 'pcpid']);"><img src="//c1.mifile.cn/f/i/15/goods/nav/hezi3s!160x110.jpg" data-src="//c1.mifile.cn/f/i/15/goods/nav/hezi3s!160x110.jpg" srcset="//c1.mifile.cn/f/i/15/goods/nav/hezi3s!320x220.jpg 2x" alt="小米盒子3 增强版" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//www.mi.com/hezi3s/" data-stat-id="9c415465c2aba107" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-9c415465c2aba107', '//www.mi.com/hezi3s/', 'pcpid']);">小米盒子3 增强版</a></div>
-                                    <p class="price">399元</p>                                                                    </li>
-                                                            <li>
-                                    <div class="figure figure-thumb">
-                                        <a href="//www.mi.com/tvzj/" data-stat-id="c5c1e9de07b24ca5" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-c5c1e9de07b24ca5', '//www.mi.com/tvzj/', 'pcpid']);"><img src="//c1.mifile.cn/f/i/g/2015/cn-index/zhuji!160x110.jpg" data-src="//c1.mifile.cn/f/i/g/2015/cn-index/zhuji!160x110.jpg" srcset="//c1.mifile.cn/f/i/g/2015/cn-index/zhuji!320x220.jpg 2x" alt="小米电视主机" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//www.mi.com/tvzj/" data-stat-id="9a31b67eade41359" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-9a31b67eade41359', '//www.mi.com/tvzj/', 'pcpid']);">小米电视主机</a></div>
-                                    <p class="price">999元</p>                                                                    </li>
-                                                            <li>
-                                    <div class="figure figure-thumb">
-                                        <a href="//item.mi.com/1160800073.html" data-stat-id="0b9699df610dd856" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-0b9699df610dd856', '//item.mi.com/1160800073.html', 'pcpid']);"><img src="//c1.mifile.cn/f/i/g/2015/cn-index/jinshuban!160x110.jpg" data-src="//c1.mifile.cn/f/i/g/2015/cn-index/jinshuban!160x110.jpg" srcset="//c1.mifile.cn/f/i/g/2015/cn-index/jinshuban!320x220.jpg 2x" alt="小米家庭音响 金属版" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//item.mi.com/1160800073.html" data-stat-id="a36ad90018f6e523" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-a36ad90018f6e523', '//item.mi.com/1160800073.html', 'pcpid']);">小米家庭音响 金属版</a></div>
-                                    <p class="price">899元</p>                                                                    </li>
-                                                            <li>
-                                    <div class="figure figure-thumb">
-                                        <a href="//item.mi.com/1160800074.html" data-stat-id="102cede91d10b78c" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-102cede91d10b78c', '//item.mi.com/1160800074.html', 'pcpid']);"><img src="//c1.mifile.cn/f/i/g/2015/cn-index/putonban!160x110.jpg" data-src="//c1.mifile.cn/f/i/g/2015/cn-index/putonban!160x110.jpg" srcset="//c1.mifile.cn/f/i/g/2015/cn-index/putonban!320x220.jpg 2x" alt="小米家庭音响 标准版" width="160" height="110"></a>
-                                    </div>
-                                    <div class="title"><a href="//item.mi.com/1160800074.html" data-stat-id="9d7925dc3e0008d1" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-9d7925dc3e0008d1', '//item.mi.com/1160800074.html', 'pcpid']);">小米家庭音响 标准版</a></div>
-                                    <p class="price">699元</p>                                                                    </li>
-                                                        </ul></div></div></div>
-
-
-<div class="breadcrumbs">
-    <div class="container">
-        <a href="//www.mi.com/index.html" data-stat-id="b0bcd814768c68cc" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b0bcd814768c68cc', '//www.mi.com/index.html', 'pcpid']);">首页</a><span class="sep">&gt;</span><span>个人中心</span>    </div>
+<div style="background-color:#F5F5F5;height:30px">
+    <div class="container" style="height:30px">
+        <a href="{{ URL('/') }}" data-stat-id="b0bcd814768c68cc" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b0bcd814768c68cc', '//www.mi.com/index.html', 'pcpid']);">首页</a>
+        <span class="sep">&gt;</span>
+        <span>个人中心</span>    
+    </div>
 </div>
-
 <div class="page-main user-main">
     <div class="container">
         <div class="row">
