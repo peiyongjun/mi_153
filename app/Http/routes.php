@@ -17,9 +17,11 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/','IndexController@index');
+Route::get('/list','IndexController@goodslist');
 
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
+Route::get('/specs/{id}','DetailController@specs');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
@@ -64,6 +66,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/doUpload',"home\UserController@doUpload");
 
     Route::post('/pwd',"home\UserController@pwd");
+
+    Route::post('/email',"home\UserController@email");
+
+    Route::post('/phone',"home\UserController@phone");
+
+    Route::post('/updatePhone',"home\UserController@updatePhone");
 });
 
 
@@ -86,10 +94,8 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
+    Route::post("/goods_list_all/skus","Admin\GoodsListController@addSkus");//添加型号
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
-	// Route::get('/goods_list_off', function () {
-	//     return view('admin.goods_list_off');
-	// });
 
 	Route::get('/order_list_cancel','Admin\OrderController@Offorder');
     //所有订单管理    
