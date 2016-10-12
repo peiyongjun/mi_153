@@ -1,16 +1,22 @@
 @extends("layout.adminBase")
 @section("content")
-<link rel="stylesheet" href="">
-<script>
-	 function doChange(id)
-	 {
-	 	if(confirm('是否取消该订单?')){
-	 		var myform = document.myform;
-	 		myform.action = "/admin/order_list_all"+id;
-	 		myform.submit();
-	 	}
-	 }
-</script>
+<script type="text/javascript">
+	//控制模态框内信息
+	function doUpdate(id)
+	{
+		var editForm = document.editForm;
+		editForm.action = "/admin/order_list_all/Status/"+id;
+		var Eail = $("#orderEail"+id).html();
+		var express = $("#orderExpress"+id).html();
+		var name = $("#orderName"+id).html();
+		var address = $("#orderAddress"+id).html();
+		var phone = $("#orderPhone"+id).html();
+		$("#Eail").val(Eail);
+		$("#Express").val(express);
+		$("#Username").val(name);
+		$("#Address").val(address);
+		$("#Phone").val(phone);
+	}
 </script>
 <div class="col-xs-12">
 	<h3 class="header smaller lighter blue">所有商品订单管理</h3>
@@ -31,7 +37,7 @@
 				</div> -->
 				<form action="" method="post" name="myform">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="hidden" name="_method" value="Change">
+					<input type="hidden" name="_method" value="update">
 				</form>
 				<div class="col-sm-3">
 					<div class="dataTables_filter" id="sample-table-2_filter">
@@ -60,19 +66,25 @@
 					商品名
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 197px;">
-					商品数量
+					商品数
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
-					收件人姓名--联系方式
+					收件人姓名
+				</th>
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+					联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					省-市-地区
+				</th>
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+					地址
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					状态
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
-				快递商家
+				快递
 				</th>
 				<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 249px;">操作
 				</th>
@@ -86,28 +98,41 @@
 				<td>{{ $kk->username }}</td>
 				<td>{{ $kk->name }}</td>
 				<td>{{ $kk->goods_num }}</td>
-				<td id="orderName{{ $kk->id }}">{{ $kk->del_name }}--{{ $kk->phone }}</td>
+				<td id="orderName{{ $kk->id }}">{{ $kk->del_name }}</td>
+				<td id="orderPhone{{ $kk->id}}">{{ $kk->phone }}</td>
 				<td id="orderAddress{{ $kk->id }}">{{ $kk->province }}-{{ $kk->city }}-{{ $kk->district }}</td>
+				<td id="orderEail{{ $kk->id}}">{{ $kk->address }}</td>
 				<td>
-				    @if($kk->order_status == 1)
-					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
+				    @if($kk->order_status == 0)
+					<span class="label label-success arrowed-in arrowed-in-right">待支付</span>
+					@elseif($kk->order_status == 1)
+					<span class="label label-danger arrowed">取消订单</span>
 					@elseif($kk->order_status == 2)
-					<span class="label label-danger arrowed">待发货</span>
+					<span class="label label-info arrowed-right arrowed-in">支付完成</span>
 					@elseif($kk->order_status == 3)
-					<span class="label label-info arrowed-right arrowed-in">已取消订单</span>
+					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
+					@elseif($kk->order_status == 4)
+					<span class="label label-danger arrowed">退货</span>
+					@elseif($kk->order_status == 5)
+					<span class="label label-success arrowed-in arrowed-in-right">确认收货</span>
 				@endif
 				</td>
 				<td id="orderExpress{{ $kk->id }}">{{ $kk->express }}</td>
+				
 				<td>
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="red" href="" onclick="javascript:doChange({{ $kk->id }})">
-							<i class="icon-trash bigger-130"></i>
+						@if($kk->order_status == 0)
+						<a class="green" href="/admin/order_list_all/cancel?id={{ $kk->id }}">
+							<i class="icon-check bigger-130"></i>
 						</a>
-					<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
+						@elseif($kk->order_status == 2)
+						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $kk->id }})">
+							<i class="icon-edit bigger-130"></i>
+						</a>
+						@endif
 					</div>
 				</td>
+				
 			</tr>
 			@endforeach
 			</tbody>
@@ -133,6 +158,7 @@
         <div class="modal-content">
        		<form action="" method="post" name="editForm">
        			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+       			<input type="hidden" name="order_status" value="3">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	                <h4 class="modal-title" id="myModalLabel">请确认发货信息</h4>
@@ -141,19 +167,23 @@
 					<div class="widget-main">
 						<div>
 							<label for="form-field-8">快递商家</label>
-							<input style="font-weight:bold;" class="form-control" name="Express" id="Express">
+							<input style="font-weight:bold;" class="form-control" name="express" id="Express">
 						</div>
 						<div>
 							<label for="form-field-8">收件人地址</label>
-							<input style="font-weight:bold;" class="form-control" name="Address" id="Address">
+							<input style="font-weight:bold;" class="form-control" name="location" id="Address">
 						</div>
 						<div>
-							<label for="form-field-8">订单号</label>
-							<input style="font-weight:bold;" class="form-control" name="Number" id="Number">
+							<label for="form-field-8">地址</label>
+							<input style="font-weight:bold;" class="form-control" name="address" id="Eail">
 						</div>
 						<div>
-							<label for="form-field-9">收件人姓名及联系方式</label>
-							<input style="font-weight:bold;" class="form-control limited" name="Username" id="Username">
+							<label for="form-field-9">收件人姓名</label>
+							<input style="font-weight:bold;" class="form-control limited" name="del_name" id="Username">
+						</div>
+						<div>
+							<label for="form-field-9">联系电话或手机</label>
+							<input style="font-weight:bold;" class="form-control limited" name="phone" id="Phone">
 						</div>
 					</div>
 	            </div>

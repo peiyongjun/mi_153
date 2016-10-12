@@ -62,7 +62,7 @@
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
 			@foreach($list as $vv)
-			@if($vv->order_status == 3)
+			@if($vv->order_status == 1 )
 			<tr class="odd">
 				<td class=" ">
 				{{ $vv->id }}	
@@ -87,7 +87,7 @@
 				</td>
 				<td class=" ">
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-				
+						
 					</div>
 				</td>
 			</tr>
