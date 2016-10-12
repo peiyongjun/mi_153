@@ -37,7 +37,7 @@
         </i>
       </div>
       <div class="ada-btn-area" id="btnUpdatePassword">
-        <a href="#" class="n-btn" id="editInfo" data-toggle="modal" data-target="#myModal">
+        <a href="#" class="n-btn" id="uPwd" data-toggle="modal" data-target="#myModal">
           修改
         </a>
       </div>
@@ -85,14 +85,19 @@
         <i class="arrow_r">
         </i>
       </div>
+      @if(empty($user->phone))
       <div class="ada-btn-area" id="btnUpdatePhone">
         <a class="n-btn btnBindMobile" href="#" class="n-btn" id="editInfo" data-toggle="modal" data-target="#phoneModal">
           添加
         </a>
+      </div>
+      @else
+      <div class="ada-btn-area" id="btnUpdatePhone">
         <a class="n-btn btnBindMobile" href="#" class="n-btn" id="editInfo" data-toggle="modal" data-target="#upPhoneModal">
           修改
         </a>
       </div>
+      @endif
     </li>
     <li id="setMibao" class="click-row">
       <div class="font-img-item clearfix">
@@ -146,12 +151,12 @@
               </li>
               <li>
                 新密码:　
-                <label class="labelbox">
-                  <input class="newPass" type="password" placeholder="输入新密码" autocomplete="off" disableautocomplete="">
+                <label class="labelbox" id="newpwd">
+                  <input class="newPass" name="newpwd" type="password" placeholder="输入新密码" autocomplete="off" disableautocomplete="">
                 </label>
                 <br>
-                确认密码:&nbsp;<label class="labelbox">
-                  <input class="newPass2" type="password" placeholder="重复新密码" autocomplete="off" disableautocomplete="">
+                确认密码:&nbsp;<label class="labelbox" id="conpwd">
+                  <input class="newPass2" name="conpwd" type="password" placeholder="重复新密码" autocomplete="off" disableautocomplete="">
                 </label>
               </li>
             </ul>
@@ -337,19 +342,44 @@
       $("<span>　原密码不能为空</span>").css('color','red').insertAfter('label[id="prepwd"]');
       $("input[name='but']").attr('disabled',true);
     }
-    // $.ajax({
-    // type:'POST',
-    // async:true,
-    // url:'/pwd',
-    // data:{password:($(this).val()),_token:($("input[name='_token']").val())},
-    // // header:{
-    // //   'X-CSRF-TOKEN':"{{ csrf_token() }}"
-    // // },
-    // success:function(data){
-    //   console.log(data);
-    //   $("<span>"+data.msg+"</span>").css('color','red').insertAfter('label[id="prepwd"]');
-    // }
-    // });
+  });
+
+  $("input[name='newpwd']").focus(function(){
+    $('label[id="newpwd"]').next('span').remove();
+    $("input[name='but']").attr('disabled',false);
+  }).blur(function(){
+    $('label[id="newpwd"]').next('span').remove();
+    var v = $(this).val();
+    if(v == ''){
+      $("<span>　密码不能为空</span>").css('color','red').insertAfter('label[id="newpwd"]');
+      $("input[name='but']").attr('disabled',true);
+    };
+  });
+
+  $("input[name='conpwd']").focus(function(){
+    $('label[id="conpwd"]').next('span').remove();
+    $("input[name='but']").attr('disabled',false);
+  }).blur(function(){
+    $('label[id="conpwd"]').next('span').remove();
+    var v = $(this).val();
+    var nv = $("input[name='newpwd']").val();
+    if(v == ''){
+      $("<span>　密码不能为空</span>").css('color','red').insertAfter('label[id="conpwd"]');
+      $("input[name='but']").attr('disabled',true);
+    };
+    if(v !== nv){
+    	$("<span>　密码不一致</span>").css('color','red').insertAfter('label[id="conpwd"]');
+      $("input[name='but']").attr('disabled',true);
+    }
+  });
+
+  $(function($){
+  	if("{{ session()->get('imsg') }}"){
+  		$("#uPwd").click();
+		$("<span>　{{ session()->get('imsg') }}</span>").css('color','red').insertAfter('label[id="prepwd"]');
+		$("input[name='but']").attr('disabled',true);
+  		
+  	}
   });
 
   $("input[name='email']").focus(function(){
@@ -389,12 +419,13 @@
     $('label[id="upphone"]').next('span').remove();
     var v = $(this).val();
     if(v == ''){
-       $('label[id="upphone"]').next('span').remove();
-       $("input[name='upon']").attr('disabled',false);
+       $("<span>　手机号不能为空</span>").css('color','red').insertAfter('label[id="phone"]');
+      $("input[name='pon']").attr('disabled',true);
     }else if(v.match(/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/) == null){
       $("<span>　手机号格式不正确</span>").css('color','red').insertAfter('label[id="upphone"]');
       $("input[name='upon']").attr('disabled',true);
     };
   });
+
 </script>
 @endsection
