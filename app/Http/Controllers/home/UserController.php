@@ -136,11 +136,21 @@ class UserController extends Controller
         $id = $request->id;
         $user = Users::find($id);
         $pwd = md5($request->prePwd);
+        $password = $request->newpwd;
+        $conpwd = $request->conpwd;
         if($pwd != $user->password){
-            $msg = "原密码不正确";
-            return response()->json(array('msg'=> $msg), 200);
-        }else{
+            session()->flash("imsg","原密码不正确");
+            // return session()->get('imsg');
             return back();
+        }else{
+            if(empty($pwd) || empty($password) || $password != $conpwd){
+                return back();
+            }else{
+                $user->password = md5($password);
+                $user->save();
+                return back();
+            }
+           
         }
         // dd($request);
     }
