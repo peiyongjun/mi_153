@@ -96,18 +96,12 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::resource("/goods_list_all","Admin\GoodsListController");
     Route::post("/goods_list_all/skus","Admin\GoodsListController@addSkus");//添加型号
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
-
-	Route::get('/order_list_cancel', function () {
-        return view('admin.order_list_cancel');
-    });
-    
-    Route::get('/order_list_all', function () {
-        return view('admin.order_list_all');
-    });
-
-    Route::get('/order_list_off', function () {
-        return view('admin.order_list_off');
-    });
+    //订单管理
+	Route::get('/order_list_cancel','Admin\OrderController@Offorder');
+    Route::get('/order_list_all','Admin\OrderController@order');
+    Route::get('/order_list_off', 'Admin\OrderController@Onorder');
+    Route::post('/order_list_off/{id}','Admin\OrderController@doUpdate');
+    Route::post('/order_list_all/{id}','Admin\OrderController@Change');
 });
 
 /////////////////////////////////////////////////////////////////////////////////

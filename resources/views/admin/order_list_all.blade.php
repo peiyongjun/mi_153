@@ -1,8 +1,18 @@
 @extends("layout.adminBase")
-
 @section("content")
+<script>
+	 function doChange(id)
+	 {
+	 	if(confirm('是否取消该订单?')){
+	 		var myform = document.myform;
+	 		myform.action = "/admin/order_list_all"+id;
+	 		myform.submit();
+	 	}
+	 }
+</script>
+</script>
 <div class="col-xs-12">
-	<h3 class="header smaller lighter blue">所有商品管理</h3>
+	<h3 class="header smaller lighter blue">所有商品订单管理</h3>
 	<div class="table-responsive">
 		<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 			<div class="row">
@@ -18,9 +28,21 @@
 						 records</label>
 					</div>
 				</div> -->
+				<form action="" method="post" name="myform">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_method" value="Change">
+				</form>
 				<div class="col-sm-3">
 					<div class="dataTables_filter" id="sample-table-2_filter">
-						<label>Search: <input type="text" aria-controls="sample-table-2"></label>
+						<form action="" class="form-search">
+							<!-- 搜索表单 -->
+								<input type="text" placeholder="请输入关键字" name="name" autocomplete="off">
+								<button type="submit" class="bn  bigger-110 blue">
+									<a>
+										<i class="icon-search nav-search-icon"></i>
+									</a>
+								</button>
+							</form>
 					</div>
 				</div>
 			</div>
@@ -40,55 +62,50 @@
 					商品数量
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
-					总价
+					收件人姓名--联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
-					地址
+					省-市-地区
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					状态
 				</th>
-				<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 249px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+				快递商家
+				</th>
+				<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 249px;">操作
 				</th>
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
-			<tr class="odd">
-				<td class=" ">
-					654816849685
+			<!-- 管理所有订单 -->
+			@foreach($list as $kk)
+			<tr id="order{{ $kk->id }}">
+				<td id="orderId{{ $kk->id }}">{{ $kk->id }}</td>
+				<td>{{ $kk->username }}</td>
+				<td>{{ $kk->name }}</td>
+				<td>{{ $kk->goods_num }}</td>
+				<td id="orderName{{ $kk->id }}">{{ $kk->del_name }}--{{ $kk->phone }}</td>
+				<td id="orderAddress{{ $kk->id }}">{{ $kk->province }}-{{ $kk->city }}-{{ $kk->district }}</td>
+				<td>
+				@if($kk->order_status == 1)
+					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
+					@elseif($kk->order_status == 2)
+					<span class="label label-danger arrowed">待发货</span>
+					@elseif($kk->order_status == 3)
+					<span class="label label-info arrowed-right arrowed-in">已取消订单</span>
+				@endif
 				</td>
-				<td class=" ">
-					xmm
-				</td>
-				<td class=" ">
-					小米5
-				</td>
-				<td class=" ">
-					5
-				</td>
-				<td class=" ">
-					6666
-				</td>
-				<td class="hidden-480 ">
-					北京市昌平区撒旦法撒旦法撒旦法
-				</td>
-				<td class=" ">
-					已发货
-				</td>
-				<td class=" ">
+				<td id="orderExpress{{ $kk->id }}">{{ $kk->express }}</td>
+				<td>
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="blue" href="#">
-							<i class="icon-zoom-in bigger-130"></i>
-						</a>&nbsp;
-						<a class="green" href="#">
-							<i class="icon-pencil bigger-130"></i>
-						</a>&nbsp;
-						<a class="red" href="#">
+						<a class="red" href="" onclick="javascript:doChange({{ $kk->id }})">
 							<i class="icon-trash bigger-130"></i>
 						</a>
 					</div>
 				</td>
 			</tr>
+			@endforeach
 			</tbody>
 			</table>
 			<div class="row">
@@ -99,17 +116,49 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
-						<ul class="pagination"> 
-							<li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li>
-						</ul>  
+						{!! $list->appends($where)->render() !!}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+	<!-- 模态框(确认发货信息) -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+       		<form action="" method="post" name="editForm">
+       			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">请确认发货信息</h4>
+	            </div>
+	            <div class="modal-body">
+					<div class="widget-main">
+						<div>
+							<label for="form-field-8">快递商家</label>
+							<input style="font-weight:bold;" class="form-control" name="Express" id="Express">
+						</div>
+						<div>
+							<label for="form-field-8">收件人地址</label>
+							<input style="font-weight:bold;" class="form-control" name="Address" id="Address">
+						</div>
+						<div>
+							<label for="form-field-8">订单号</label>
+							<input style="font-weight:bold;" class="form-control" name="Number" id="Number">
+						</div>
+						<div>
+							<label for="form-field-9">收件人姓名及联系方式</label>
+							<input style="font-weight:bold;" class="form-control limited" name="Username" id="Username">
+						</div>
+					</div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="submit" class="btn btn-primary">确认发货</button>
+	            </div>
+	        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>		
 @endsection
