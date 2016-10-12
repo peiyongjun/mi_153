@@ -76,7 +76,7 @@ class OrderController extends Controller
     public function doUpdate(Request $request)
     {
             //确认发货状态以及发货信息修改
-        $data = $request->onlsy('express','del_name','phone','address','order_status');
+        $data = $request->only('express','del_name','phone','address','order_status');
         // dd($data);
         $id = $request->id;
         $add= array();

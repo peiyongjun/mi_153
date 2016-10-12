@@ -1,5 +1,6 @@
 @extends("layout.adminBase")
 @section("content")
+<link rel="stylesheet" href="">
 <script>
 	 function doChange(id)
 	 {
@@ -88,7 +89,7 @@
 				<td id="orderName{{ $kk->id }}">{{ $kk->del_name }}--{{ $kk->phone }}</td>
 				<td id="orderAddress{{ $kk->id }}">{{ $kk->province }}-{{ $kk->city }}-{{ $kk->district }}</td>
 				<td>
-				@if($kk->order_status == 1)
+				    @if($kk->order_status == 1)
 					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
 					@elseif($kk->order_status == 2)
 					<span class="label label-danger arrowed">待发货</span>
@@ -102,6 +103,9 @@
 						<a class="red" href="" onclick="javascript:doChange({{ $kk->id }})">
 							<i class="icon-trash bigger-130"></i>
 						</a>
+					<button class="btn btn-info">
+								<i class="icon-pencil"></i>
+							</button>
 					</div>
 				</td>
 			</tr>
