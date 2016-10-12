@@ -12,6 +12,10 @@ class Orders extends Model
     protected $table = 'orders';
     public function getAllorder()
     {
-    	
+    	$data = \DB::table('orders')
+            ->join('users','users.id','=','orders.user_id')
+            ->join('goods','goods.id','=','orders.goods_id')
+            ->select('orders.*','users.username','goods.name');
+            return $data;
     }
 }

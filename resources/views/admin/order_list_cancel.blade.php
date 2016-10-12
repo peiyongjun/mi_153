@@ -48,7 +48,7 @@
 					商品数量
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
-					收件人姓名/联系方式
+					收件人姓名-联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					地址:省-市-地区
@@ -77,7 +77,7 @@
 				{{ $vv->goods_num }}
 				</td>
 				<td class=" ">
-				{{ $vv->del_name }}/{{ $vv->phone }}
+				{{ $vv->del_name }}-{{ $vv->phone }}
 				</td>
 				<td class="hidden-480 ">
 				{{ $vv->province }}-{{ $vv->city }}-{{ $vv->district }}
@@ -87,15 +87,7 @@
 				</td>
 				<td class=" ">
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="blue" href="#">
-							<i class="icon-zoom-in bigger-130"></i>
-						</a>&nbsp;
-						<a class="green" href="#">
-							<i class="icon-pencil bigger-130"></i>
-						</a>&nbsp;
-						<a class="red" href="#">
-							<i class="icon-trash bigger-130"></i>
-						</a>
+				
 					</div>
 				</td>
 			</tr>

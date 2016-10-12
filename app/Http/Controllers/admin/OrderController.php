@@ -76,8 +76,29 @@ class OrderController extends Controller
     public function doUpdate(Request $request)
     {
             //确认发货状态以及发货信息修改
+        $data = $request->onlsy('express','del_name','phone','address','order_status');
+        // dd($data);
         $id = $request->id;
-        $list = \DB::table('orders')->where('id',$id)->update(['order_status'=>1]);
+        $add= array();
+        $address = explode('-',$request->address);
+        // dd($address);
+        $add["province"] = $address[0];
+        $add["city"] = $address[1];
+        $add["district"] = $address[2];
+        
+        $orders = new Orders();
+        $list = $orders->where('id',$id)->update($data,$add);
+        return back();
+    }
+    public function Change(Request $request)
+    {
+        //取消订单状态
+        $id = $request->id;
+        $orders = new Orders();
+        $list = $orders->where('id',$id)->first();
+        if($list->order_status == 2){
+           $list->order_status == 3;
+        }
         return back();
     }   
 

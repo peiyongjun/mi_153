@@ -1,20 +1,15 @@
 @extends("layout.adminBase")
 @section("content")
-<script type="text/javascript">
-	//控制模态框内信息
-	function doUpdate(id)
-	{
-		var editForm = document.editForm;
-		editForm.action = "/admin/order_list_all/"+id;
-		var number = $("#orderId"+id).html();
-		var express = $("#orderExpress"+id).html();
-		var name = $("#orderName"+id).html();
-		var address =$("#orderAddress"+id).html();
-		$("#Number").val(number);
-		$("#Express").val(express);
-		$("#Username").val(name);
-		$("#Address").val(address);
-	}	
+<script>
+	 function doChange(id)
+	 {
+	 	if(confirm('是否取消该订单?')){
+	 		var myform = document.myform;
+	 		myform.action = "/admin/order_list_all"+id;
+	 		myform.submit();
+	 	}
+	 }
+</script>
 </script>
 <div class="col-xs-12">
 	<h3 class="header smaller lighter blue">所有商品订单管理</h3>
@@ -33,6 +28,10 @@
 						 records</label>
 					</div>
 				</div> -->
+				<form action="" method="post" name="myform">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_method" value="Change">
+				</form>
 				<div class="col-sm-3">
 					<div class="dataTables_filter" id="sample-table-2_filter">
 						<form action="" class="form-search">
@@ -100,13 +99,8 @@
 				<td id="orderExpress{{ $kk->id }}">{{ $kk->express }}</td>
 				<td>
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-					@if($kk->order_status == 2)
-						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $kk->id }})">
-							<i class="icon-edit bigger-130"></i>
-						</a>
-					@endif
-						<a class="green" href="">
-							<i class="icon-pencil bigger-130"></i>
+						<a class="red" href="" onclick="javascript:doChange({{ $kk->id }})">
+							<i class="icon-trash bigger-130"></i>
 						</a>
 					</div>
 				</td>
