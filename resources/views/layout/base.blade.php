@@ -37,7 +37,7 @@
 		<div class="topbar-info" id="J_userInfo">
 			<span class="user">
 				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
-					<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span>
+					<span class="name" id="username">{{ session('user')->username }}</span>
 				</a>
 			</span>
 			<span class="sep">|</span>

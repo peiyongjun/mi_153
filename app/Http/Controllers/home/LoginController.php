@@ -26,8 +26,6 @@ class LoginController extends Controller
         //写入到session 
         if($db){
             session(['user'=>$db]);//中间件验证的session
-            session_start();//开启session
-            $_SESSION['user'] = $db->username; //username存入到全局session中
             return redirect("/");
         }else{
             return back()->with('msg',"用户名或密码错误");
