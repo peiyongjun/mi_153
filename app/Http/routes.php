@@ -96,6 +96,10 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get('/order_list_all','Admin\OrderController@order');
     //待发货订单
     Route::get('/order_list_off', 'Admin\OrderController@Onorder');
+
+    Route::post('/order_list_all/{id}','Admin\OrderController@doUpdate');
+    //订单操作
+    // Route::get('/order_list_all/{id}','Admin\OrderController@Change');
 });
 
 /////////////////////////////////////////////////////////////////////////////////
