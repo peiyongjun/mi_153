@@ -26,6 +26,35 @@
                         @endif
                        <!--  <img class="avatar" src="https://account.xiaomi.com/static/img/passport/photo.jpg" width="150" height="150" alt="1157822905"> -->
                     </div>
+                    <div class="user-actions">
+                        <ul class="action-list">
+                            <li>账户安全：<span class="level level-2">
+                                @if ($user->phone && $user->email)
+                                较高
+                                @elseif ($user->phone || $user->email)
+                                普通
+                                @else
+                                较低
+                                @endif
+                            </span></li>
+                            @if($user->phone)
+                            <li>绑定手机：<span class="tel"><?php  $a = $user->phone;for($i=3;$i<9;$i++){$a[$i]='*';};echo $a; ?></span></li> 
+                            @else
+                            <li>
+                                绑定手机：<span class="tel"></span>
+                                <a class="btn btn-small btn-primary" href="{{ URL('/userSafe') }}" target="_blank" data-stat-id="f51e486b2c529448" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-f51e486b2c529448', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);">绑定</a>
+                            </li>
+                            @endif 
+                            <li>
+                                @if($user->email)
+                                绑定邮箱：<span class="tel"><?php  $b = $user->email;for($i=1;$i<strpos($b,"@")-1;$i++){$b[$i]='*';};echo $b; ?></span>
+                                @else
+                                绑定邮箱：<span class="tel"></span>
+                                <a class="btn btn-small btn-primary" href="{{ URL('/userSafe') }}" target="_blank" data-stat-id="f51e486b2c529448" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-f51e486b2c529448', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);">绑定</a>
+                                @endif
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="portal-sub">
                     <ul class="info-list clearfix">
