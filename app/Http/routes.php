@@ -44,7 +44,7 @@ Route::get('/userlogout',"home\LoginController@logOut");
 Route::group(['middleware'=>'homelogin'],function(){
 
     Route::get("/buy","DetailController@buyNow");
-
+    //个人中心页面
     Route::get('/user', "home\UserController@index");
     //订单页面
     Route::get('/validOrder', "home\UserController@myOrder");
@@ -58,8 +58,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
 
     Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
+    //评价晒单
+    Route::get('/orderComment', "home\UserController@showOrder");
 
-    Route::get('/showOrder', "home\UserController@showOrder");
+    Route::get('/alreadyC',"home\UserController@alreadyC");
+
+    Route::get('/invalidC',"home\UserController@invalidC");
 
     Route::get('/message', "home\UserController@message");
 

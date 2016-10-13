@@ -48,7 +48,7 @@
                                 等待付款
                                 @elseif ($order->order_status == 1)
                                 已关闭
-                                @elseif ($order->order_status == 2 || $v->order_status == 2)
+                                @elseif ($order->order_status == 2 || $order->order_status == 2)
                                 等待收货
                                 @elseif ($order->order_status == 3)
                                 等待收货

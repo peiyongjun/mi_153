@@ -12,4 +12,9 @@ class Comments extends Model
     {
     	return $this->hasMany("App\Models\Users","id","user_id");
     }
+
+    public function hasManyOrders ()
+    {
+    	return $this->hasMany("App\Models\Orders","id","order_id");
+    }
 }

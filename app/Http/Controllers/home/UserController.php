@@ -9,6 +9,7 @@ use App\Models\Users;
 use App\Models\Orders;
 use App\Models\Goods;
 use App\Models\Skus;
+use App\Models\Comments;
 
 class UserController extends Controller
 {
@@ -25,7 +26,9 @@ class UserController extends Controller
         $data = $goods->getAll();
         $id = session()->get('user')['id'];
         $user = Users::find($id);
-        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user]);
+        $order = Orders::where("user_id",$id)->where('order_status','==',0)->get();
+        $orders = Orders::where("user_id",$id)->where('order_status',2)->orWhere('order_status',3)->get();
+        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user])->with(['order'=>$order])->with(['orders'=>$orders]);
     }
 
     public function myOrder()
@@ -143,7 +146,66 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.showOrder')->with(['list'=>$list])->with(["data"=>$data]);
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','7')->get();
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.orderComment')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    public function alreadyC()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $comments = Comments::where("user_id",$userId)->where("status",1)->get();
+        // dd($comments);
+        $orders = [];//存放评价
+        foreach ($comments as $comment) {
+            $orders[$comment->id] = $comment::find($comment->id)->hasManyOrders()->first();
+        }
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.alreadyC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
+    }
+
+    public function invalidC()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $comments = Comments::where("user_id",$userId)->where("status",0)->get();
+        // dd($comments);
+        $orders = [];//存放评价
+        foreach ($comments as $comment) {
+            $orders[$comment->id] = $comment::find($comment->id)->hasManyOrders()->first();
+        }
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+
+        return view('home.user.invalidC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
     }
 
     public function like()

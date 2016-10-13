@@ -5,7 +5,7 @@
         display:none;
     }
 </style>
-<link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2016d30">
+<link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2016d26">
 @yield("css")
 <link rel="stylesheet" type="text/css" href="//s01.mifile.cn/css/user/main.min.css?v=2016053001">
 <div style="background-color:#F5F5F5;height:30px">
@@ -27,7 +27,7 @@
                         <div class="box-bd">
                             <ul class="uc-nav-list">
                                 <li id="myOrder"><a href="{{ URL('/validOrder') }}" data-stat-id="8f3d1bffd166dc22" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-8f3d1bffd166dc22', '//static.mi.com/order/', 'pcpid']);">我的订单</a></li>
-                                <li id="showOrder"><a href="/showOrder" data-count="comment" data-count-style="bracket" data-stat-id="20db2c68bfa9e4a5" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-20db2c68bfa9e4a5', 'http://order.mi.com/user/comment', 'pcpid']);">评价晒单</a></li>
+                                <li id="showOrder"><a href="{{ URL('/orderComment') }}" data-count="comment" data-count-style="bracket" data-stat-id="20db2c68bfa9e4a5" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-20db2c68bfa9e4a5', 'http://order.mi.com/user/comment', 'pcpid']);">评价晒单</a></li>
                             </ul>
                         </div>
                     </div>

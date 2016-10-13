@@ -59,18 +59,18 @@
                 <div class="portal-sub">
                     <ul class="info-list clearfix">
                         <li>
-                            <h3>待支付的订单：<span class="num">0</span></h3>
-                            <a href="//static.mi.com/order/?type=7" data-stat-id="dd6496f77a167a5d" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-dd6496f77a167a5d', '//static.mi.com/order/', 'pcpid']);">查看待支付订单<i class="iconfont"></i></a>
+                            <h3>待支付的订单：<span class="num">{{ $order->count() }}</span></h3>
+                            <a href="{{ URL('/waitPay') }}" data-stat-id="dd6496f77a167a5d" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-dd6496f77a167a5d', '//static.mi.com/order/', 'pcpid']);">查看待支付订单<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-1.png" alt="">
                         </li>
                         <li>
-                            <h3>待收货的订单：<span class="num">0</span></h3>
-                            <a href="//static.mi.com/order/?type=8" data-stat-id="92fa860987c1c734" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-92fa860987c1c734', '//static.mi.com/order/', 'pcpid']);">查看待收货订单<i class="iconfont"></i></a>
+                            <h3>待收货的订单：<span class="num">{{ $orders->count() }}</span></h3>
+                            <a href="{{ URL('/delOrder') }}" data-stat-id="92fa860987c1c734" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-92fa860987c1c734', '//static.mi.com/order/', 'pcpid']);">查看待收货订单<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-2.png" alt="">
                         </li>
                         <li>
                             <h3>待评价商品数：<span class="num">0</span></h3>
-                            <a href="http://order.mi.com/user/comment?filter=1&amp;r=84908.1474984937" data-stat-id="b4a31da3923196c8" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b4a31da3923196c8', 'http://order.mi.com/user/comment', 'pcpid']);">查看待评价商品<i class="iconfont"></i></a>
+                            <a href="" data-stat-id="b4a31da3923196c8" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b4a31da3923196c8', 'http://order.mi.com/user/comment', 'pcpid']);">查看待评价商品<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-3.png" alt="">
                         </li>
                         <li>
