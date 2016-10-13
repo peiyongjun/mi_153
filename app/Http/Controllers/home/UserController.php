@@ -26,9 +26,10 @@ class UserController extends Controller
         $data = $goods->getAll();
         $id = session()->get('user')['id'];
         $user = Users::find($id);
-        $order = Orders::where("user_id",$id)->where('order_status','==',0)->get();
+        $order = Orders::where("user_id",$id)->where('order_status',0)->get();
         $orders = Orders::where("user_id",$id)->where('order_status',2)->orWhere('order_status',3)->get();
-        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user])->with(['order'=>$order])->with(['orders'=>$orders]);
+        $Order = Orders::where("user_id",$id)->where('order_status',7)->get();
+        return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user])->with(['order'=>$order])->with(['orders'=>$orders])->with(['Order'=>$Order]);
     }
 
     public function myOrder()

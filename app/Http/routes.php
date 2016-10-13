@@ -15,7 +15,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////前台相关路由///////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
+//主页
 Route::get('/','IndexController@index');
 Route::get('/list','IndexController@goodslist');
 
@@ -47,46 +47,46 @@ Route::group(['middleware'=>'homelogin'],function(){
     //个人中心页面
     Route::get('/user', "home\UserController@index");
     //订单页面
+    //全部有效订单
     Route::get('/validOrder', "home\UserController@myOrder");
-
+    //待支付订单
     Route::get('/waitPay',"home\UserController@waitPay");
-
+    //待收货订单
     Route::get('/delOrder',"home\UserController@delOrder");
-
+    //已取消订单
     Route::get('/down',"home\UserController@down");
-
+    //订单详情页
     Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
-
+    //执行取消订单
     Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
     //评价晒单
+    //待评价
     Route::get('/orderComment', "home\UserController@showOrder");
-
+    //已评价
     Route::get('/alreadyC',"home\UserController@alreadyC");
-
+    //评价无效
     Route::get('/invalidC',"home\UserController@invalidC");
-
-    Route::get('/message', "home\UserController@message");
-
+    //喜欢商品页面
     Route::get('/like', "home\UserController@like");
-
+    //收货地址页面
     Route::get('/address', "home\UserController@address");
-
+    //售后服务页面
     Route::get('/server', "home\UserController@server");
-
+    //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
-
+    //个人信息修改
     Route::get('/Info',"home\UserController@Info");
 
     Route::post('/Info',"home\UserController@addInfo");
-
+    //上传头像
     Route::post('/doUpload',"home\UserController@doUpload");
-
+    //修改密码
     Route::post('/pwd',"home\UserController@pwd");
-
+    //修改邮箱
     Route::post('/email',"home\UserController@email");
-
+    //添加手机号
     Route::post('/phone',"home\UserController@phone");
-
+    //修改手机号
     Route::post('/updatePhone',"home\UserController@updatePhone");
 });
 
