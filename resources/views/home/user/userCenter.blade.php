@@ -69,8 +69,8 @@
                             <img src="//s01.mifile.cn/i/user/portal-icon-2.png" alt="">
                         </li>
                         <li>
-                            <h3>待评价商品数：<span class="num">0</span></h3>
-                            <a href="" data-stat-id="b4a31da3923196c8" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b4a31da3923196c8', 'http://order.mi.com/user/comment', 'pcpid']);">查看待评价商品<i class="iconfont"></i></a>
+                            <h3>待评价商品数：<span class="num">{{ $Order->count() }}</span></h3>
+                            <a href="{{ URL('/orderComment') }}" data-stat-id="b4a31da3923196c8" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b4a31da3923196c8', 'http://order.mi.com/user/comment', 'pcpid']);">查看待评价商品<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-3.png" alt="">
                         </li>
                         <li>
