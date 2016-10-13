@@ -50,9 +50,8 @@ class OrderController extends Controller
             $where['name']= $name;
         $list = $data->where('users.username','like',"%{$name}%")->paginate(4);
         }else{
-        $list = $data->orderby('order_status','desc')->paginate(4);
+        $list = $data->orderby('order_status','desc')->paginate(10);
         }
-
         return view('admin.order_list_cancel')->with(['list'=>$list])->with(['where'=>$where]);
     }
     public function Onorder(Request $request)
@@ -76,7 +75,7 @@ class OrderController extends Controller
     public function doUpdate(Request $request)
     {
             //确认发货状态以及发货信息修改
-        $data = $request->onlsy('express','del_name','phone','address','order_status');
+        $data = $request->only('express','del_name','phone','address','order_status');
         // dd($data);
         $id = $request->id;
         $add= array();
@@ -96,9 +95,30 @@ class OrderController extends Controller
         $id = $request->id;
         $orders = new Orders();
         $list = $orders->where('id',$id)->first();
-        if($list->order_status == 2){
-           $list->order_status == 3;
+        // dd($id);
+        if($list->order_status == 0){
+           $list->order_status = 1;
+
         }
+        $list->save();
+        return back();
+    }
+     public function Status(Request $request)
+    {
+            //确认发货状态以及发货信息修改
+        $address = explode('-',$request->location);
+        $data = $request->only('express','address','del_name','phone','order_status');
+        
+        $id = $request->id;
+        $add= array();
+        
+        // dd($address);
+        $add["province"] = $address[0];
+        $add["city"] = $address[1];
+        $add["district"] = $address[2];
+        
+        $orders = new Orders();
+        $list = $orders->where('id',$id)->update($data,$add);
         return back();
     }   
 

@@ -67,7 +67,7 @@
 					商品名
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 197px;">
-					商品数量
+					商品数
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
 					收件人姓名
@@ -101,7 +101,7 @@
 				<td id="orderAddress{{ $v->id }}">{{ $v->province }}-{{ $v->city }}-{{ $v->district }}</td>
 				<td id="orderPhone{{ $v->id }}">{{ $v->phone }}</td>
 				<td>
-					<span class="label label-danger arrowed">待发货</span>
+					<span class="label label-danger arrowed">支付完成</span>
 				</td>
 				<td id="orderExpress{{ $v->id }}">{{ $v->express }}</td>
 				<td>
@@ -137,7 +137,7 @@
         <div class="modal-content">
        		<form action="" method="post" name="editForm">
        			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-       			<input type="hidden" name="order_status" value="1">
+       			<input type="hidden" name="order_status" value="3">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	                <h4 class="modal-title" id="myModalLabel">请确认发货信息</h4>
