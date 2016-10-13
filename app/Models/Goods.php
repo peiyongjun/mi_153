@@ -51,4 +51,9 @@ class Goods extends Model
     {
         return $this->hasOne('App\Models\Skus', 'goods_id', 'id');
     }
+
+    public function hasManyGoods()
+    {
+        return $this->belongsTo("App\Models\Comments","goods_id","id");
+    }
 }

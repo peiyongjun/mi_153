@@ -1,5 +1,18 @@
 @extends("layout.adminBase")
 @section("content")
+<style>
+	a:active{
+		text-decoration: none;
+		color:white;
+	}
+	a:hover{
+		text-decoration: none;
+		color:white;
+	}
+	a{
+		color:white;
+	}
+</style>
 <script type="text/javascript">
 	//侧边导航选中
 	$("#commentsList").addClass("active");
@@ -38,57 +51,80 @@
 			</tr>
 			</thead>
 			<tbody>
+			@foreach($comments as $comment)
 			<tr>
-				<td>评价id</td>
-				<td>商品名</td>
-				<td>商品型号</td>
-				<td>用户帐号</td>
-				<td>评价内容</td>
-				<td>评价时间</td>
-				<td>☆☆☆☆☆</td>
+				<td>{{ $comment->id }}</td>
+				<td>{{ $goods[$comment->id]->name }}</td>
+				<td>{{ $skus[$comment->id]->attr }} {{ $skus[$comment->id]->color }}</td>
+				<td>{{ $users[$comment->id]->username }}</td>
+				<td>{{ $comment->content }}</td>
+				<td>{{ $comment->ctime }}</td>
+				<td>
+					@for($i=0; $i<($comment->star); $i++)
+					☆
+					@endfor
+				</td>
 				<td>
 					<!-- 评价状态 -->
-					<span class="label label-success arrowed">有效</span>
-					<span class="label label-danger arrowed">失效</span>
-					<span class="label label-warning">Useful</span>
+					@if($comment->status == 1)
+					<span class="label label-success arrowed">
+						<a href="#">有效</a>
+					</span>
+					@elseif($comment->status == 0)
+					<span class="label label-danger arrowed">
+						<a href="#">无效</a>
+					</span>
+					@endif
+					@if($comment->useful == 1)
+					<span class="label label-warning">
+						<a href="#">Useful</a>
+					</span>
+					@elseif($comment->useful == 0)
+					<span>
+					</span>
+					@endif
 				</td>
 				<td>
 					<!-- 操作按钮 -->
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="blue" href="">
+						@if($comment->useful == 0)
+						<a class="blue" href="{{ URL('/admin/comments_list/useful/'.$comment->id) }}">
 							<!-- 添加为有用 -->
 							<i class="icon-bookmark bigger-130"></i>
 						</a>
-						&nbsp;&nbsp;
-						<a class="blue" href="">
+						@elseif($comment->useful == 1)
+						<a class="blue" href="{{ URL('/admin/comments_list/unuseful/'.$comment->id) }}">
 							<!-- 取消有用 -->
 							<i class="icon-bookmark-empty bigger-130"></i>
 						</a>
-						&nbsp;&nbsp;
-						<a class="red" href="">
+						@endif
+						@if($comment->status == 1)
+						<a class="red" href="{{ URL('/admin/comments_list/invalid/'.$comment->id) }}">
 							<!-- 失效评论 -->
 							<i class="icon-ban-circle bigger-130"></i> 
 						</a>
-						&nbsp;&nbsp;
-						<a class="green" href="">
+						@elseif($comment->status == 0)
+						<a class="green" href="{{ URL('/admin/comments_list/valid/'.$comment->id) }}">
 							<!-- 生效评论 -->
 							<i class="icon-check bigger-130"></i>
 						</a>
+						@endif
 					</div>
 				</td>
 			</tr>
+			@endforeach
 			</tbody>
 			</table>
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="dataTables_info">
-						Showing 8 entries
+						本页共{!! $comments->count() !!}条数据
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
 						<!-- 分页 -->
-
+					
 						<!-- 分页 -->
 					</div>
 				</div>

@@ -17,4 +17,14 @@ class Comments extends Model
     {
     	return $this->hasMany("App\Models\Orders","id","order_id");
     }
+
+    public function hasMSkus()
+    {
+    	return $this->hasMany("App\Models\Skus","id","skus_id");
+    }
+
+    public function hasManyGoods()
+    {
+    	return $this->hasMany("App\Models\Goods","id","goods_id");
+    }
 }

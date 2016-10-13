@@ -27,4 +27,9 @@ class Skus extends Model
     {
         return $this->belongsTo('App\Models\Goods', 'id', 'goods_id');
     }
+
+    public function hasMSkus()
+    {
+        return $this->belongsTo("App\Models\Comments","skus_id","id");
+    }
 }

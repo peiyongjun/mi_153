@@ -106,9 +106,12 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
 
     Route::get("/user_list/toggle","Admin\UserListController@ToggleAccess");
     Route::resource("/user_list","Admin\UserListController");
-
+    //评价管理
     Route::get("/comments_list","Admin\CommentListController@index");
-
+    Route::get("/comments_list/valid/{id?}","Admin\CommentListController@valid");
+    Route::get("/comments_list/invalid/{id?}","Admin\CommentListController@invalid");
+    Route::get("/comments_list/useful/{id?}","Admin\CommentListController@useful");
+    Route::get("/comments_list/unuseful/{id?}","Admin\CommentListController@unuseful");
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
