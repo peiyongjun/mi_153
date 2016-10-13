@@ -11,9 +11,11 @@
             </div>
             <div class="nav">
                 <span class="nav-switch">
-                <a class="link active" href="{{ URL('/detail/'.$detail->id) }}">概述</a>
-                <span class="sep">|</span>
-                <a class="link" href="{{ URL('/specs/'.$detail->id) }}">参数</a>
+                    <a class="link active" href="{{ URL('/detail/'.$detail->id) }}">概述</a>
+                    <span class="sep">|</span>
+                    <a class="link" href="{{ URL('/specs/'.$detail->id) }}">参数</a>
+                    <span class="sep">|</span>
+                    <a class="link" href="{{ URL('/comments/'.$detail->id) }}">评价</a>
                 </span>
                 <a href="/buy?id={{ $detail->id }}" target="_blank" class="btn btn-primary btn-small J_buyBtn">立即购买</a>
             </div>

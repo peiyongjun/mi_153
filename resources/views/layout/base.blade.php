@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="/home/css/category.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
+<style>
+	body{
+        background-color:#F5F5F5;
+	}
+</style>
 <body>
 <div class="site-topbar">
 	<div class="container">

@@ -18,4 +18,13 @@ class Skus extends Model
     {
         return $this::hasMany('App\Models\Goods','id','goods_id');
     }
+    /**
+     * 关联skus表
+     * 
+     * @return Object  $list    查询到的数据
+     */
+    public function hasOneSkus()
+    {
+        return $this->belongsTo('App\Models\Goods', 'id', 'goods_id');
+    }
 }
