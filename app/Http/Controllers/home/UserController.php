@@ -174,11 +174,13 @@ class UserController extends Controller
         // dd($orders);
         $skus = [];
         $good = [];
-        foreach($orders as $order){
-            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
-        }
-        foreach($skus as $sku){
-            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        if($orders){
+            foreach($orders as $order){
+                $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+            }
+            foreach($skus as $sku){
+                $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+            }
         }
         return view('home.user.alreadyC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
     }

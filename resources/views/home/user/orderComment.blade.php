@@ -7,7 +7,7 @@
 </style>
 @endsection
 @section("showOrder")
-@if(!$skus)
+@if(!$order)
 <div class="box-bd">
 	<p class="empty">暂时没有符合条件的商品。</p>
 </div>
