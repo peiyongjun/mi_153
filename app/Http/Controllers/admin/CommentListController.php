@@ -21,7 +21,7 @@ class CommentListController extends Controller
      */
     public function index ()
     {
-    	$comments = Comments::all();
+    	$comments = Comments::paginate(5);
     	// dd($comments);
     	$users = [];
     	$skus = [];
@@ -43,7 +43,7 @@ class CommentListController extends Controller
     	$comment = Comments::find($id);
     	$comment->status = 1;
     	$comment->save();
-    	$comments = Comments::all();
+    	$comments = Comments::paginate(5);
     	$users = [];
     	$skus = [];
     	foreach($comments as $comment){
@@ -64,7 +64,7 @@ class CommentListController extends Controller
     	$comment = Comments::find($id);
     	$comment->status = 0;
     	$comment->save();
-    	$comments = Comments::all();
+    	$comments = Comments::paginate(5);
     	$users = [];
     	$skus = [];
     	foreach($comments as $comment){
@@ -85,7 +85,7 @@ class CommentListController extends Controller
     	$comment = Comments::find($id);
     	$comment->useful = 1;
     	$comment->save();
-    	$comments = Comments::all();
+    	$comments = Comments::paginate(5);
     	$users = [];
     	$skus = [];
     	foreach($comments as $comment){
@@ -106,7 +106,7 @@ class CommentListController extends Controller
     	$comment = Comments::find($id);
     	$comment->useful = 0;
     	$comment->save();
-    	$comments = Comments::all();
+    	$comments = Comments::paginate(5);
     	$users = [];
     	$skus = [];
     	foreach($comments as $comment){

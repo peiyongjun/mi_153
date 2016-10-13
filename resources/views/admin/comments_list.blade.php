@@ -124,7 +124,7 @@
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
 						<!-- 分页 -->
-					
+						{!! $comments->render() !!}
 						<!-- 分页 -->
 					</div>
 				</div>
