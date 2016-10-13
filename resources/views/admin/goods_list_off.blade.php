@@ -4,7 +4,7 @@
 	//侧边导航选中
 	$("#goodsList").addClass("open");
 	$("#goodsList").addClass("active");
-	$("#goodsListAll").addClass("active");
+	$("#goodsListOff").addClass("active");
 	//控制修改信息模态框内信息
 	function doUpdate(id)
 	{

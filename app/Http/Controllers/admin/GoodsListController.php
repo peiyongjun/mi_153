@@ -157,7 +157,7 @@ class GoodsListController extends Controller
         foreach ($types as $k => $v) {
             $type[$v->id] = $v->name;
         }
-        return view('admin.goods_list_all')->with(['data'=>$data])->with(["type"=>$type])->with(["search"=>$search]);
+        return view('admin.goods_list_off')->with(['data'=>$data])->with(["type"=>$type])->with(["search"=>$search]);
     }
 
     /**
