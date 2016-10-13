@@ -172,7 +172,7 @@
                                 <b class="arrow icon-angle-down"></b>
                             </a>
                             <ul class="submenu">
-                                <li id="/goods_list_all">
+                                <li id="goods_list_all">
                                     <a href="/admin/goods_list_all">
                                         <i class="icon-double-angle-right"></i>
                                         所有商品
@@ -236,7 +236,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="index.html">
+                            <a href="/admin/comments_list">
                                 <i class="icon-dashboard"></i>
                                 <span class="menu-text"> 评价管理 </span>
                             </a>

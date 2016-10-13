@@ -103,6 +103,8 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get("/user_list/toggle","Admin\UserListController@ToggleAccess");
     Route::resource("/user_list","Admin\UserListController");
 
+    Route::get("/comments_list","Admin\CommentListController@index");
+
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
