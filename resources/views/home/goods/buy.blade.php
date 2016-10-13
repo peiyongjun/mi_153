@@ -1,5 +1,6 @@
 @extends('layout.base')
 @section('content')
+<link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
 <div class="container">
 	<div class="pro-choose-main clearfix container" id="J_chooseMain" style="">
 		<div class="pro-view">

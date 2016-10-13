@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
-use App\Models\Goods;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
+use App\Models\Orders;
+use App\Models\Goods;
+use App\Models\Skus;
 
 class UserController extends Controller
 {
@@ -31,7 +33,32 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.myOrder')->with(['list'=>$list])->with(["data"=>$data]);
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','!=',1)->get();
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        // dd($orders);
+        return view('home.user.validOrder')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    public function waitPay()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        return view('home.user.waitPay')->with(['list'=>$list])->with(["data"=>$data]);
+    }
+
+    public function down()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        return view('home.user.down')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
     public function message()

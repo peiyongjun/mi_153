@@ -26,7 +26,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li id="myOrder"><a href="/myOrder" data-stat-id="8f3d1bffd166dc22" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-8f3d1bffd166dc22', '//static.mi.com/order/', 'pcpid']);">我的订单</a></li>
+                                <li id="myOrder"><a href="{{ URL('/validOrder') }}" data-stat-id="8f3d1bffd166dc22" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-8f3d1bffd166dc22', '//static.mi.com/order/', 'pcpid']);">我的订单</a></li>
                                 <li id="showOrder"><a href="/showOrder" data-count="comment" data-count-style="bracket" data-stat-id="20db2c68bfa9e4a5" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-20db2c68bfa9e4a5', 'http://order.mi.com/user/comment', 'pcpid']);">评价晒单</a></li>
                             </ul>
                         </div>

@@ -37,8 +37,9 @@ class Goods extends Model
      * 
      * @return Object  $list    查询到的数据
      */
-    public function hasSkus ()
+   public function hasSkus()
     {
-        return Goods::hasMany('App\Models\Skus','goods_id','id');
+        return $this->belongsTo('App\Models\Skus', 'goods_id', 'id');
     }
+   
 }
