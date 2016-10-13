@@ -2,13 +2,9 @@
 @section("orderContent")
 @section("orderCss")
 <style>
-    #valid a{
+    #delivery a{
         color:#FF6700;
     }
-    .pagination {
-  height: 36px;
-  margin: 18px 0;
-}
 </style>
 @endsection
 <!-- 没有订单 -->
@@ -30,21 +26,7 @@
                 <div class="order-detail">
                     <div class="order-summary">
                         <div class="order-status">
-                            @if ($v->order_status == 0)
-                            等待付款
-                            @elseif ($v->order_status == 2 || $v->order_status == 2)
-                            等待发货
-                            @elseif ($v->order_status == 3)
-                            等待发货
-                            @elseif ($v->order_status == 4)
-                            退货中
-                            @elseif ($v->order_status == 5)
-                            交易完成
-                            @elseif ($v->order_status == 6)
-                            退货完成
-                            @elseif ($v->order_status == 7)
-                            待评价
-                            @endif
+                            等待收货
                         </div>
                         <p class="order-desc J_deliverDesc">
                             21:30前支付，预计明天送达
@@ -73,7 +55,7 @@
                                         <span class="sep">
                                             |
                                         </span>
-                                        在线支付
+                                        已支付
                                     </p>
                                 </th>
                                 <th class="col-sub">
@@ -99,7 +81,7 @@
                                                 </a>
                                             </div>
                                             <p class="name">
-                                                <a target="_blank" href="{{ URL('/detail/').$goods[$skus[$v->id]->id]->id }}">
+                                                <a target="_blank" href="{{ URL(('/detail/').($goods[$skus[$v->id]->id]->id)) }}">
                                                     {{ $goods[$skus[$v->id]->id]->name }} {{ $skus[$v->id]->attr }} {{ $skus[$v->id]->color }}
                                                 </a>
                                             </p>
@@ -110,10 +92,6 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
-                                        立即支付
-                                    </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
                                         订单详情
                                     </a>

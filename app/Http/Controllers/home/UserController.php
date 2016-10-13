@@ -35,14 +35,16 @@ class UserController extends Controller
         $data = $goods->getAll();
         $userId = session('user')->id;
         $orders = Orders::where("user_id",$userId)->where('order_status','!=',1)->get();
+        $skus = [];
+        $good = [];
         foreach($orders as $order){
             $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
         }
         foreach($skus as $sku){
             $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
         }
-        // dd($orders);
         return view('home.user.validOrder')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+        // dd($skus);
     }
 
     public function waitPay()
@@ -50,7 +52,36 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.waitPay')->with(['list'=>$list])->with(["data"=>$data]);
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','==',0)->get();
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.waitPay')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    public function delOrder()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','2')->orWhere('order_status','3')->get();
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.delOrder')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
     public function down()
@@ -58,7 +89,45 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.down')->with(['list'=>$list])->with(["data"=>$data]);
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','1')->get();
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.down')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    public function orderDetail($id)
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $orderId = $id;
+        $orders = Orders::where("id",$orderId)->first();
+        $skus = Skus::where("id",$orders->goods_id)->first();
+        $good = Goods::where("id",$skus->goods_id)->first();
+        return view('home.user.orderDetail')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    public function cancelOrder($id)
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $orderId = $id;
+        $order = Orders::find($orderId);
+        $order->order_status = 1;
+        $order->save();
+        $orders = Orders::where("id",$orderId)->first();
+        $skus = Skus::where("id",$orders->goods_id)->first();
+        $good = Goods::where("id",$skus->goods_id)->first();
+        return view('home.user.orderDetail')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
     public function message()

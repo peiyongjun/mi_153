@@ -45,12 +45,18 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get("/buy","DetailController@buyNow");
 
     Route::get('/user', "home\UserController@index");
-    
+    //订单页面
     Route::get('/validOrder', "home\UserController@myOrder");
 
     Route::get('/waitPay',"home\UserController@waitPay");
 
+    Route::get('/delOrder',"home\UserController@delOrder");
+
     Route::get('/down',"home\UserController@down");
+
+    Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
+
+    Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
 
     Route::get('/showOrder', "home\UserController@showOrder");
 

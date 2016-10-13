@@ -37,8 +37,8 @@
                                 待支付
                             </a>
                         </li>
-                        <li>
-                            <a id="J_sendTab" href="//static.mi.com/order/#type=8" data-type="8" data-stat-id="8308bdcf62c72b1b"
+                        <li id="delivery">
+                            <a id="J_sendTab" href="{{ URL('/delOrder') }}" data-type="8" data-stat-id="8308bdcf62c72b1b"
                             onclick="_msq.push(['trackEvent', '5eab40056fa03ac0-8308bdcf62c72b1b', '//static.mi.com/order/#type=8', 'pcpid']);">
                                 待收货
                             </a>

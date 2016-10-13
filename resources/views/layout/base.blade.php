@@ -44,7 +44,7 @@
 				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
 			</span>
 			<span class="sep">|</span>
-			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<a rel="nofollow" class="link link-order" href="{{ URL('/validOrder') }}" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>
