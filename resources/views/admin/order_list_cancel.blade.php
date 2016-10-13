@@ -1,6 +1,12 @@
 @extends("layout.adminBase")
 
 @section("content")
+<script type="text/javascript">
+	//侧边导航选中
+	$("#orderList").addClass("open");
+	$("#orderList").addClass("active");
+	$("#orderListCancel").addClass("active");
+</script>
 <div class="col-xs-12">
 	<h3 class="header smaller lighter blue">取消订单管理</h3>
 	<div class="table-responsive">
