@@ -22,6 +22,7 @@ Route::get('/list','IndexController@goodslist');
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
 Route::get('/specs/{id}','DetailController@specs');
+Route::get('/comments/{id}','home\CommentController@showInGoods');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
