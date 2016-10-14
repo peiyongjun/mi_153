@@ -28,10 +28,10 @@
                         <div class="order-status">
                             @if ($v->order_status == 0)
                             等待付款
-                            @elseif ($v->order_status == 2 || $v->order_status == 2)
+                            @elseif ($v->order_status == 2)
                             等待发货
                             @elseif ($v->order_status == 3)
-                            等待发货
+                            等待收货
                             @elseif ($v->order_status == 4)
                             退货中
                             @elseif ($v->order_status == 5)
@@ -106,10 +106,15 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
-                                        立即支付
-                                    </a>
+                                        @if ($v->order_status == 0)
+                                        <a class="btn btn-small btn-primary" href="" target="_blank">
+                                            立即支付
+                                        </a>
+                                        @elseif ($v->order_status == 3)
+                                        <a class="btn btn-small btn-primary" href="" target="_blank">
+                                            确认收货
+                                        </a>
+                                        @endif
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
                                         订单详情
                                     </a>
