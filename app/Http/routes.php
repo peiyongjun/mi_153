@@ -59,6 +59,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
     //执行取消订单
     Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
+    //确认收货
+    Route::get('/delivery/{id}',"home\UserController@delivery");
     //评价晒单
     //待评价
     Route::get('/orderComment', "home\UserController@showOrder");
@@ -71,7 +73,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     //收货地址页面
     Route::get('/address', "home\UserController@address");
     //售后服务页面
+    //服务记录
     Route::get('/server', "home\UserController@server");
+    //申请服务
+    Route::get('/service', "home\UserController@service");
+    //提交申请表
+    Route::post('/service', "home\UserController@addService");
     //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
     //个人信息修改

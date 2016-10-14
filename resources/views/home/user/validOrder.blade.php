@@ -22,32 +22,40 @@
     @foreach($order as $v)
     <div id="J_orderList">
         <ul class="order-list">
+            @if($v->order_status != 5 && $v->order_status != 7)
             <li class="uc-order-item uc-order-item-pay">
+            @elseif($v->order_status == 5)
+            <li class="uc-order-item uc-order-item-finish">
+            @elseif($v->order_status == 7)
+            <li class="uc-order-item uc-order-item-finish">
+            @endif
                 <div class="order-detail">
                     <div class="order-summary">
                         <div class="order-status">
                             @if ($v->order_status == 0)
                             等待付款
-                            @elseif ($v->order_status == 2 || $v->order_status == 2)
-                            等待发货
+                            @elseif ($v->order_status == 2)
+                            等待收货
                             @elseif ($v->order_status == 3)
-                            等待发货
+                            等待收货
                             @elseif ($v->order_status == 4)
                             退货中
                             @elseif ($v->order_status == 5)
-                            交易完成
+                            已收货
                             @elseif ($v->order_status == 6)
                             退货完成
                             @elseif ($v->order_status == 7)
-                            待评价
+                            已收货
                             @endif
                         </div>
+                        @if($v->order_status != 5 && $v->order_status != 7)
                         <p class="order-desc J_deliverDesc">
                             21:30前支付，预计明天送达
                             <span class="beta">
                                 Beta
                             </span>
                         </p>
+                        @endif
                     </div>
                     <table class="order-detail-table">
                         <thead>
@@ -106,10 +114,28 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
+                                    @if ($v->order_status == 0)
                                     <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
                                     target="_blank">
                                         立即支付
                                     </a>
+                                    @elseif ($v->order_status == 2)
+                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
+                                        确认收货
+                                    </a>
+                                    @elseif ($v->order_status == 3)
+                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
+                                        确认收货
+                                    </a>
+                                    @elseif ($v->order_status == 7)
+                                    <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
+                                        申请售后
+                                    </a>
+                                     @elseif ($v->order_status == 5)
+                                    <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
+                                        申请售后
+                                    </a>
+                                    @endif
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
                                         订单详情
                                     </a>
@@ -124,4 +150,14 @@
     @endforeach
 </div>
 @endif
+<script>
+    function conDel(id){
+        nid = id;
+    }
+     $("#confirmDel").click(function(){
+        if(confirm("确认收货？")){
+            location.href = "/delivery/"+nid;
+        }
+    })
+</script>
 @endsection

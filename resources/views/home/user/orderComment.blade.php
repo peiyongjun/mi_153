@@ -84,6 +84,9 @@
 									target="_blank">
 										去评价
 									</a>
+									<a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
+                                        订单详情
+                                    </a>
 								</td>
 							</tr>
 						</tbody>

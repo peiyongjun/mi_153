@@ -92,6 +92,9 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
+                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
+                                        确认收货
+                                    </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
                                         订单详情
                                     </a>
@@ -106,4 +109,14 @@
     @endforeach
 </div>
 @endif
+<script>
+   function conDel(id){
+        nid = id;
+    }
+     $("#confirmDel").click(function(){
+        if(confirm("确认收货？")){
+            location.href = "/delivery/"+nid;
+        }
+    })
+</script>
 @endsection

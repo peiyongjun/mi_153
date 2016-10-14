@@ -32,6 +32,11 @@ class UserController extends Controller
         return view('home.user.userCenter')->with(['list'=>$list])->with(["data"=>$data])->with(['user'=>$user])->with(['order'=>$order])->with(['orders'=>$orders])->with(['Order'=>$Order]);
     }
 
+    /**
+     * 我的订单主页面，全部有效订单
+     *
+     * @return 有效订单页面
+     */
     public function myOrder()
     {
         $goods = new Goods();
@@ -51,6 +56,11 @@ class UserController extends Controller
         // dd($skus);
     }
 
+    /**
+     * 待支付订单
+     *
+     * @return 待支付页面
+     */
     public function waitPay()
     {
         $goods = new Goods();
@@ -69,6 +79,11 @@ class UserController extends Controller
         return view('home.user.waitPay')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
+    /**
+     * 待收货订单
+     *
+     * @return 待收货订单页面
+     */
     public function delOrder()
     {
         $goods = new Goods();
@@ -88,6 +103,23 @@ class UserController extends Controller
         return view('home.user.delOrder')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
+    /**
+     * 确认收货
+     *
+     * @return 
+     */
+    public function delivery($id)
+    {
+        $orders = Orders::find($id);
+        $orders->order_status = 7;
+        $orders->save();
+        return back();
+    }
+    /**
+     * 已关闭订单
+     *
+     * @return 已关闭订单页面
+     */
     public function down()
     {
         $goods = new Goods();
@@ -107,6 +139,11 @@ class UserController extends Controller
         return view('home.user.down')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
+    /**
+     * 订单详情
+     *
+     * @return 订单详情页面
+     */
     public function orderDetail($id)
     {
         $goods = new Goods();
@@ -119,6 +156,11 @@ class UserController extends Controller
         return view('home.user.orderDetail')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
+    /**
+     * 取消订单
+     *
+     * @return 订单详情页面
+     */
     public function cancelOrder($id)
     {
         $goods = new Goods();
@@ -134,14 +176,11 @@ class UserController extends Controller
         return view('home.user.orderDetail')->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
-    public function message()
-    {
-        $goods = new Goods();
-        $list = $goods->getType();
-        $data = $goods->getAll();
-        return view('home.user.message')->with(['list'=>$list])->with(["data"=>$data]);
-    }
-
+    /**
+     * 评价晒单
+     *
+     * @return 待评价商品页面
+     */
     public function showOrder()
     {
         $goods = new Goods();
@@ -160,6 +199,11 @@ class UserController extends Controller
         return view('home.user.orderComment')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
+    /**
+     * 已评价商品
+     *
+     * @return 已评价页面
+     */
     public function alreadyC()
     {
         $goods = new Goods();
@@ -186,6 +230,11 @@ class UserController extends Controller
         return view('home.user.alreadyC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
     }
 
+    /**
+     * 评价失效商品
+     *
+     * @return 评价失效页面
+     */
     public function invalidC()
     {
         $goods = new Goods();
@@ -211,6 +260,11 @@ class UserController extends Controller
         return view('home.user.invalidC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
     }
 
+    /**
+     * 喜欢的商品
+     *
+     * @return
+     */
     public function like()
     {
         $goods = new Goods();
@@ -219,6 +273,11 @@ class UserController extends Controller
         return view('home.user.like')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
+    /**
+     * 收货地址
+     *
+     * @return
+     */
     public function address()
     {
         $goods = new Goods();
@@ -227,6 +286,11 @@ class UserController extends Controller
         return view('home.user.address')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
+    /**
+     * 服务记录
+     *
+     * @return 
+     */
     public function server()
     {
         $goods = new Goods();
@@ -235,6 +299,33 @@ class UserController extends Controller
         return view('home.user.server')->with(['list'=>$list])->with(["data"=>$data]);
     }
 
+    /**
+     * 申请服务
+     *
+     * @return 
+     */
+    public function service()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        return view("home.user.service")->with(['list'=>$list])->with(["data"=>$data]);
+    }
+
+    /**
+     * 添加申请服务
+     *
+     * @return 
+     */
+    public function addService()
+    {
+        
+    }
+    /**
+     * 个人信息
+     *
+     * @return 账户安全页面
+     */
     public function userSafe()
     {
         $id = session()->get('user')['id'];
@@ -242,6 +333,11 @@ class UserController extends Controller
         return view('home.user.userSafe')->with(["user"=>$user]);
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 个人信息页面
+     */
     public function Info()
     {
         $id = session()->get('user')['id'];
@@ -255,6 +351,11 @@ class UserController extends Controller
         return view('home.user.Info')->with(["user"=>$user])->with(['birthday'=>$birthday]);
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 添加信息
+     */
     public function addInfo(Request $request)
     {
         $id = $request->id;
@@ -268,6 +369,11 @@ class UserController extends Controller
         return redirect('/Info');
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 上传头像
+     */
     public function doUpload(Request $request)
     {
         //判断是否有上传
@@ -291,6 +397,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 修改密码
+     */
     public function pwd(Request $request)
     {
         // dd($request);
@@ -316,6 +427,11 @@ class UserController extends Controller
         // dd($request);
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 修改邮箱
+     */
     public function email(Request $request)
     {
         // dd($request);
@@ -331,6 +447,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 添加手机号
+     */
     public function phone(Request $request)
     {
         if($request->phone == ''  || !preg_match("/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/",$request->phone)){
@@ -345,6 +466,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 个人信息
+     *
+     * @return 修改手机号
+     */
     public function updatePhone(Request $request)
     {
         $id = $request->id;
