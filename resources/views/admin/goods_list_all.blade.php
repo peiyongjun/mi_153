@@ -9,7 +9,7 @@
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
-		editForm.action = "order_list_all/"+id;
+		editForm.action = "goods_list_all/"+id;
 		var name = $("#name"+id).html();
 		var num = $("#num"+id).html();
 		var price = $("#price"+id).html();
