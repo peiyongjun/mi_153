@@ -7,22 +7,44 @@
 </style>
 @endsection
 @section('userContent')
+@section("Ccss")
+@show
 <div class="span16">
     <div class="uc-box uc-main-box">
-        <div class="uc-content-box">
+        <div class="uc-content-box order-list-box">
             <div class="box-hd">
-                <h1 class="title">商品评价</h1>
+                <h1 class="title">
+                    商品评价
+                </h1>
                 <div class="more clearfix">
-                    <ul class="filter-list J_addrType">
-                        <li class="first active"><a href="http://order.mi.com/user/comment?filter=1&amp;r=27008.1474986637" data-stat-id="b3c689cd9b84db0f" onclick="_msq.push(['trackEvent', '815ce971591f749c-b3c689cd9b84db0f', 'http://order.mi.com/user/comment', 'pcpid']);">待评价商品</a></li>
-                        <li><a href="http://order.mi.com/user/comment?filter=2&amp;r=27008.1474986637" data-stat-id="f37aa1a4345d9e39" onclick="_msq.push(['trackEvent', '815ce971591f749c-f37aa1a4345d9e39', 'http://order.mi.com/user/comment', 'pcpid']);">已评价商品</a></li>
-                        <li><a href="http://order.mi.com/user/comment?filter=3&amp;r=27008.1474986637" data-stat-id="80ca0056e3d4948a" onclick="_msq.push(['trackEvent', '815ce971591f749c-80ca0056e3d4948a', 'http://order.mi.com/user/comment', 'pcpid']);">评价失效商品</a></li>
+                    <ul class="filter-list J_orderType">
+                        <li class="first" id="waitC">
+                            <a href="{{ URL('/orderComment') }}">
+                                待评价订单
+                            </a>
+                        </li>
+                        <li id="alC">
+                            <a id="J_unpaidTab" href="{{ URL('/alreadyC') }}">
+                                已评价订单
+                            </a>
+                        </li>
+                        <li id="ivC">
+                            <a id="J_sendTab" href="{{ URL('/invalidC') }}">
+                                评价失效订单
+                            </a>
+                        </li>
                     </ul>
+                    <form id="J_orderSearchForm" class="search-form clearfix" action="#" method="get">
+                        <label for="search" class="hide">
+                            站内搜索
+                        </label>
+                        <input class="search-text" type="search" id="J_orderSearchKeywords" name="keywords"
+                        autocomplete="off" placeholder="输入商品名称、商品编号、订单号">
+                        <input type="submit" class="search-btn iconfont" value="">
+                    </form>
                 </div>
             </div>
-            <div class="box-bd">
-                            <p class="empty">暂时没有符合条件的商品。</p>
-                        </div>
+            @yield("showOrder")         
         </div>
     </div>
 </div>

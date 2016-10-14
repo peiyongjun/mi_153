@@ -15,13 +15,14 @@
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////前台相关路由///////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
+//主页
 Route::get('/','IndexController@index');
 Route::get('/list','IndexController@goodslist');
 
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
 Route::get('/specs/{id}','DetailController@specs');
+Route::get('/comments/{id}','home\CommentController@showInGoods');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
@@ -41,31 +42,52 @@ Route::get('/userlogout',"home\LoginController@logOut");
 
 //个人中心页面
 Route::group(['middleware'=>'homelogin'],function(){
+
     Route::get("/buy","DetailController@buyNow");
-
+    //个人中心页面
     Route::get('/user', "home\UserController@index");
-    
-    Route::get('/myOrder', "home\UserController@myOrder");
-
-    Route::get('/showOrder', "home\UserController@showOrder");
-
-    Route::get('/message', "home\UserController@message");
-
+    //订单页面
+    //全部有效订单
+    Route::get('/validOrder', "home\UserController@myOrder");
+    //待支付订单
+    Route::get('/waitPay',"home\UserController@waitPay");
+    //待收货订单
+    Route::get('/delOrder',"home\UserController@delOrder");
+    //已取消订单
+    Route::get('/down',"home\UserController@down");
+    //订单详情页
+    Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
+    //执行取消订单
+    Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
+    //评价晒单
+    //待评价
+    Route::get('/orderComment', "home\UserController@showOrder");
+    //已评价
+    Route::get('/alreadyC',"home\UserController@alreadyC");
+    //评价无效
+    Route::get('/invalidC',"home\UserController@invalidC");
+    //喜欢商品页面
     Route::get('/like', "home\UserController@like");
-
+    //收货地址页面
     Route::get('/address', "home\UserController@address");
-
+    //售后服务页面
     Route::get('/server', "home\UserController@server");
-
+    //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
-
+    //个人信息修改
     Route::get('/Info',"home\UserController@Info");
 
     Route::post('/Info',"home\UserController@addInfo");
-
+    //上传头像
     Route::post('/doUpload',"home\UserController@doUpload");
-
+    //修改密码
     Route::post('/pwd',"home\UserController@pwd");
+    //修改邮箱
+    Route::post('/email',"home\UserController@email");
+    //添加手机号
+    Route::post('/phone',"home\UserController@phone");
+    //修改手机号
+    Route::post('/updatePhone',"home\UserController@updatePhone");
 });
 
 
@@ -84,22 +106,28 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
 
     Route::get("/user_list/toggle","Admin\UserListController@ToggleAccess");
     Route::resource("/user_list","Admin\UserListController");
-
+    //评价管理
+    Route::get("/comments_list","Admin\CommentListController@index");
+    Route::get("/comments_list/valid/{id?}","Admin\CommentListController@valid");
+    Route::get("/comments_list/invalid/{id?}","Admin\CommentListController@invalid");
+    Route::get("/comments_list/useful/{id?}","Admin\CommentListController@useful");
+    Route::get("/comments_list/unuseful/{id?}","Admin\CommentListController@unuseful");
     //操作货物信息的路由
     Route::get("/goods_list_all/toggle","Admin\GoodsListController@ToggleStatus");
     Route::resource("/goods_list_all","Admin\GoodsListController");
+    Route::post("/goods_list_all/skus","Admin\GoodsListController@addSkus");//添加型号
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
-	Route::get('/order_list_cancel', function () {
-        return view('admin.order_list_cancel');
-    });
-    
-    Route::get('/order_list_all', function () {
-        return view('admin.order_list_all');
-    });
-
-    Route::get('/order_list_off', function () {
-        return view('admin.order_list_off');
-    });
+    //已取消的订单
+	Route::get('/order_list_cancel','Admin\OrderController@Offorder');
+    //全部订单信息
+    Route::get('/order_list_all','Admin\OrderController@order');
+    //已支付订单
+    Route::get('/order_list_off', 'Admin\OrderController@Onorder');
+    //确认和修改发货信息
+    Route::post('/order_list_off/{id}','Admin\OrderController@doUpdate');
+    Route::post('/order_list_all/Status/{id}','Admin\OrderController@Status');
+    //是否取消订单信息
+    Route::get('/order_list_all/cancel','Admin\OrderController@Change');
 });
 
 /////////////////////////////////////////////////////////////////////////////////

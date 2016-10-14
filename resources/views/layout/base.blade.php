@@ -10,10 +10,14 @@
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
-<link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
 <link rel="stylesheet" href="/home/css/category.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
+<style>
+	body{
+        background-color:#F5F5F5;
+	}
+</style>
 <body>
 <div class="site-topbar">
 	<div class="container">
@@ -37,7 +41,7 @@
 		<div class="topbar-info" id="J_userInfo">
 			<span class="user">
 				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
-					<span class="name" id="username"><?php session_start(); echo $_SESSION['user']; ?></span>
+					<span class="name" id="username">{{ session('user')->username }}</span>
 				</a>
 			</span>
 			<span class="sep">|</span>
@@ -45,7 +49,7 @@
 				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
 			</span>
 			<span class="sep">|</span>
-			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<a rel="nofollow" class="link link-order" href="{{ URL('/validOrder') }}" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>

@@ -34,7 +34,8 @@
 		<!-- ace settings handler -->
 
 		<script src="{{ asset('admin/assets/js/ace-extra.min.js') }}"></script>
-
+		
+		<script src="{{ asset('/admin/assets/js/jquery-1.8.3.min.js') }}"></script>
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
@@ -157,14 +158,14 @@
 					</div><!-- #sidebar-shortcuts -->
 
 					<ul class="nav nav-list" id="left-list">
-						<li>
+						<li id="userList">
 							<a href="/admin/user_list">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text" id="user_list"> 用户管理 </span>
 							</a>
 						</li>
 
-						<li>
+						<li id="goodsList">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-desktop"></i>
                                 <span class="menu-text"> 商品管理 </span>
@@ -172,13 +173,13 @@
                                 <b class="arrow icon-angle-down"></b>
                             </a>
                             <ul class="submenu">
-                                <li id="/goods_list_all">
+                                <li id="goodsListAll">
                                     <a href="/admin/goods_list_all">
                                         <i class="icon-double-angle-right"></i>
                                         所有商品
                                     </a>
                                 </li>
-                                <li id="goods_list_off">
+                                <li id="goodsListOff">
                                     <a href="/admin/goods_list_off">
                                         <i class="icon-double-angle-right"></i>
                                         已下架商品
@@ -186,26 +187,26 @@
                                 </li>
                             </ul>
                         </li>
-						<li>
+						<li id="orderList">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-desktop"></i>
 								<span class="menu-text"> 订单管理 </span>
 								<b class="arrow icon-angle-down"></b>
 							</a>
 							<ul class="submenu">
-								<li id="order_list_all">
+								<li id="orderListAll">
 									<a href="/admin/order_list_all">
 										<i class="icon-double-angle-right"></i>
 										所有订单
 									</a>
 								</li>
-                                <li>
+                                <li id="orderListOff">
                                     <a href="/admin/order_list_off">
                                         <i class="icon-double-angle-right"></i>
                                         未发货订单
                                     </a>
                                 </li>
-                                <li>
+                                <li id="orderListCancel">
                                     <a href="/admin/order_list_cancel">
                                         <i class="icon-double-angle-right"></i>
                                         已取消订单
@@ -235,8 +236,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="index.html">
+                        <li  id="commentsList">
+                            <a href="/admin/comments_list">
                                 <i class="icon-dashboard"></i>
                                 <span class="menu-text"> 评价管理 </span>
                             </a>
@@ -383,7 +384,6 @@
 		<script src="{{ asset('admin/assets/js/flot/jquery.flot.min.js') }}"></script>
 		<script src="{{ asset('admin/assets/js/flot/jquery.flot.pie.min.js') }}"></script>
         <script src="{{ asset('admin/assets/js/flot/jquery.flot.resize.min.js') }}"></script>
-		<!-- <script src="/admin/assets/js/jquery-1.8.3.min.js"></script> -->
 
 		<!-- ace scripts -->
 
