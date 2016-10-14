@@ -10,6 +10,7 @@ class Users extends Model
 {
     //指定表名为users
     protected $table = "users";
+    public $timestamps = false;
 
     /**
      * 验证管理员登陆

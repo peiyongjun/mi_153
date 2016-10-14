@@ -8,6 +8,7 @@ class Skus extends Model
 {
     //
     protected $table = "skus";
+    public $timestamps = false;
 
     public function hasManySkus()
     {

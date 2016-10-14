@@ -9,7 +9,7 @@ class Goods extends Model
 {
      //指定表名为users
     protected $table = "goods";
-
+    public $timestamps = false;
     /**
      * 查询所有大类
      * 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comments extends Model
 {
     protected $tables = "comments";
+    public $timestamps = false;
 
     public function hasManyUsers ()
     {
