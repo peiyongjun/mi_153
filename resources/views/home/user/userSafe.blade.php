@@ -8,7 +8,6 @@
         color:#FF6700;
     }
 </style>
-<script src = "/home/js/ajax.js"></script>
 <script type="text/javascript" src="/home/js/jquery.js"></script>
 <script type="text/javascript" src="/home/js/bootstrap-modal.js"></script>
 @endsection

@@ -111,6 +111,9 @@
 									<a class="btn btn-small btn-primary" href="" data-toggle="modal" data-target="#commentModal" onclick="javascript:ModalInfo({{ $goods[$skus[$v->id]->id]->id }},{{ $skus[$v->id]->id }},{{ $v->id }})">
 										去评价
 									</a>
+									<a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
+                                        订单详情
+                                    </a>
 								</td>
 							</tr>
 						</tbody>

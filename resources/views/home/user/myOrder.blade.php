@@ -5,6 +5,7 @@
         color:#FF6700;
     }
 </style>
+<script type="text/javascript" src="/home/js/jquery-1.8.3.js"></script>
 @endsection
 @section('userContent')
 @section("orderCss")

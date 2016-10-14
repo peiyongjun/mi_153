@@ -5,7 +5,8 @@
         display:none;
     }
 </style>
-<link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2016d26">
+<script type="text/javascript" src="/home/js/jquery.js"></script>
+<script type="text/javascript" src="/home/js/bootstrap-modal.js"></script>
 @yield("css")
 <link rel="stylesheet" type="text/css" href="//s01.mifile.cn/css/user/main.min.css?v=2016053001">
 <div style="background-color:#F5F5F5;height:30px">
