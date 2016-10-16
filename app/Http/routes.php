@@ -83,6 +83,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/service', "home\UserController@addService");
     //快速申请
     Route::post('/fastApply', "home\UserController@fastApply");
+    //售后详情页
+    Route::get('/serverDetail/{id}',"home\UserController@serverDetail");
     //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
     //个人信息修改
@@ -139,6 +141,12 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::post('/order_list_all/Status/{id}','Admin\OrderController@Status');
     //是否取消订单信息
     Route::get('/order_list_all/cancel','Admin\OrderController@Change');
+    //未处理售后
+    Route::get('/untreatedServer','Admin\ServiceController@untreatedServer');
+    //已处理售后
+    Route::get('/treatedServer','Admin\ServiceController@treatedServer');
+
+    Route::get('/alreadyS/{id}','Admin\ServiceController@alreadyS');
 });
 
 /////////////////////////////////////////////////////////////////////////////////

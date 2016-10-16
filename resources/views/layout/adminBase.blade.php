@@ -223,13 +223,13 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="elements.html">
+                                    <a href="/admin/untreatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         未处理售后
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="elements.html">
+                                    <a href="/admin/treatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         已处理售后
                                     </a>

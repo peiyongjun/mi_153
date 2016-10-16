@@ -303,11 +303,6 @@ class UserController extends Controller
         $good = [];
         foreach($services as $service){
             $orders[$service->id] = Service::find($service->id)->hasManyOrders()->first();
-            if($service->status == 0){
-               $orders[$service->id]->order_status = 4; 
-            }else if($service->status == 1){
-               $orders[$service->id]->order_status = 5;
-            }
         }
         foreach($orders as $order){
             $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
@@ -385,6 +380,24 @@ class UserController extends Controller
         $order->order_status = 4;
         $order->save();
         return back();
+    }
+
+    /**
+     * 售后详情
+     *
+     * @return 
+     */
+    public function serverDetail($id)
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $orderId = $id;
+        $service = Service::where("order_id",$orderId)->first();
+        $orders = Orders::where("id",$orderId)->first();
+        $skus = Skus::where("id",$orders->goods_id)->first();
+        $good = Goods::where("id",$skus->goods_id)->first();   
+        return view("home.user.serverDetail")->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['service'=>$service]);
     }
 
     /**
