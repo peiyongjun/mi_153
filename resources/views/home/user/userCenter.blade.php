@@ -73,11 +73,6 @@
                             <a href="{{ URL('/orderComment') }}" data-stat-id="b4a31da3923196c8" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-b4a31da3923196c8', 'http://order.mi.com/user/comment', 'pcpid']);">查看待评价商品<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-3.png" alt="">
                         </li>
-                        <li>
-                            <h3>喜欢的商品：<span class="num">0</span></h3>
-                            <a href="http://order.mi.com/user/favorite?r=84908.1474984937" data-stat-id="e7f60a4653081c02" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-e7f60a4653081c02', 'http://order.mi.com/user/favorite', 'pcpid']);">查看喜欢的商品<i class="iconfont"></i></a>
-                            <img src="//s01.mifile.cn/i/user/portal-icon-4.png" alt="">
-                        </li>
                     </ul>
                 </div>
             </div>

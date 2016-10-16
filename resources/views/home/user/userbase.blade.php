@@ -39,7 +39,6 @@
                         <div class="box-bd">
                             <ul class="uc-nav-list">
                                 <li id='userCenter'><a href="/user">我的个人中心</a></li>
-                                <li  id='like'><a href="/like">喜欢的商品</a></li>
                                 <li id='address'><a href="/address">收货地址</a></li>
                             </ul>
                         </div>

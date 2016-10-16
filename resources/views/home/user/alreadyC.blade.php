@@ -86,9 +86,6 @@
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/comments/'.$goods[$skus[$v->id]->id]->id) }}">
                                         评价详情
                                     </a>
-                                    <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
-                                        订单详情
-                                    </a>
 								</td>
 							</tr>
 						</tbody>
