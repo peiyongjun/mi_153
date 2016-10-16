@@ -10,6 +10,8 @@ class Orders extends Model
      *订单查询
      */ 
     protected $table = 'orders';
+    public $timestamps = false;
+    
     public function getAllorder()
     {
     	$data = \DB::table('orders')

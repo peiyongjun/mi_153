@@ -64,6 +64,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     //评价晒单
     //待评价
     Route::get('/orderComment', "home\UserController@showOrder");
+    //添加评价
+    Route::post('/addComment', "home\CommentController@addComment");
     //已评价
     Route::get('/alreadyC',"home\UserController@alreadyC");
     //评价无效

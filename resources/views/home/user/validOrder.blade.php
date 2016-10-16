@@ -35,7 +35,7 @@
                             @if ($v->order_status == 0)
                             等待付款
                             @elseif ($v->order_status == 2)
-                            等待收货
+                            等待发货
                             @elseif ($v->order_status == 3)
                             等待收货
                             @elseif ($v->order_status == 4)
@@ -117,10 +117,13 @@
                                     target="_blank">
                                         立即支付
                                     </a>
+<<<<<<< HEAD
                                     @elseif ($v->order_status == 2)
                                     <a class="btn btn-smallb btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
                                         确认收货
                                     </a>
+=======
+>>>>>>> e757a478154f67f5402cb7a90f38dec9f409e796
                                     @elseif ($v->order_status == 3)
                                     <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
                                         确认收货

@@ -64,8 +64,8 @@
 										<li>
 											<div class="figure figure-thumb">
 												<a href="{{ URL(('/detail/').($goods[$skus[$v->id]->id]->id)) }}" target="_blank">
-													<img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80"
-													height="80" alt="小米手机5s 标配全网通版 3GB内存 银色 64GB">
+													<img s<img src="{{ asset('Uploads/picture') }}{{ '/'.$goods[$skus[$v->id]->id]->img }}" width="80"
+													height="80" alt="{{ $goods[$skus[$v->id]->id]->name }}">
 												</a>
 											</div>
 											<p class="name">
@@ -81,6 +81,9 @@
 								</td>
 								<td class="order-actions">
 									<a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
+                                        订单详情
+                                    </a>
+                                    <a class="btn btn-small btn-line-gray" href="{{ URL('/comments/'.$goods[$skus[$v->id]->id]->id) }}">
                                         评价详情
                                     </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">

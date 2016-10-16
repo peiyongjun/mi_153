@@ -26,7 +26,11 @@
                 <div class="order-detail">
                     <div class="order-summary">
                         <div class="order-status">
+                            @if($v->order_status == 2)
+                            等待发货
+                            @elseif($v->order_status == 3)
                             等待收货
+                            @endif
                         </div>
                         <p class="order-desc J_deliverDesc">
                             21:30前支付，预计明天送达
