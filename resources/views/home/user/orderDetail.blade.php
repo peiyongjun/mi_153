@@ -53,13 +53,11 @@
                                 @elseif ($order->order_status == 3)
                                 等待收货
                                 @elseif ($order->order_status == 4)
-                                退货中
+                                售后处理中
                                 @elseif ($order->order_status == 5)
-                                交易完成
-                                @elseif ($order->order_status == 6)
-                                退货完成
+                                已收货
                                 @elseif ($order->order_status == 7)
-                                待评价
+                                已收货
                                 @endif
                             </div>
                         </div>

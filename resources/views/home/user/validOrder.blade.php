@@ -117,13 +117,10 @@
                                     target="_blank">
                                         立即支付
                                     </a>
-<<<<<<< HEAD
                                     @elseif ($v->order_status == 2)
-                                    <a class="btn btn-smallb btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
+                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
                                         确认收货
                                     </a>
-=======
->>>>>>> e757a478154f67f5402cb7a90f38dec9f409e796
                                     @elseif ($v->order_status == 3)
                                     <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
                                         确认收货

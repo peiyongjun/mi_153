@@ -102,7 +102,7 @@
                                                 target="_blank">
                                                     立即支付
                                                 </a> -->
-                                                <a class="btn btn-small btn-line-gray" href="#">
+                                                <a class="btn btn-small btn-line-gray" href="{{ URL('/serverDetail/'.$v->order_id )}}">
                                                     售后详情
                                                 </a>
                                             </td>
