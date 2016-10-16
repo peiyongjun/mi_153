@@ -79,6 +79,8 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/service', "home\UserController@service");
     //提交申请表
     Route::post('/service', "home\UserController@addService");
+    //快速申请
+    Route::post('/fastApply', "home\UserController@fastApply");
     //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
     //个人信息修改

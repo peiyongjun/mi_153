@@ -24,4 +24,9 @@ class Orders extends Model
         return $this->hasMany("App\Models\Skus", "id", "goods_id");
     }    
 
+    public function hasManyOrders()
+    {
+        return $this->belongsTo("App\Models\Service", "order_id", "id");
+    }
+
 }

@@ -10,6 +10,7 @@ use App\Models\Orders;
 use App\Models\Goods;
 use App\Models\Skus;
 use App\Models\Comments;
+use App\Models\Service;
 
 class UserController extends Controller
 {
@@ -296,7 +297,26 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        return view('home.user.server')->with(['list'=>$list])->with(["data"=>$data]);
+        $services = Service::all();
+        $orders = [];
+        $skus = [];
+        $good = [];
+        foreach($services as $service){
+            $orders[$service->id] = Service::find($service->id)->hasManyOrders()->first();
+            if($service->status == 0){
+               $orders[$service->id]->order_status = 4; 
+            }else if($service->status == 1){
+               $orders[$service->id]->order_status = 5;
+            }
+        }
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        // dd($good);
+        return view('home.user.server')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['services'=>$services]);
     }
 
     /**
@@ -317,10 +337,56 @@ class UserController extends Controller
      *
      * @return 
      */
-    public function addService()
+    public function addService(Request $request)
     {
-        
+        $userId = session('user')->id;
+        $user = Users::where('id',$userId)->first();
+        $order_id = $request->order_id;
+        $orders = Orders::where('id',$order_id)->where('user_id',$userId)->whereIn('order_status', [5,7])->first();
+        if(!$orders){
+            return back()->with('orderMsg','订单号不正确');
+        }
+        $name = $user->username;
+        $orders_id = $orders->id;
+        $description = $request->content;
+        $service = new Service;
+        $services = Service::where('order_id',$orders_id)->first();
+        // dd($services);
+        if($services){
+            return back()->with('reOrder','该订单已申请');
+        }
+        $service->username = $name;
+        $service->order_id = $orders_id;
+        $service->description = $description;
+        $service->save();
+        $order = Orders::find($order_id);
+        $order->order_status = 4;
+        $order->save();
+        return back();
     }
+
+    public function fastApply(Request $request)
+    {
+        $order_id = $request->order_id;
+        $userId = session('user')->id;
+        $user = Users::where('id',$userId)->first();
+        $service = new Service;
+        $services = Service::where('order_id',$request->order_id)->first();
+        // dd($services);
+        if($services){
+            return back()->with('reOrder','该订单已申请');
+            // dd(1);
+        }
+        $service->username = $user->username;
+        $service->order_id = $request->order_id;
+        $service->description = $request->content;
+        $service->save();
+        $order = Orders::find($order_id);
+        $order->order_status = 4;
+        $order->save();
+        return back();
+    }
+
     /**
      * 个人信息
      *

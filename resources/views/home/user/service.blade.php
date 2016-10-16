@@ -34,7 +34,7 @@
             <div class="box-bd">
                 <div class="box-bd">
                     <ul class="service-choose-list clearfix">
-                        <li>
+                        <li style="list-style-type:none">
                             <i class="icon icon-order">
                             </i>
                             <h3>
@@ -49,7 +49,11 @@
                                 前往订单
                             </a>
                         </li>
-                        <li>
+                    </ul>
+                </div>
+                <div class="box-bd">
+                    <ul class="service-choose-list clearfix">
+                        <li style="list-style-type:none">
                             <i class="icon icon-fill">
                             </i>
                             <h3>
@@ -60,7 +64,7 @@
                                 <br>
                                 根据产品唯一识别码和购买凭证申请售后
                             </p>
-                            <a href="#" class="btn btn-line-green btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            <a href="#" id="apply" class="btn btn-line-green btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                                 申请售后
                             </a>
                         </li>
@@ -95,12 +99,6 @@
                     <input type='hidden' name='_token' value="{{ csrf_token() }}">
                     <table align="center">
                         <tr>
-                            <td><dt>用户名</dt></td>
-                            <td>
-                                <input type="text" name="username">
-                            </td>
-                        </tr>
-                        <tr>
                             <td><dt>订单号</dt></td>
                             <td>
                                 <input type="text" name="order_id">
@@ -116,6 +114,12 @@
                             <td><dt>型号</dt></td>
                             <td>
                                 <input type="text" name="goods_type">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><dt>描述</dt></td>
+                            <td>
+                                <textarea name="content" rows="7" cols="20"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -146,13 +150,42 @@
 <script type="text/javascript" src="/service/js/plugin/plupload.zh-CN.min.js?20160420"></script>
 <script type="text/javascript" src="/service/js/uploader.min.js?20160809"></script>
 <script type="text/javascript" src="/service/js/applyFill.min.js?20160420"></script>
-<script>
+<script>  
     $("#but").click(function(){
-        if($("input[name='username']").val() != '' && $("input[name='username']").val() != '' && $("input[name='username']").val() != '' && ("input[name='username']").val() != ''){
+        if($("input[name='username']").val() != '' && $("input[name='order_id']").val() != '' && $("input[name='goods_name']").val() != '' && $("input[name='goods_type']").val() != ''){
             $("#but").attr({type:"submit"});
         }else{
             $("#but").attr({type:"button"});
+            $("input[name='username']").next('span').remove();
+            $("input[name='order_id']").next('span').remove();
+            $("input[name='goods_name']").next('span').remove();
+            $("input[name='goods_type']").next('span').remove();
+            if($("input[name='username']").val() == ''){
+                $("<span>　信息不完整</span>").css('color','red').insertAfter("input[name='username']");
+            }
+            if($("input[name='order_id']").val() == ''){
+                $("<span>　信息不完整</span>").css('color','red').insertAfter("input[name='order_id']");
+            }
+            if($("input[name='goods_name']").val() == ''){
+                $("<span>　信息不完整</span>").css('color','red').insertAfter("input[name='goods_name']");
+            }
+            if($("input[name='goods_type']").val() == ''){
+                $("<span>　信息不完整</span>").css('color','red').insertAfter("input[name='goods_type']");
+            }
         }
-    })
+    });
+
+    $(function($){
+        if("{{ session()->get('orderMsg') }}"){
+            $("#apply").click();
+            $("<span>　{{ session()->get('orderMsg') }}</span>").css('color','red').insertAfter("input[name='order_id']");
+            $("input[name='but']").attr('disabled',true);   
+        }
+        if("{{ session()->get('reOrder') }}"){
+            $("#apply").click();
+            $("<span>　{{ session()->get('reOrder') }}</span>").css('color','red').insertAfter("input[name='order_id']");
+            $("input[name='but']").attr('disabled',true);   
+        }
+  });
 </script>
 @endsection
