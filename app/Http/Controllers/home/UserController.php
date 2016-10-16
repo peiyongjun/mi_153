@@ -345,7 +345,7 @@ class UserController extends Controller
         $orders_id = $orders->id;
         $description = $request->content;
         $service = new Service;
-        $services = Service::where('order_id',$orders_id)->first();
+        $services = Service::where('order_id',$orders_id)->where("status",'0')->first();
         // dd($services);
         if($services){
             return back()->with('reOrder','该订单已申请');
@@ -366,7 +366,7 @@ class UserController extends Controller
         $userId = session('user')->id;
         $user = Users::where('id',$userId)->first();
         $service = new Service;
-        $services = Service::where('order_id',$request->order_id)->first();
+        $services = Service::where('order_id',$request->order_id)->where("status",'0')->first();
         // dd($services);
         if($services){
             return back()->with('reOrder','该订单已申请');

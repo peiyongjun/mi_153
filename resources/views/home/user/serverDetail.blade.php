@@ -79,9 +79,7 @@
                         <h3>
                             买家申请描述：
                         </h3>
-                        <table class="info-table">
-                            <textarea rows="10" cols="50">{{ $service->description }}</textarea>
-                        </table>
+                        <p>{{ $service->description }}</p>
                     </div>
                 </div>
             </div>
