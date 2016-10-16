@@ -28,6 +28,7 @@
                         <span class="tag tag-subsidy">
                         </span>
                     </h2>
+                    @if($order->order_status == 0)
                     <div class="actions" id="cancel">
                         <a id="cancelOrder" class="btn btn-small btn-line-gray" title="取消订单">
                             取消订单
@@ -37,6 +38,7 @@
                             立即支付
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="box-bd" id="finish">
@@ -55,9 +57,9 @@
                                 @elseif ($order->order_status == 4)
                                 售后处理中
                                 @elseif ($order->order_status == 5)
-                                已收货
+                                待评价
                                 @elseif ($order->order_status == 7)
-                                已收货
+                                待评价
                                 @endif
                             </div>
                         </div>

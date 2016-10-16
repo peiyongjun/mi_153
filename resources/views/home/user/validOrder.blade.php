@@ -41,9 +41,9 @@
                             @elseif ($v->order_status == 4)
                             售后处理中
                             @elseif ($v->order_status == 5)
-                            已收货
+                            已完成
                             @elseif ($v->order_status == 7)
-                            已收货
+                            待评价
                             @endif
                         </div>
                         @if($v->order_status != 5 && $v->order_status != 7 && $v->order_status !=4)
