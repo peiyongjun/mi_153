@@ -565,38 +565,37 @@ class UserController extends Controller
     {   //获取用户订单信息
         $id = $request->id;
         $db = Skus::find($id);
-        $Gname = Goods::where('id',$db->goods_id)->select('name')->first();
-        
-        return view('home.goods.checkout')->with(['db'=>$db])->with(['Gname'=>$Gname]);
+        $Gname = Goods::where('id',$db->goods_id)->first();
+        // dd($id);
+        return view('home.goods.checkout')->with(['id'=>$id])->with(['db'=>$db])->with(['Gname'=>$Gname]);
     }
     //支付接第三方接口
     public function Money(Request $request)
     {   
         //添加订单收货地址
         $gid = $request->id;
-        $db = Skus::find($gid)->first()->price;
-
+        $price = Skus::where("id",$gid)->first()->price;
         $list = $request->dis;
         $id = $list[0];
         $upid = $list[1];
         $cid = $list[2];
         $data = array();
-      $data['goods_id'] = Skus::find($gid)->first()->goods_id;
-      $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
-      $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
-      $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
-      if (isset($list[3])){
-        $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   }
-      $data['user_id'] = session()->get("user")->id;
-      $data['order_status'] = 0;
-      $data['goods_num'] = 2;
-      $data['del_name'] = $request->del_name;
-      $data['phone'] = $request->phone;
-      Orders::insert($data);
-      $od = new Orders();
-      $ppid = Orders::insertGetId($data);
-      // dd($ppid);
-        return view('home.goods.pay')->with(['data'=>$data])->with(['db'=>$db])->with(['ppid'=>$ppid]);
+        $data['goods_id'] = Skus::find($gid)->first()->goods_id;
+        $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
+        $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
+        $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
+        if (isset($list[3])){
+        $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   
+        }
+        $data['user_id'] = session()->get("user")->id;
+        $data['order_status'] = 0;
+        $data['goods_num'] = 2;
+        $data['del_name'] = $request->del_name;
+        $data['phone'] = $request->phone;
+        Orders::insert($data);
+        $od = new Orders();
+        $ppid = Orders::insertGetId($data);
+        return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
     }
     //返回订单信息id
     public function Ajax(Request $request)
@@ -618,7 +617,6 @@ class UserController extends Controller
     {
         $id = $request->id;
         $order = Orders::find($id);
-        // dd($order);
         $order->order_status = 2;
         $order->save();
         return redirect("/validOrder");

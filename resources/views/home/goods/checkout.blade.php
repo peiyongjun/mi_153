@@ -42,7 +42,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="text" name="del_name" style="width:120px;" placeholder="姓名">
                         <input type="text" name="phone" style="width:120px;" placeholder="电话">
-                        <input type="hidden" name="id" value="{{ $db->id }}">
+                        <input type="hidden" name="id" value="{{ $id }}">
                     </form>
             <div class="section section-options section-payment clearfix">
             </div>
