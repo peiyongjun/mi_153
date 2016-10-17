@@ -1,5 +1,4 @@
 @extends("layout.adminBase")
-
 @section("content")
 <script type="text/javascript">
 	//侧边导航选中
@@ -10,21 +9,21 @@
 	function doUpdate(id)
 	{
 		var editForm = document.editForm;
-		editForm.action = "/admin/order_list_off/"+id;
-		var number = $("#orderId"+id).html();
+		editForm.action = "/admin/order_list_all/Status/"+id;
+		var Eail = $("#orderEail"+id).html();
 		var express = $("#orderExpress"+id).html();
 		var name = $("#orderName"+id).html();
 		var address = $("#orderAddress"+id).html();
 		var phone = $("#orderPhone"+id).html();
-		$("#Number").val(number);
+		$("#Eail").val(Eail);
 		$("#Express").val(express);
 		$("#Username").val(name);
 		$("#Address").val(address);
 		$("#Phone").val(phone);
 	}
-</script>	
+</script>
 <div class="col-xs-12">
-	<h3 class="header smaller lighter blue">待发货订单管理</h3>
+	<h3 class="header smaller lighter blue">待发货商品订单管理</h3>
 	<div class="table-responsive">
 		<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 			<div class="row">
@@ -42,13 +41,13 @@
 				</div> -->
 				<form action="" method="post" name="myform">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="hidden" name="_method" value="change">
+					<input type="hidden" name="_method" value="update">
 				</form>
 				<div class="col-sm-3">
 					<div class="dataTables_filter" id="sample-table-2_filter">
 						<form action="" class="form-search">
 							<!-- 搜索表单 -->
-								<input type="text" placeholder="请输入关键字" name="name" autocomplete="off">
+								<input type="text" placeholder="请输入关键字" name="id" autocomplete="off">
 								<button type="submit" class="bn  bigger-110 blue">
 									<a>
 										<i class="icon-search nav-search-icon"></i>
@@ -61,62 +60,88 @@
 			<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 			<thead>
 			<tr role="row">
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 100px;">
 					订单号
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 110px;">
 					订单用户
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 684px;">
 					商品名
 				</th>
-				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 197px;">
+				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 97px;">
 					商品数
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 187px;">
 					收件人姓名
+				</th>
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+					联系方式
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					省-市-地区
 				</th>
-				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
-					联系方式
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+					地址
 				</th>
 				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 271px;">
 					状态
 				</th>
-				<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 249px;">快递商家
-				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
-					操作
+				快递
+				</th>
+				<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 249px;">操作
 				</th>
 			</tr>
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
 			<!-- 管理所有订单 -->
-			@foreach($list as $v)
-			@if($v->order_status == 2 || $v->order_status == 4)
-			<tr id="order{{ $v->id }}">
-				<td id="orderId{{ $v->id }}">{{ $v->id }}</td>
-				<td>{{ $v->username }}</td>
-				<td>{{ $v->name }}</td>
-				<td>{{ $v->goods_num }}</td>
-				<td id="orderName{{ $v->id }}">{{ $v->del_name }}</td>
-				<td id="orderAddress{{ $v->id }}">{{ $v->province }}-{{ $v->city }}-{{ $v->district }}</td>
-				<td id="orderPhone{{ $v->id }}">{{ $v->phone }}</td>
+			@foreach($orders as $order)
+			<tr id="order{{ $order->id }}">
+				<td id="orderId{{ $order->id }}">{{ $order->id }}</td>
+				<td>{{ $users[$order->id]->username }}</td>
+				<td>{{ $goods[$skus[$order->id]->id]->name }}+{{ $skus[$order->id]->attr }}+{{ $skus[$order->id]->color }}</td>
+				<td>{{ $order->goods_num }}</td>
+				<td id="orderName{{ $order->id }}">{{ $order->del_name }}</td>
+				<td id="orderPhone{{ $order->id}}">{{ $order->phone }}</td>
+				<td id="orderAddress{{ $order->id }}">{{ $order->province }}-{{ $order->city }}-{{ $order->district }}</td>
+				<td id="orderEail{{ $order->id}}">{{ $order->address }}</td>
 				<td>
-					<span class="label label-danger arrowed">支付完成</span>
+				    @if($order->order_status == 0)
+					<span class="label label-success arrowed-in arrowed-in-right">待支付</span>
+					@elseif($order->order_status == 1)
+					<span class="label label-danger arrowed">取消订单</span>
+					@elseif($order->order_status == 2)
+					<span class="label label-info arrowed-right arrowed-in">支付完成</span>
+					@elseif($order->order_status == 3)
+					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
+					@elseif($order->order_status == 4)
+					<span class="label label-danger arrowed">售后处理中</span>
+					@elseif($order->order_status == 5)
+					<span class="label label-success arrowed-in arrowed-in-right">已完成</span>
+					@elseif($order->order_status == 6)
+					<span class="label label-success arrowed-in arrowed-in-right">退货完成</span>
+					@elseif($order->order_status == 7)
+					<span class="label label-success arrowed-in arrowed-in-right">待评价</span>
+					@endif
 				</td>
-				<td id="orderExpress{{ $v->id }}">{{ $v->express }}</td>
+				<td id="orderExpress{{ $order->id }}">{{ $order->express }}</td>
+				
 				<td>
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $v->id }})">
+						@if($order->order_status == 0)
+						<a class="green" href="/admin/order_list_all/cancel?id={{ $order->id }}">
+							<i class="icon-ban-circle bigger-130"></i>
+						</a>
+						@elseif($order->order_status == 2)
+						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $order->id }})">
 							<i class="icon-edit bigger-130"></i>
 						</a>
+						@endif
 					</div>
 				</td>
+				
 			</tr>
-			@endif
 			@endforeach
 			</tbody>
 			</table>
@@ -128,7 +153,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
-						{!! $list->appends($where)->render() !!}
+						{!! $orders->appends($where)->render() !!}
 					</div>
 				</div>
 			</div>
@@ -154,10 +179,14 @@
 						</div>
 						<div>
 							<label for="form-field-8">收件人地址</label>
-							<input style="font-weight:bold;" class="form-control" name="address" id="Address">
+							<input style="font-weight:bold;" class="form-control" name="location" id="Address">
 						</div>
 						<div>
-							<label for="form-field-9">收货人</label>
+							<label for="form-field-8">地址</label>
+							<input style="font-weight:bold;" class="form-control" name="address" id="Eail">
+						</div>
+						<div>
+							<label for="form-field-9">收件人姓名</label>
 							<input style="font-weight:bold;" class="form-control limited" name="del_name" id="Username">
 						</div>
 						<div>

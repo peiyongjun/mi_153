@@ -43,6 +43,7 @@
                         <input type="text" name="del_name" style="width:120px;" placeholder="姓名">
                         <input type="text" name="phone" style="width:120px;" placeholder="电话">
                         <input type="hidden" name="id" value="{{ $id }}">
+                        <input type="hidden" name="num" value="">
                     </form>
             <div class="section section-options section-payment clearfix">
             </div>
@@ -90,10 +91,10 @@
                                 <a href="//item.mi.com/1162900018.html" target="_blank">{{ $Gname->name }} {{ $db->attr }} {{ $db->color }}</a>
                             </div>
                             <div class="col col-price">
-                               价格                         
+                                数量                  
                             </div>
                             <div class="col col-status">
-                                {{ $db->price }}元
+                                <input type="text" style="width:30px;text-align: center;" id="num" value="1">&nbsp;件
                             </div>
                             <div class="col col-total">
                                 
@@ -135,15 +136,15 @@
                     <ul>
                         <li class="clearfix">
                             <label>商品件数：</label>
-                            <span class="val">1件</span>
+                            <span class="val" id="showNum">1件</span>
                         </li>
                         <li class="clearfix">
                             <label>金额合计：</label>
-                            <span class="val">{{ $db->price }}元</span>
+                            <span class="val" id="showTotal">{{ $db->price }}元</span>
                         </li>
                         <li class="clearfix total-price">
                             <label>应付总额：</label>
-                            <span class="val"><em data-id="J_totalPrice">{{ $db->price }}</em>元</span>
+                            <span class="val"><em data-id="J_totalPrice"  id="showTotalPrice">{{ $db->price }}</em>元</span>
                         </li>
                     </ul>
                     <div class="fr">
@@ -287,6 +288,18 @@
             myform.submit();
             // alert('11');
              }
+
+    //控制商品件数
+    $("#num").blur(function (){
+        if($("#num").val() <= 0){
+            alert("商品至少要购买一件")
+            $("#num").val(1);
+        }
+        $("input[name='num']").val($("#num").val());
+        $("#showTotal").html($("#num").val()*{{ $db->price }}+'元')
+        $("#showNum").html($("#num").val()+'件');
+        $("#showTotalPrice").html($("#num").val()*{{ $db->price }}+'元')
+    })      
   </script>
   <script>
        

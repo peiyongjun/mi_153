@@ -47,7 +47,7 @@
 					<div class="dataTables_filter" id="sample-table-2_filter">
 						<form action="" class="form-search">
 							<!-- 搜索表单 -->
-								<input type="text" placeholder="请输入关键字" name="name" autocomplete="off">
+								<input type="text" placeholder="请输入关键字" name="id" autocomplete="off">
 								<button type="submit" class="bn  bigger-110 blue">
 									<a>
 										<i class="icon-search nav-search-icon"></i>
@@ -60,19 +60,19 @@
 			<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 			<thead>
 			<tr role="row">
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 100px;">
 					订单号
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 260px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 110px;">
 					订单用户
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 684px;">
 					商品名
 				</th>
-				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 197px;">
+				<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 97px;">
 					商品数
 				</th>
-				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 287px;">
+				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label=" update : activate to sort column ascending" style="width: 187px;">
 					收件人姓名
 				</th>
 				<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 184px;">
@@ -96,41 +96,45 @@
 			</thead>
 			<tbody role="alert" aria-live="polite" aria-relevant="all">
 			<!-- 管理所有订单 -->
-			@foreach($list as $kk)
-			<tr id="order{{ $kk->id }}">
-				<td id="orderId{{ $kk->id }}">{{ $kk->id }}</td>
-				<td>{{ $kk->username }}</td>
-				<td>{{ $kk->name }}</td>
-				<td>{{ $kk->goods_num }}</td>
-				<td id="orderName{{ $kk->id }}">{{ $kk->del_name }}</td>
-				<td id="orderPhone{{ $kk->id}}">{{ $kk->phone }}</td>
-				<td id="orderAddress{{ $kk->id }}">{{ $kk->province }}-{{ $kk->city }}-{{ $kk->district }}</td>
-				<td id="orderEail{{ $kk->id}}">{{ $kk->address }}</td>
+			@foreach($orders as $order)
+			<tr id="order{{ $order->id }}">
+				<td id="orderId{{ $order->id }}">{{ $order->id }}</td>
+				<td>{{ $users[$order->id]->username }}</td>
+				<td>{{ $goods[$skus[$order->id]->id]->name }}+{{ $skus[$order->id]->attr }}+{{ $skus[$order->id]->color }}</td>
+				<td>{{ $order->goods_num }}</td>
+				<td id="orderName{{ $order->id }}">{{ $order->del_name }}</td>
+				<td id="orderPhone{{ $order->id}}">{{ $order->phone }}</td>
+				<td id="orderAddress{{ $order->id }}">{{ $order->province }}-{{ $order->city }}-{{ $order->district }}</td>
+				<td id="orderEail{{ $order->id}}">{{ $order->address }}</td>
 				<td>
-				    @if($kk->order_status == 0)
+				    @if($order->order_status == 0)
 					<span class="label label-success arrowed-in arrowed-in-right">待支付</span>
-					@elseif($kk->order_status == 1)
+					@elseif($order->order_status == 1)
 					<span class="label label-danger arrowed">取消订单</span>
-					@elseif($kk->order_status == 2)
+					@elseif($order->order_status == 2)
 					<span class="label label-info arrowed-right arrowed-in">支付完成</span>
-					@elseif($kk->order_status == 3)
+					@elseif($order->order_status == 3)
 					<span class="label label-success arrowed-in arrowed-in-right">已发货</span>
-					@elseif($kk->order_status == 4)
-					<span class="label label-danger arrowed">退货</span>
-					@elseif($kk->order_status == 5)
-					<span class="label label-success arrowed-in arrowed-in-right">确认收货</span>
-				@endif
+					@elseif($order->order_status == 4)
+					<span class="label label-danger arrowed">售后处理中</span>
+					@elseif($order->order_status == 5)
+					<span class="label label-success arrowed-in arrowed-in-right">已完成</span>
+					@elseif($order->order_status == 6)
+					<span class="label label-success arrowed-in arrowed-in-right">退货完成</span>
+					@elseif($order->order_status == 7)
+					<span class="label label-success arrowed-in arrowed-in-right">待评价</span>
+					@endif
 				</td>
-				<td id="orderExpress{{ $kk->id }}">{{ $kk->express }}</td>
+				<td id="orderExpress{{ $order->id }}">{{ $order->express }}</td>
 				
 				<td>
 					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						@if($kk->order_status == 0)
-						<a class="green" href="/admin/order_list_all/cancel?id={{ $kk->id }}">
-							<i class="icon-check bigger-130"></i>
+						@if($order->order_status == 0)
+						<a class="green" href="/admin/order_list_all/cancel?id={{ $order->id }}">
+							<i class="icon-ban-circle bigger-130"></i>
 						</a>
-						@elseif($kk->order_status == 2)
-						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $kk->id }})">
+						@elseif($order->order_status == 2)
+						<a class="blue" href="" data-toggle="modal" data-target="#EditModal" onclick="javascript:doUpdate({{ $order->id }})">
 							<i class="icon-edit bigger-130"></i>
 						</a>
 						@endif
@@ -149,7 +153,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="dataTables_paginate paging_bootstrap">
-						{!! $list->appends($where)->render() !!}
+						{!! $orders->appends($where)->render() !!}
 					</div>
 				</div>
 			</div>

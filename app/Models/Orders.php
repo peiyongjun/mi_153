@@ -31,4 +31,9 @@ class Orders extends Model
         return $this->belongsTo("App\Models\Service", "order_id", "id");
     }
 
+    public function hasManyUsers()
+    {
+        return $this->hasMany("App\Models\Users", "id", "user_id");
+    }
+
 }
