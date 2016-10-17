@@ -214,7 +214,7 @@
                                 </li>
 							</ul>
 						</li>
-                       <li>
+                       <li id="serviceList">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-desktop"></i>
                                 <span class="menu-text"> 售后管理 </span>
@@ -222,13 +222,13 @@
                                 <b class="arrow icon-angle-down"></b>
                             </a>
                             <ul class="submenu">
-                                <li>
+                                <li id="serviceList0">
                                     <a href="/admin/untreatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         未处理售后
                                     </a>
                                 </li>
-                                <li>
+                                <li id="serviceList1">
                                     <a href="/admin/treatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         已处理售后

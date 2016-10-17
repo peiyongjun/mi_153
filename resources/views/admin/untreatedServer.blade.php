@@ -15,7 +15,9 @@
 </style>
 <script type="text/javascript">
 	//侧边导航选中
-	$("#commentsList").addClass("active");
+	$("#serviceList").addClass("open");
+	$("#serviceList").addClass("active");
+	$("#serviceList0").addClass("active");
 </script>
 <div class="col-xs-12">
 	<h3 class="header smaller lighter blue">商品售后管理</h3>

@@ -16,8 +16,7 @@
                     订单详情
                     <small>
                         请谨防钓鱼链接或诈骗电话，
-                        <a href="http://bbs.xiaomi.cn/thread/index/tid/11508301" target="_blank"
-                        data-stat-id="b027715c015d6e08" onclick="_msq.push([&#39;trackEvent&#39;, &#39;f4b7f6b8926ce27a-b027715c015d6e08&#39;, &#39;http://bbs.xiaomi.cn/thread/index/tid/11508301&#39;, &#39;pcpid&#39;]);">
+                        <a href="http://bbs.xiaomi.cn/thread/index/tid/11508301" target="_blank">
                             了解更多&gt;
                         </a>
                     </small>
@@ -69,7 +68,7 @@
                                     <td class="col col-thumb">
                                         <div class="figure figure-thumb">
                                             <a target="_blank" href="{{ URL(('/detail/').($goods->id)) }}">
-                                                <img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80" height="80"
+                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80" height="80"
                                                 alt="">
                                             </a>
                                         </div>

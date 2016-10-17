@@ -92,8 +92,8 @@
 										<li>
 											<div class="figure figure-thumb">
 												<a href="{{ URL(('/detail/').($goods[$skus[$v->id]->id]->id)) }}" target="_blank">
-													<img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80"
-													height="80" alt="小米手机5s 标配全网通版 3GB内存 银色 64GB">
+													<img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80"
+													height="80">
 												</a>
 											</div>
 											<p class="name">
