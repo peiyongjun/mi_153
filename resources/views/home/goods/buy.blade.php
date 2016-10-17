@@ -10,7 +10,7 @@
 			<div class="pro-title clearfix">
 				<h1>
 					<span class="pro-name J_proDesc">购买{{ $info->name }}</span>
-					<span class="pro-price J_proPrice">{{ $info->price }}元</span>
+					<span class="pro-price J_proPrice" id="skusPrice"></span>
 				</h1>
 				<a href="{{ URL('/detail/'.$info->id) }}" class="pro-more" target="_blank" id="J_proMore">深入了解产品></a>
 			</div>
@@ -105,10 +105,11 @@
 			url:"/getSkusId",
 			type:"get",
 			data:{a:a,b:b,c:c},
-			dataType:"html",
+			dataType:"json",
 			success:function(data)
 			{
-				var c = data;
+				var c = data[0];
+				$("#skusPrice").html(data[1]+"元")
 				$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
 				$("#cart").attr('href',"/buy/cart/"+c);//给href属性赋值			
 			},
@@ -117,7 +118,7 @@
 				alert(data);
 			}
 		});
-		
+
 	}
 	function checkSkus ()
 	{

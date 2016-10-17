@@ -574,44 +574,35 @@ class UserController extends Controller
     {   
         //添加订单收货地址
         $gid = $request->id;
-        $price = Skus::where("id",$gid)->first()->price;
+        $price = Skus::where("id",$gid)->first()->price*$request->num;
         $list = $request->dis;
         $id = $list[0];
         $upid = $list[1];
         $cid = $list[2];
+        if (isset($list[3])){
+            $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   
+        }
         $data = array();
         $data['goods_id'] = $gid;
         $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
         $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
         $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
-        if (isset($list[3])){
-        $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   
-        }
         $data['user_id'] = session()->get("user")->id;
         $data['order_status'] = 0;
-        $data['goods_num'] = 2;
+        $data['goods_num'] = $request->num;
         $data['del_name'] = $request->del_name;
         $data['phone'] = $request->phone;
         $data['ctime'] = date("Y-m-d H:i:s",time());
-        // Orders::insert($data);
         $ppid = Orders::insertGetId($data);
-      // dd($ppid);
+        $skus = Skus::where("id",$gid)->first();
+        $skus->num = $skus->num - 1;
+        $skus->save();
         return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
-    }
-    //返回订单信息id
-    public function Ajax(Request $request)
-    {
-        $attr = trim($request->a);
-        $color = trim($request->b);
-        $goods_id = trim($request->c);
-        $value = Skus::where('color',$color)->where("attr",$attr)->where("goods_id",$goods_id)->first();
-        return $value->id;
     }
     //查询district内容
     public function find($upid=0)
     {
         $address = \DB::table('district')->where('upid',$upid)->get();
-        // dd($address);
         return json_encode($address); 
     }
 

@@ -73,8 +73,10 @@ class DetailController extends Controller
         $attr = trim($request->a);
         $color = trim($request->b);
         $goods_id = trim($request->c);
-        $value = Skus::where('color',$color)->where("attr",$attr)->where("goods_id",$goods_id)->first();
-        return $value->id;
+        $skus = Skus::where('color',$color)->where("attr",$attr)->where("goods_id",$goods_id)->where("num","!=",0)->first();
+        $sku[] = $skus->id;
+        $sku[] = $skus->price;
+        return json_encode($sku);
     }
 
     public function getSkus(Request $request)

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Http\Requests;
+use App\Models\Skus;
+use App\Models\Users;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -17,19 +19,24 @@ class OrderController extends Controller
     public function order(Request $request)
     {
         //所有订单信息
-        $data = \DB::table('orders')
-            ->join('users','users.id','=','orders.user_id')
-            ->join('goods','goods.id','=','orders.goods_id')
-            ->select('orders.*','users.username','goods.name');
-         $where = [];//存储搜索条件
-        if($request->has('name')){
-            $name = $request->input('name');
-            $where['name']= $name;
-        $list = $data->where('users.username','like',"%{$name}%")->paginate(4);
+        $where = [];
+        if ($request->id) {
+            $where['id'] = $request->id;
+            $orders = Orders::where('id','=',$request->id)->paginate(8);
         }else{
-        $list = $data->orderby('order_status','desc')->paginate(4);
+            $orders = Orders::paginate(8);
         }
-        return view('admin.order_list_all')->with(['list'=>$list])->with(['where'=>$where]);
+        $skus = [];
+        $goods = [];
+        $users = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+            $users[$order->id] = Orders::find($order->id)->hasManyUsers()->first();
+        }
+        foreach($skus as $sku){
+            $goods[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('admin.order_list_all')->with(['orders'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$goods])->with(['users'=>$users])->with(['where'=>$where]);
     }
 
     /**
@@ -39,38 +46,45 @@ class OrderController extends Controller
      */
     public function Offorder(Request $request)
     {
-        //取消的订单
-        $data = \DB::table('orders')
-            ->join('users','users.id','=','orders.user_id')
-            ->join('goods','goods.id','=','orders.goods_id')
-            ->select('orders.*','users.username','goods.name');
-             $where = [];
-        if($request->has('name')){
-            $name = $request->input('name');
-            $where['name']= $name;
-        $list = $data->where('users.username','like',"%{$name}%")->paginate(4);
+        $where = [];
+        if ($request->id) {
+            $where['id'] = $request->id;
+            $orders = Orders::where('id','=',$request->id)->where("order_status",1)->paginate(8);
         }else{
-        $list = $data->orderby('order_status','desc')->paginate(10);
+            $orders = Orders::where("order_status",1)->paginate(8);
         }
-        return view('admin.order_list_cancel')->with(['list'=>$list])->with(['where'=>$where]);
+        $skus = [];
+        $goods = [];
+        $users = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+            $users[$order->id] = Orders::find($order->id)->hasManyUsers()->first();
+        }
+        foreach($skus as $sku){
+            $goods[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('admin.order_list_cancel')->with(['orders'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$goods])->with(['users'=>$users])->with(['where'=>$where]);
     }
     public function Onorder(Request $request)
     {
-        //待发货的订单
-        $data = \DB::table('orders')
-            ->join('users','users.id','=','orders.user_id')
-            ->join('goods','goods.id','=','orders.goods_id')
-            ->select('orders.*','users.username','goods.name');
-        $where = [];//存储搜索条件
-        if($request->has('name')){
-            $name = $request->input('name');
-            $where['name']= $name;
-        $list = $data->where('users.username','like',"%{$name}%")->paginate(8);
+        $where = [];
+        if ($request->id) {
+            $where['id'] = $request->id;
+            $orders = Orders::where('id','=',$request->id)->where("order_status",2)->paginate(8);
         }else{
-        $list = $data->orderby('order_status','desc')->paginate(8);
+            $orders = Orders::where("order_status",2)->paginate(8);
         }
-
-        return view('admin.order_list_off')->with(['list'=>$list])->with(['where'=>$where]);
+        $skus = [];
+        $goods = [];
+        $users = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+            $users[$order->id] = Orders::find($order->id)->hasManyUsers()->first();
+        }
+        foreach($skus as $sku){
+            $goods[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('admin.order_list_off')->with(['orders'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$goods])->with(['users'=>$users])->with(['where'=>$where]);
     }
     public function doUpdate(Request $request)
     {

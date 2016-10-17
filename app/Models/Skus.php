@@ -17,7 +17,7 @@ class Skus extends Model
 
      public function hasSkus ()
     {
-        return $this::hasMany('App\Models\Goods','id','goods_id');
+        return $this->hasMany('App\Models\Goods','id','goods_id');
     }
     /**
      * 关联skus表
