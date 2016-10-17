@@ -57,7 +57,7 @@
                                     <td class="col col-thumb">
                                         <div class="figure figure-thumb">
                                             <a target="_blank" href="{{ URL(('/detail/').($goods->id)) }}">
-                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80" height="80"
+                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods->img !!}' width="80" height="80"
                                                 alt="">
                                             </a>
                                         </div>

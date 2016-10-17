@@ -88,4 +88,15 @@ class CartController extends Controller
         return back();
     }
 
+    /**
+     * 清空购物车
+     *
+     * @return
+     */
+    public function clearAll()
+    {
+        session()->forget('cart');
+        return back();
+    }
+
 }

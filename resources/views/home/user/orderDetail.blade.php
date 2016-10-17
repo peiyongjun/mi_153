@@ -49,14 +49,14 @@
                                 等待付款
                                 @elseif ($order->order_status == 1)
                                 已关闭
-                                @elseif ($order->order_status == 2 || $order->order_status == 2)
+                                @elseif ($order->order_status == 2)
                                 等待收货
                                 @elseif ($order->order_status == 3)
                                 等待收货
                                 @elseif ($order->order_status == 4)
                                 售后处理中
                                 @elseif ($order->order_status == 5)
-                                待评价
+                                已完成
                                 @elseif ($order->order_status == 7)
                                 待评价
                                 @endif
@@ -68,7 +68,7 @@
                                     <td class="col col-thumb">
                                         <div class="figure figure-thumb">
                                             <a target="_blank" href="{{ URL(('/detail/').($goods->id)) }}">
-                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80" height="80"
+                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods->img !!}' width="80" height="80"
                                                 alt="">
                                             </a>
                                         </div>
