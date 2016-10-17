@@ -607,7 +607,7 @@ class UserController extends Controller
         return $value->id;
     }
     //查询district内容
-    public function find($upid=0)
+    public function find($upid=0)  
     {
         $address = \DB::table('district')->where('upid',$upid)->get();
         // dd($address);

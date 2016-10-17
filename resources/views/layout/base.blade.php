@@ -330,5 +330,4 @@
 			$('#J_miniCartMenu').attr('style','display:none');
 		})
 	</script>
-</body>
 </html>

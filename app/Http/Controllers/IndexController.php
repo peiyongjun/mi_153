@@ -39,6 +39,4 @@ class IndexController extends Controller
         }
         return view('home.list')->with(['list'=>$list])->with(["data"=>$data]);
     }
-
-
 }
