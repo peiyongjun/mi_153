@@ -28,6 +28,9 @@
 			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
+				@if(session('cart'))
+				({{ session()->get('num') }})
+				@endif
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
 			@if(session('cart'))
@@ -38,9 +41,9 @@
 						<div class="cart-item clearfix first">
 							<a class="thumb" href="">
 							<img alt="" src="\Uploads\Picture\{{ $v['cartImg'] }}"></a>
-							<a class="name" href="">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
+							<a class="name" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
 							<span class="price">{{ $v['cartPrice'] }}元 × {{ $v['cartnum'] }}</span>
-							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
+							<a class="btn-del J_delItem" href="{{ URL('/clearCart/'.$v['skusId']) }}" gid="2162700009_0_buy" data-isbigtap="false">
 							<i class="iconfont"></i>
 							</a>
 						</div>
@@ -48,8 +51,8 @@
 					@endforeach
 				</ul>
 				<div class="cart-total clearfix">
-					<span class="total">共 <em>1</em> 件商品
-						<span class="price"><em>1499.00</em>元</span>
+					<span class="total">共 <em>{{ session()->get('num') }}</em> 件商品
+						<span class="price"><em>{{ session()->get('total') }}</em>元</span>
 					</span>
 					<a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a>
 				</div>

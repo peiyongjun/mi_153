@@ -107,7 +107,10 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/buy/Pay',"home\UserController@Money");
     Route::get('/buy/Ajax',"home\UserController@Ajax");
     Route::get('/buy/district/{upid?}',"home\UserController@find");
+    //添加购物车
     Route::get('/buy/cart/{id}',"home\CartController@Addcart");
+    //清除购物车
+    Route::get('/clearCart/{id}',"home\CartController@Clearcart");
     // Route::get('/buy/order',"home\UserController@Del");
 });
 
