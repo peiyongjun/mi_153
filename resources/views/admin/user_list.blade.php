@@ -1,6 +1,8 @@
 @extends("layout.adminBase")
 @section("content")
 <script type="text/javascript">
+	//侧边导航选中
+	$("#userList").addClass("active");
 	//执行删除信息
 	function doDel(id)
 	{

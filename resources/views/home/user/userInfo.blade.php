@@ -279,7 +279,7 @@
   <div class="n-account-area-box">
     <div class="n-account-area clearfix">
       <div class="na-info">
-      <p class="na-num"><?php session_start(); echo $_SESSION['user'] ?></p>
+      <p class="na-num">{{ session("user")->username }}</p>
       </div>
       <div class="na-img-area fl-l">
       <!--na-img-bg-area不能插入任何子元素-->

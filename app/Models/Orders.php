@@ -10,6 +10,8 @@ class Orders extends Model
      *订单查询
      */ 
     protected $table = 'orders';
+    public $timestamps = false;
+    
     public function getAllorder()
     {
     	$data = \DB::table('orders')
@@ -18,4 +20,15 @@ class Orders extends Model
             ->select('orders.*','users.username','goods.name');
             return $data;
     }
+
+    public function hasManySkus()
+    {
+        return $this->hasMany("App\Models\Skus", "id", "goods_id");
+    }    
+
+    public function hasManyOrders()
+    {
+        return $this->belongsTo("App\Models\Service", "order_id", "id");
+    }
+
 }

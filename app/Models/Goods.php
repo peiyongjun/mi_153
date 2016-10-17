@@ -9,7 +9,7 @@ class Goods extends Model
 {
      //指定表名为users
     protected $table = "goods";
-
+    public $timestamps = false;
     /**
      * 查询所有大类
      * 
@@ -37,8 +37,23 @@ class Goods extends Model
      * 
      * @return Object  $list    查询到的数据
      */
-    public function hasSkus ()
+    public function hasSkus()
     {
-        return Goods::hasMany('App\Models\Skus','goods_id','id');
+        return $this->belongsTo('App\Models\Skus', 'goods_id', 'id');
+    }
+    
+    /**
+     * 关联skus表
+     * 
+     * @return Object  $list    查询到的数据
+     */
+    public function hasOneSkus()
+    {
+        return $this->hasOne('App\Models\Skus', 'goods_id', 'id');
+    }
+
+    public function hasManyGoods()
+    {
+        return $this->belongsTo("App\Models\Comments","goods_id","id");
     }
 }

@@ -2,6 +2,10 @@
 
 @section("content")
 <script type="text/javascript">
+	//侧边导航选中
+	$("#orderList").addClass("open");
+	$("#orderList").addClass("active");
+	$("#orderListOff").addClass("active");
 	//控制模态框内信息
 	function doUpdate(id)
 	{

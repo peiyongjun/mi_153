@@ -1,5 +1,10 @@
 @extends('layout.base')
 @section('content')
+<style type="text/css">
+    body{
+        background-color:white; 
+    }
+</style>
 <div class="container">
     <div class="">
         <div class="container">

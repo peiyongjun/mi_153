@@ -8,4 +8,29 @@ class Skus extends Model
 {
     //
     protected $table = "skus";
+    public $timestamps = false;
+
+    public function hasManySkus()
+    {
+        return $this->belongsTo('App\Models\Orders', 'goods_id', 'id');
+    }
+
+     public function hasSkus ()
+    {
+        return $this::hasMany('App\Models\Goods','id','goods_id');
+    }
+    /**
+     * 关联skus表
+     * 
+     * @return Object  $list    查询到的数据
+     */
+    public function hasOneSkus()
+    {
+        return $this->belongsTo('App\Models\Goods', 'id', 'goods_id');
+    }
+
+    public function hasMSkus()
+    {
+        return $this->belongsTo("App\Models\Comments","skus_id","id");
+    }
 }

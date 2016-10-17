@@ -10,10 +10,14 @@
 <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="/home/css/base.min.css"/>
-<link rel="stylesheet" href="/home/css/buy-choose.min.css"/>
 <link rel="stylesheet" href="/home/css/category.min.css"/>
 <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
+<style>
+	body{
+        background-color:#F5F5F5;
+	}
+</style>
 <body>
 <div class="site-topbar">
 	<div class="container">
@@ -21,15 +25,32 @@
 			<a rel="nofollow" href="//www.mi.com/index.html">小米商城</a><span class="sep">|</span><a rel="nofollow" href="http://www.miui.com/" target="_blank">MIUI</a><span class="sep">|</span><a rel="nofollow" href="http://www.miliao.com/" target="_blank">米聊</a><span class="sep">|</span><a rel="nofollow" href="http://game.xiaomi.com/" target="_blank">游戏</a><span class="sep">|</span><a rel="nofollow" href="http://www.duokan.com/" target="_blank">多看阅读</a><span class="sep">|</span><a rel="nofollow" href="https://i.mi.com/" target="_blank">云服务</a><span class="sep">|</span><a rel="nofollow" href="https://jr.mi.com?from=micom" target="_blank">金融</a><span class="sep">|</span><a rel="nofollow" href="//www.mi.com/c/appdownload/" target="_blank">小米网移动版</a><span class="sep">|</span><a rel="nofollow" href="//static.mi.com/feedback/" target="_blank">问题反馈</a><span class="sep">|</span><a rel="nofollow" href="#J_modal-globalSites" data-toggle="modal">Select Region</a>
 		</div>
 		<div class="topbar-cart" id="J_miniCartTrigger">
-			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/">
+			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
-			<div class="cart-menu" id="J_miniCartMenu">
-				<div class="loading">
-					<div class="loader">
-					</div>
+			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
+				<ul class="cart-list">
+				
+					<li>
+						<div class="cart-item clearfix first">
+							<a class="thumb" href="">
+							<img alt="" src=""></a>
+							<a class="name" href="">红米Pro 全网通版 3GB内存 灰色 32GB</a>
+							<span class="price">1499元 × 1</span>
+							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
+							<i class="iconfont"></i>
+							</a>
+						</div>
+					</li>
+
+				</ul>
+				<div class="cart-total clearfix">
+					<span class="total">共 <em>1</em> 件商品
+						<span class="price"><em>1499.00</em>元</span>
+					</span>
+					<a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a>
 				</div>
 			</div>
 		</div>
@@ -45,7 +66,7 @@
 				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
 			</span>
 			<span class="sep">|</span>
-			<a rel="nofollow" class="link link-order" href="/myOrder" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
+			<a rel="nofollow" class="link link-order" href="{{ URL('/validOrder') }}" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="/userlogout" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">退出</a>
 		</div>
@@ -301,6 +322,13 @@
 		    var s = document.getElementsByTagName('script')[0];
 		    s.parentNode.insertBefore(ms, s);
 		})();
+	</script>
+	<script type="text/javascript">
+		$('#J_miniCartTrigger').mouseover(function (){
+			$('#J_miniCartMenu').attr('style','display:block');
+		}).mouseout(function (){
+			$('#J_miniCartMenu').attr('style','display:none');
+		})
 	</script>
 </body>
 </html>
