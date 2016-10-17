@@ -35,7 +35,7 @@ class CartController extends Controller
         }
         return back()->with(['skus'=>$skus])->with(['goods'=>$goods]);
     }
-
+    
     public function check($id)
     {
         $good = session('cart');
