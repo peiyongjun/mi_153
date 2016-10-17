@@ -49,6 +49,7 @@ Route::group(['middleware'=>'homelogin'],function(){
     //订单页面
     //全部有效订单
     Route::get('/validOrder', "home\UserController@myOrder");
+    Route::get('/validOrder/Status',"home\UserController@touch");
     //待支付订单
     Route::get('/waitPay',"home\UserController@waitPay");
     //待收货订单
