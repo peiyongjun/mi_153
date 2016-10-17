@@ -88,10 +88,11 @@
 		};
 		var a = $("#attr").html();
 		var b = $("#color").html();
+		var c = {{ $info->id }};
 		$.ajax({
 			url:"/buy/Ajax",
 			type:"get",
-			data:{a:a,b:b},
+			data:{a:a,b:b,c:c},
 			dataType:"html",
 			success:function(data)
 			{

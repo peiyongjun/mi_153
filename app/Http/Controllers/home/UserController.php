@@ -580,7 +580,7 @@ class UserController extends Controller
         $upid = $list[1];
         $cid = $list[2];
         $data = array();
-        $data['goods_id'] = Skus::find($gid)->first()->goods_id;
+        $data['goods_id'] = $gid;
         $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
         $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
         $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
@@ -592,9 +592,10 @@ class UserController extends Controller
         $data['goods_num'] = 2;
         $data['del_name'] = $request->del_name;
         $data['phone'] = $request->phone;
-        Orders::insert($data);
-        $od = new Orders();
+        $data['ctime'] = date("Y-m-d H:i:s",time());
+        // Orders::insert($data);
         $ppid = Orders::insertGetId($data);
+      // dd($ppid);
         return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
     }
     //返回订单信息id
@@ -602,7 +603,8 @@ class UserController extends Controller
     {
         $attr = trim($request->a);
         $color = trim($request->b);
-        $value = Skus::where('color',$color)->where("attr",$attr)->first();
+        $goods_id = trim($request->c);
+        $value = Skus::where('color',$color)->where("attr",$attr)->where("goods_id",$goods_id)->first();
         return $value->id;
     }
     //查询district内容
@@ -617,6 +619,7 @@ class UserController extends Controller
     {
         $id = $request->id;
         $order = Orders::find($id);
+        // dd($order);
         $order->order_status = 2;
         $order->save();
         return redirect("/validOrder");
