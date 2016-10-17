@@ -72,6 +72,12 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/phone',"home\UserController@phone");
 
     Route::post('/updatePhone',"home\UserController@updatePhone");
+    //选择完成后跳转至生成订单界面
+    Route::get('/buy/checkout/{id}',"home\UserController@Checkout");
+    Route::post('/buy/Pay/{id}',"home\UserController@Money");
+    Route::get('/buy/Ajax',"home\UserController@Ajax");
+    Route::get('/buy/district/{upid?}',"home\UserController@find");
+    // Route::get('/buy/order',"home\UserController@Del");
 });
 
 

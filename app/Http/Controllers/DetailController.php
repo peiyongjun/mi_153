@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Goods;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class DetailController extends Controller
 {

@@ -47,7 +47,7 @@
 					<span id="color"></span>
 					<!-- <form action="/buy/checkout" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="attr" name="attr" value="">
+						<input type="attr" name="attr " value="">
 						<input type="color" name="color" value="">
 					</form> -->
 				</p>
@@ -57,7 +57,7 @@
 			<div class="pro-choose-result" id="J_chooseResultInit">
 				<a href="javascript:void(0);" class="btn btn-large btn-primary btn-dakeLight">加入购物车</a>
 				<!-- 按钮变色在class加btn-primary -->
-				<a disabled href="javascript:doCheckout()" class="btn btn-large btn-dakeLight" id="next">下一步</a>
+				<a disabled href="" class="btn btn-large btn-dakeLight" id="next">下一步</a>
 				<!-- <span class="next-desc">请选择商品</span> -->
 			</div>
 		</div>
@@ -79,25 +79,45 @@
 	}
 	function selectColor (color)
 	{
-		$(".color").removeClass("active");
-		$(color).toggleClass("active");
-		$('#color').html($(color).html());//当前选择框内容
-		checkSkus();
+		if ($('#attr').html()){
+			$(".color").removeClass("active");
+			$(color).toggleClass("active");
+			$('#color').html($(color).html());//当前选择框内容
+			checkSkus();
+		};
+		var a = $("#attr").html();
+		var b = $("#color").html();
+		$.ajax({
+			url:"/buy/Ajax",
+			type:"get",
+			data:{a:a,b:b},
+			dataType:"html",
+			success:function(data)
+			{
+				var c = data;
+				$("#next").click(function(){
+					$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
+				});			
+			},
+			error:function(data)
+			{
+				alert(data);
+			}
+		});
+
 	}
 	function checkSkus ()
 	{
 		if ($("#attr").html() && $("#color").html()) {
 			$("#next").addClass("btn-primary");
 			$("#next").attr('disabled',false);
+
 		}else{
 			$("#next").removeClass("btn-primary");
 			$("#next").attr('disabled',true);
 		}
 	}
-	function doCheckout ()
-	{
 
-	}
+	
 </script>
-
 @endsection

@@ -7,6 +7,7 @@ use App\Models\Goods;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
+use App\Models\Skus;
 
 class UserController extends Controller
 {
@@ -193,5 +194,36 @@ class UserController extends Controller
         $user->save();
         // dd($request);
         return redirect('/userSafe');
+    }
+    //结算
+    public function Checkout(Request $request)
+    {   //获取用户订单信息
+        $id = $request->id;
+        $db = Skus::find($id);
+        $Gname = Goods::where('id',$db->goods_id)->select('name')->first();
+        
+        return view('home.goods.checkout')->with(['db'=>$db])->with(['Gname'=>$Gname]);
+    }
+    //支付接第三方接口
+    public function Money(Request $request)
+    {   
+        $db = $request->only('del_name','phone','dis');
+        dd($db);
+        return view('home.goods.pay');
+    }
+    //返回订单信息id
+    public function Ajax(Request $request)
+    {
+        $attr = trim($request->a);
+        $color = trim($request->b);
+        $value = Skus::where('color',$color)->where("attr",$attr)->first();
+        return $value->id;
+    }
+    //查询district内容
+    public function find($upid=0)
+    {
+        $address = \DB::table('district')->where('upid',$upid)->get();
+        // dd($address);
+        return json_encode($address); 
     }
 }
