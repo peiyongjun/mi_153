@@ -637,7 +637,7 @@ _msq.push(['trackPageView']);
         tid.onclick = function()
         {
             if(confirm('确认支付吗?')){
-                window.location.href="/validOrder";
+                window.location.href="/validOrder/Status?id={{ $ppid }}";
             };
         }
     </script>

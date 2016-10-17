@@ -593,8 +593,10 @@ class UserController extends Controller
       $data['del_name'] = $request->del_name;
       $data['phone'] = $request->phone;
       Orders::insert($data);
-
-        return view('home.goods.pay')->with(['data'=>$data])->with(['db'=>$db]);
+      $od = new Orders();
+      $ppid = Orders::insertGetId($data);
+      // dd($ppid);
+        return view('home.goods.pay')->with(['data'=>$data])->with(['db'=>$db])->with(['ppid'=>$ppid]);
     }
     //返回订单信息id
     public function Ajax(Request $request)
@@ -610,5 +612,15 @@ class UserController extends Controller
         $address = \DB::table('district')->where('upid',$upid)->get();
         // dd($address);
         return json_encode($address); 
+    }
+
+    public function touch(Request $request)
+    {
+        $id = $request->id;
+        $order = Orders::find($id);
+        // dd($order);
+        $order->order_status = 2;
+        $order->save();
+        return redirect("/validOrder");
     }
 }
