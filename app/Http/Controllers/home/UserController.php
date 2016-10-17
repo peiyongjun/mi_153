@@ -600,7 +600,7 @@ class UserController extends Controller
         return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
     }
     //查询district内容
-    public function find($upid=0)
+    public function find($upid=0)  
     {
         $address = \DB::table('district')->where('upid',$upid)->get();
         return json_encode($address); 

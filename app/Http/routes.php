@@ -107,7 +107,11 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/buy/Pay',"home\UserController@Money");
     Route::get('/getSkusId',"DetailController@getSkusId");
     Route::get('/buy/district/{upid?}',"home\UserController@find");
+    //添加购物车
     Route::get('/buy/cart/{id}',"home\CartController@Addcart");
+    //清除购物车
+    Route::get('/clearCart/{id}',"home\CartController@Clearcart");
+    Route::get('/clearAll',"home\CartController@clearAll");
     Route::get('/getSkus',"DetailController@getSkus");
 });
 
@@ -157,7 +161,6 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
 
     Route::get('/alreadyS/{id}','Admin\ServiceController@alreadyS');
 });
-
+    
 /////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////其 它 路 由////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////其 它 路 由///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

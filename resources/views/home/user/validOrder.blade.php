@@ -101,7 +101,7 @@
                                                 </a>
                                             </div>
                                             <p class="name">
-                                                <a target="_blank" href="{{ URL('/detail/').$goods[$skus[$v->id]->id]->id }}">
+                                                <a target="_blank" href="{{ URL('/detail').'/'.$goods[$skus[$v->id]->id]->id }}">
                                                       {{ $goods[$skus[$v->id]->id]->name }} {{ $skus[$v->id]->attr }} {{ $skus[$v->id]->color }}
                                                 </a>
                                             </p>

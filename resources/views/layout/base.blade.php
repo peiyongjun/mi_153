@@ -28,19 +28,23 @@
 			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
+				@if(session('user') && session('cart'))
+				({{ session()->get('num') }})
+				@endif
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
-			@if(session('cart'))
+			@if(session('user') && session('cart'))
 			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
 				<ul class="cart-list">
 					@foreach(session()->get('cart') as $v)
 					<li>
-						<div class="cart-item clearfix first">
-							<a class="thumb" href="">
+						<div class="cart-item clearfix first" style="position:absolute">
+							<a class="thumb" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">
 							<img alt="" src="\Uploads\Picture\{{ $v['cartImg'] }}"></a>
-							<a class="name" href="">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
+							<a class="name" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
 							<span class="price">{{ $v['cartPrice'] }}元 × {{ $v['cartnum'] }}</span>
-							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
+							<a href="{{ URL('/buy/checkout/'.$v['skusId']) }}" class="btn btn-small btn-primary" style="display:block;color:white;float:right;position:relative;top:3px;right:5px">去结算</a>
+							<a class="btn-del J_delItem" href="{{ URL('/clearCart/'.$v['skusId']) }}" gid="2162700009_0_buy" data-isbigtap="false">
 							<i class="iconfont"></i>
 							</a>
 						</div>
@@ -48,13 +52,13 @@
 					@endforeach
 				</ul>
 				<div class="cart-total clearfix">
-					<span class="total">共 <em>1</em> 件商品
-						<span class="price"><em>1499.00</em>元</span>
+					<span class="total">共 <em>{{ session()->get('num') }}</em> 件商品
+						<span class="price"><em>{{ session()->get('total') }}</em>元</span>
 					</span>
-					<a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a>
+					<a class="btn btn-small btn-line-gray" href="{{ URL('/clearAll') }}">清空购物车</a>
 				</div>
 			</div>
-			@else
+			@elseif(session('user'))
 			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
 				<ul class="cart-list">
 					<li>
@@ -338,5 +342,4 @@
 			$('#J_miniCartMenu').attr('style','display:none');
 		})
 	</script>
-</body>
 </html>
