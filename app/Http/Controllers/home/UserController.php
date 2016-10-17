@@ -572,9 +572,29 @@ class UserController extends Controller
     //支付接第三方接口
     public function Money(Request $request)
     {   
-        $db = $request->only('del_name','phone','dis');
-        dd($db);
-        return view('home.goods.pay');
+        //添加订单收货地址
+        $gid = $request->id;
+        $db = Skus::find($gid)->first()->price;
+
+        $list = $request->dis;
+        $id = $list[0];
+        $upid = $list[1];
+        $cid = $list[2];
+        $data = array();
+      $data['goods_id'] = Skus::find($gid)->first()->goods_id;
+      $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
+      $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
+      $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
+      if (isset($list[3])){
+        $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   }
+      $data['user_id'] = session()->get("user")->id;
+      $data['order_status'] = 0;
+      $data['goods_num'] = 2;
+      $data['del_name'] = $request->del_name;
+      $data['phone'] = $request->phone;
+      Orders::insert($data);
+
+        return view('home.goods.pay')->with(['data'=>$data])->with(['db'=>$db]);
     }
     //返回订单信息id
     public function Ajax(Request $request)
