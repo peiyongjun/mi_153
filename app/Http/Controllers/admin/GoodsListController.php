@@ -37,8 +37,8 @@ class GoodsListController extends Controller
     }
 
     /**
-     * 删除用户数据
-     * @param  int $id 接收到的id
+     * 上下架操作
+     * @param  int $id 
      * @return None    跳回上一个页面
      */
     public function ToggleStatus (Request $request)
@@ -50,6 +50,25 @@ class GoodsListController extends Controller
             $good->status = '0';
         } else if($good->status == 0) {
             $good->status = '1';
+        }
+        $good->save();
+        return back();
+    }
+
+    /**
+     * 明星单品操作
+     * @param  int $id 接收到的id
+     * @return None    跳回上一个页面
+     */
+    public function ToggleStar (Request $request)
+    {
+        $id = $request->id;
+        // 执行下架操作
+        $good = Goods::find($id);
+        if ($good->status == 2) {
+            $good->status = '1';
+        } else {
+            $good->status = '2';
         }
         $good->save();
         return back();
