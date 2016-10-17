@@ -105,10 +105,10 @@ Route::group(['middleware'=>'homelogin'],function(){
     //选择完成后跳转至生成订单界面
     Route::get('/buy/checkout/{id}',"home\UserController@Checkout");
     Route::post('/buy/Pay',"home\UserController@Money");
-    Route::get('/buy/Ajax',"home\UserController@Ajax");
+    Route::get('/getSkusId',"DetailController@getSkusId");
     Route::get('/buy/district/{upid?}',"home\UserController@find");
     Route::get('/buy/cart/{id}',"home\CartController@Addcart");
-    // Route::get('/buy/order',"home\UserController@Del");
+    Route::get('/getSkus',"DetailController@getSkus");
 });
 
 

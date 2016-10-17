@@ -32,11 +32,9 @@
 						<i class="pro-version-desc-icon">!</i>
 						<span class="pro-version-desc J_verDesc" data-index="2"></span>
 					</div>
-					<ul class="step-list clearfix J_stepList">
+					<ul class="step-list clearfix J_stepList" id="chooseColor">
 						<!-- 选中在class加active -->
-						@foreach($color as $v)
-						<li class="color" onclick="selectColor(this)"> {{ $v }} </li>
-						@endforeach
+						
 					</ul>
 				</div>
 			</div>
@@ -46,11 +44,6 @@
 				<p class="msg-bd" id="msg">
 					<span id="attr"></span>
 					<span id="color"></span>
-					<!-- <form action="/buy/checkout" method="post">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="attr" name="attr " value="">
-						<input type="color" name="color" value="">
-					</form> -->
 				</p>
 			</div>
 			<div class="pro-choose-result hide" id="J_chooseResult">
@@ -77,6 +70,25 @@
 		$('#attr').html($(attr).html());//当前选择框内容
 		$('#color').html('');
 		checkSkus();
+		var a = $('#attr').html();
+		var b = {{ $info->id }};
+		$("#chooseColor li").remove();
+		$.ajax({
+			type:"get",
+			data:{attr:a,gid:b},
+			url:"/getSkus",
+			dataType:'json',
+			success:function(data)
+            {
+            	for (var i = 0; i < data.length; i++) {
+            		$("#chooseColor").append('<li class="color" id="+data[i].color+" onclick="selectColor(this)">'+data[i].color+"</li>");
+            	};
+            },
+            error:function()
+            {
+                alert(222);
+            },     
+		});	
 	}
 	function selectColor (color)
 	{
@@ -90,7 +102,7 @@
 		var b = $("#color").html();
 		var c = {{ $info->id }};
 		$.ajax({
-			url:"/buy/Ajax",
+			url:"/getSkusId",
 			type:"get",
 			data:{a:a,b:b,c:c},
 			dataType:"html",
@@ -105,7 +117,7 @@
 				alert(data);
 			}
 		});
-
+		
 	}
 	function checkSkus ()
 	{
