@@ -106,7 +106,7 @@
 				            	<!-- 单列信息 -->
 				                <ul class="children-list children-list-col children-list-col-1">
 				                	@foreach($data as $vv)
-									@if($vv->pid == $v->id && $vv->status == 1)	
+									@if($vv->pid == $v->id && $vv->status != 0)	
 				                    <li class="star-goods">
 				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
 				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
@@ -145,7 +145,7 @@
 						<div class="container">
 							<ul class="children-list clearfix">
 							@foreach($data as $vv)
-							@if($vv->pid == $v->id && $vv->status == 1)				
+							@if($vv->pid == $v->id && $vv->status != 0)				
 								<li class="first">
 									<div class="figure figure-thumb">
 										<a href="{{ URL(('/detail/').($vv->id)) }}">

@@ -19,7 +19,7 @@
         </div>
         <div class="header-title" id="J_miniHeaderTitle"></div>
         <div class="topbar-info" id="J_userInfo">
-        @if(!empty($_SESSION))
+        @if(!session('user'))
         <a class="link" href="//order.mi.com/site/login" data-needlogin="true">登录</a><span class="sep">|</span><a class="link" href="https://account.xiaomi.com/pass/register" >订单中心</a>
         @endif        
         <a class="link" href="//order.mi.com/site/login" data-needlogin="true">{{ session('user')->username }}</a><span class="sep">|</span><a class="link" href="#" >订单中心</a>
@@ -42,7 +42,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="text" name="del_name" style="width:120px;" placeholder="姓名">
                         <input type="text" name="phone" style="width:120px;" placeholder="电话">
-
+                        <input type="hidden" name="id" value="{{ $db->id }}">
                     </form>
             <div class="section section-options section-payment clearfix">
             </div>
@@ -263,7 +263,7 @@
             if(data.length==0){
               return;
             }
-            var select = "<select name='dis' id='tid' class='form-contorl'>";
+            var select = "<select id='tid' name='dis[]' class='form-contorl'>";
             select +="<option value='-2'>-请选择-</option>";
             for(var i=0;i<data.length;i++){
               select +="<option value='"+data[i].id+"'>"+data[i].name+"</option>";
@@ -273,22 +273,20 @@
                 //清空后面所有的select节点
                 $(this).nextAll("select").remove();
                 var id = $(this).find("option:selected").val()
-                alert(id);
+                // alert(id);      
                 loadDistrict(id);
             }).appendTo('#myform');  
           }
         });
       }
       loadDistrict(0);
-       function doSubmit(id)
-        {
+          function doSubmit()
+            {
             var myform = document.myform;
-            var options = $("#tid option:selected");
-            alert(options.val());
-            myform.action = "/buy/Pay/"+id;
+            myform.action = "/buy/Pay";
             myform.submit();
             // alert('11');
-        }
+             }
   </script>
   <script>
        

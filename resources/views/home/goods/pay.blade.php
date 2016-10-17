@@ -23,7 +23,11 @@ var _STAT_HASHNAME="http://my.mi.com/buy/confirm";
         </div>
         <div class="header-title" id="J_miniHeaderTitle"></div>
         <div class="topbar-info" id="J_userInfo">
-        <a class="link" href="//order.mi.com/site/login" data-needlogin="true">登录</a><span class="sep">|</span><a class="link" href="https://account.xiaomi.com/pass/register" >注册</a>        </div>
+        @if(!session("user"))
+        <a class="link" href="//order.mi.com/site/login" data-needlogin="true">登录</a><span class="sep">|</span><a class="link" href="#" >注册</a>
+        @endif
+          <a class="link" href="//order.mi.com/site/login" data-needlogin="true">{{ session('user')->username }}</a><span class="sep">|</span><a class="link" href="https://account.xiaomi.com/pass/register" >订单中心</a>
+        </div>
     </div>
 </div>
 <!-- .site-mini-header END -->
@@ -43,49 +47,33 @@ var _confirmConfig = {
                     <div class="fl">
                         <h2 class="title">订单提交成功！去付款咯～</h2>
                         <p class="order-time" id="J_deliverDesc">现在支付，预计3-8天送达 <span class="beta">Beta</span></p>
-                        <p class="order-time">请在<span class="pay-time-tip">1小时57分</span>内完成支付, 超时后将取消订单</p>
-                        <p class="post-info" id="J_postInfo">
-                                                        收货信息：谢其勇 156****9597 &nbsp;&nbsp;
-                            北京&nbsp;&nbsp;北京市&nbsp;&nbsp;昌平区&nbsp;&nbsp;回龙观镇&nbsp;&nbsp;composer update                                                    </p>
+                        <p class="order-time">请在<span class="pay-time-tip">1小时</span>内完成支付, 超时后将取消订单</p>
                     </div>
                     <div class="fr">
                         <p class="total">
-                            应付总额：<span class="money"><em>1499.00</em>元</span>
+                            应付总额：<span class="money"><em>{{ $db }}</em>元</span>
                         </p>
-                        <a href="javascript:void(0);" class="show-detail" id="J_showDetail">订单详情<i class="iconfont">&#xe61c;</i></a>
+                        <a href="javascript:void(0);" class="show-detail" id="J_showDetail">地址查询<i class="iconfont">&#xe61c;</i></a>
                     </div>
                 </div>
                 <i class="iconfont icon-right">&#x221a;</i>
                 <div class="order-detail">
                     <ul>
                         <li class="clearfix">
-                            <div class="label">订单号：</div>
                             <div class="content">
                                 <span class="order-num">
-                                    1161013919700111                                </span>
+                                </span>
                             </div>
                         </li>
                         <li class="clearfix">
-                                                        <div class="label">收货信息：</div>
+                        <div class="label">收货信息：</div>
                             <div class="content">
-                            谢其勇 156****9597&nbsp;&nbsp;
-                            北京&nbsp;&nbsp;北京市&nbsp;&nbsp;昌平区&nbsp;&nbsp;回龙观镇&nbsp;&nbsp;composer update                            </div>
-                                                    </li>
-                        <li class="clearfix">
-                            <div class="label">商品名称：</div>
-                            <div class="content">
-                                红米Pro 全网通版 3GB内存 金色 32GB<br/>USB Type-C 转接头 黑色<br/>智能显示保护套 银色                            </div>
-                        </li>
-                                                <li class="clearfix">
-                            <div class="label">配送时间：</div>
-                            <div class="content">
-                                不限送货时间                            </div>
-                        </li>
-                                                <li class="clearfix">
-                            <div class="label">发票信息：</div>
-                            <div class="content">
-                                个人                            </div>
-                        </li>
+                            姓名&nbsp;{{ $data['del_name'] }}&nbsp;
+                            &nbsp;电话&nbsp;{{ $data['phone'] }}&nbsp;{{ $data['province'] }}&nbsp;{{ $data['city'] }}&nbsp;{{ $data['district'] }}&nbsp;@if(!empty($data['address']))&nbsp;
+                            {{ $data['address'] }}&nbsp;
+                            @endif
+                            </div>
+                        </li>      
                     </ul>
                 </div>
             </div>
@@ -115,7 +103,7 @@ var _confirmConfig = {
                     </div>
                     <div class="payment-body">
                         <ul class="clearfix payment-list J_paymentList J_linksign-customize">
-                            <li id="J_weixin" > <img src="//c1.mifile.cn/f/i/15/pay/wechat0715.jpg" alt="" style="margin-left: 0;"/></li><li class="J_bank"><input type="radio" name="payOnlineBank" id="alipay" value="alipay" /> <img src="//c1.mifile.cn/f/i/15/pay/alipay-0718-1.png" alt="" style="margin-left: 0;"/></li><li class="J_bank"><input type="radio" name="payOnlineBank" id="unionpay" value="unionpay" /> <img src="//s01.mifile.cn/i/banklogo/unionpay0524.png" alt="" style="margin-left: 0;"/></li><li class="J_bank"><input type="radio" name="payOnlineBank" id="cft" value="cft" /> <img src="//s01.mifile.cn/i/banklogo/cft.png" alt="" style="margin-left: 0;"/></li><li class="J_bank"><input type="radio" name="payOnlineBank" id="micash" value="micash" /> <img src="//s01.mifile.cn/i/banklogo/micash.png?ver2015" alt="" style="margin-left: 0;"/></li>                        </ul>
+                            <li> <img id="tid" src="//c1.mifile.cn/f/i/15/pay/wechat0715.jpg" alt="" style="margin-left: 0;"/></li><li class="J_bank"><input type="radio" name="payOnlineBank" id="alipay" value="alipay" /> <img src="//c1.mifile.cn/f/i/15/pay/alipay-0718-1.png" alt="" style="margin-left: 0;"/></li>                </ul>
                                                                         <div class="event-desc">
                             <p>微信支付：关注小米手机微信公众号，支付成功后可领取3-10元电影票红包。</p><p>支 付 宝：支付宝扫码支付满38元，参与赢取1999元红包</p><p>银联在线支付：每天10点，银联卡（卡号62开头）付款，每单享6.2折（最高立减30元），数量有限。</p>                            <a href="http://www.mi.com/c/payrule/" class="more" target="_blank">了解更多&gt;</a>
                         </div>
@@ -644,4 +632,13 @@ _msq.push(['trackPageView']);
 })();
 </script>
 </body>
+    <script type="text/javascript">
+        var tid = document.getElementById('tid');
+        tid.onclick = function()
+        {
+            if(confirm('确认支付吗?')){
+                window.location.href="/validOrder";
+            };
+        }
+    </script>
 </html>
