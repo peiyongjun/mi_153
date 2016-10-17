@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Goods;
+use App\Models\Skus;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Session;
 
 class DetailController extends Controller
 {
@@ -67,4 +67,23 @@ class DetailController extends Controller
         return view('home.goods.buy')->with(['list'=>$list])->with(["data"=>$data])->with(["info"=>$info])->with(["attr"=>$attr])->with(["color"=>$color]);
     }
 
+    //返回订单信息id
+    public function getSkusId(Request $request)
+    {
+        $attr = trim($request->a);
+        $color = trim($request->b);
+        $goods_id = trim($request->c);
+        $skus = Skus::where('color',$color)->where("attr",$attr)->where("goods_id",$goods_id)->where("num","!=",0)->first();
+        $sku[] = $skus->id;
+        $sku[] = $skus->price;
+        return json_encode($sku);
+    }
+
+    public function getSkus(Request $request)
+    {
+        $attr = trim($request->attr);
+        $gid = trim($request->gid);
+        $sku = Skus::where('attr',$attr)->where("goods_id",$gid)->get();
+        return $sku;
+    }
 }

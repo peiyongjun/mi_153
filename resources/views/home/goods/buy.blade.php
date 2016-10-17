@@ -10,7 +10,7 @@
 			<div class="pro-title clearfix">
 				<h1>
 					<span class="pro-name J_proDesc">购买{{ $info->name }}</span>
-					<span class="pro-price J_proPrice">{{ $info->price }}元</span>
+					<span class="pro-price J_proPrice" id="skusPrice"></span>
 				</h1>
 				<a href="{{ URL('/detail/'.$info->id) }}" class="pro-more" target="_blank" id="J_proMore">深入了解产品></a>
 			</div>
@@ -32,11 +32,9 @@
 						<i class="pro-version-desc-icon">!</i>
 						<span class="pro-version-desc J_verDesc" data-index="2"></span>
 					</div>
-					<ul class="step-list clearfix J_stepList">
+					<ul class="step-list clearfix J_stepList" id="chooseColor">
 						<!-- 选中在class加active -->
-						@foreach($color as $v)
-						<li class="color" onclick="selectColor(this)"> {{ $v }} </li>
-						@endforeach
+						
 					</ul>
 				</div>
 			</div>
@@ -46,17 +44,12 @@
 				<p class="msg-bd" id="msg">
 					<span id="attr"></span>
 					<span id="color"></span>
-					<!-- <form action="/buy/checkout" method="post">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="attr" name="attr " value="">
-						<input type="color" name="color" value="">
-					</form> -->
 				</p>
 			</div>
 			<div class="pro-choose-result hide" id="J_chooseResult">
 			</div>
 			<div class="pro-choose-result" id="J_chooseResultInit">
-				<a href="javascript:void(0);" class="btn btn-large btn-primary btn-dakeLight">加入购物车</a>
+				<a href="" class="btn btn-large btn-primary btn-dakeLight" id="cart">加入购物车</a>
 				<!-- 按钮变色在class加btn-primary -->
 				<a disabled href="" class="btn btn-large btn-dakeLight" id="next">下一步</a>
 				<!-- <span class="next-desc">请选择商品</span> -->
@@ -77,6 +70,25 @@
 		$('#attr').html($(attr).html());//当前选择框内容
 		$('#color').html('');
 		checkSkus();
+		var a = $('#attr').html();
+		var b = {{ $info->id }};
+		$("#chooseColor li").remove();
+		$.ajax({
+			type:"get",
+			data:{attr:a,gid:b},
+			url:"/getSkus",
+			dataType:'json',
+			success:function(data)
+            {
+            	for (var i = 0; i < data.length; i++) {
+            		$("#chooseColor").append('<li class="color" id="+data[i].color+" onclick="selectColor(this)">'+data[i].color+"</li>");
+            	};
+            },
+            error:function()
+            {
+                alert(222);
+            },     
+		});	
 	}
 	function selectColor (color)
 	{
@@ -88,17 +100,18 @@
 		};
 		var a = $("#attr").html();
 		var b = $("#color").html();
+		var c = {{ $info->id }};
 		$.ajax({
-			url:"/buy/Ajax",
+			url:"/getSkusId",
 			type:"get",
-			data:{a:a,b:b},
-			dataType:"html",
+			data:{a:a,b:b,c:c},
+			dataType:"json",
 			success:function(data)
 			{
-				var c = data;
-				$("#next").click(function(){
-					$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
-				});			
+				var c = data[0];
+				$("#skusPrice").html(data[1]+"元")
+				$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
+				$("#cart").attr('href',"/buy/cart/"+c);//给href属性赋值			
 			},
 			error:function(data)
 			{
@@ -118,7 +131,6 @@
 			$("#next").attr('disabled',true);
 		}
 	}
-
 	
 </script>
 @endsection

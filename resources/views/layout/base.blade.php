@@ -28,31 +28,47 @@
 			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
+				@if(session('user') && session('cart'))
+				({{ session()->get('num') }})
+				@endif
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
+			@if(session('user') && session('cart'))
 			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
 				<ul class="cart-list">
-				
+					@foreach(session()->get('cart') as $v)
 					<li>
-						<div class="cart-item clearfix first">
-							<a class="thumb" href="">
-							<img alt="" src=""></a>
-							<a class="name" href="">红米Pro 全网通版 3GB内存 灰色 32GB</a>
-							<span class="price">1499元 × 1</span>
-							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
+						<div class="cart-item clearfix first" style="position:absolute">
+							<a class="thumb" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">
+							<img alt="" src="\Uploads\Picture\{{ $v['cartImg'] }}"></a>
+							<a class="name" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
+							<span class="price">{{ $v['cartPrice'] }}元 × {{ $v['cartnum'] }}</span>
+							<a href="{{ URL('/buy/checkout/'.$v['skusId']) }}" class="btn btn-small btn-primary" style="display:block;color:white;float:right;position:relative;top:3px;right:5px">去结算</a>
+							<a class="btn-del J_delItem" href="{{ URL('/clearCart/'.$v['skusId']) }}" gid="2162700009_0_buy" data-isbigtap="false">
 							<i class="iconfont"></i>
 							</a>
 						</div>
 					</li>
-
+					@endforeach
 				</ul>
 				<div class="cart-total clearfix">
-					<span class="total">共 <em>1</em> 件商品
-						<span class="price"><em>1499.00</em>元</span>
+					<span class="total">共 <em>{{ session()->get('num') }}</em> 件商品
+						<span class="price"><em>{{ session()->get('total') }}</em>元</span>
 					</span>
-					<a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a>
+					<a class="btn btn-small btn-line-gray" href="{{ URL('/clearAll') }}">清空购物车</a>
 				</div>
 			</div>
+			@elseif(session('user'))
+			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
+				<ul class="cart-list">
+					<li>
+						<div class="cart-item clearfix first">
+							<p>当前没有购买任何商品</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			@endif
 		</div>
 		@if (session('user'))
 		<div class="topbar-info" id="J_userInfo">
@@ -60,10 +76,6 @@
 				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
 					<span class="name" id="username">{{ session('user')->username }}</span>
 				</a>
-			</span>
-			<span class="sep">|</span>
-			<span class="message">
-				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
 			</span>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="{{ URL('/validOrder') }}" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>

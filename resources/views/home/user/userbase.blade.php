@@ -60,8 +60,8 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="/userSafe" target="_blank">个人信息</a></li>
-                                <li><a href="https://account.xiaomi.com/pass/auth/security/home#service=setPassword" target="_blank">修改密码</a></li>
+                                <li><a href="/Info" target="_blank">个人信息</a></li>
+                                <li><a href="/userSafe" target="_blank">修改密码</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 <!-- .modal-globalSites END -->
 
 
-<script type="text/javascript" async="" src="//c1.mifile.cn/f/i/15/stat//xmst.js"></script><script src="//s01.mifile.cn/js/base.min.js?v2016d30"></script>
+<!-- <script type="text/javascript" async="" src="//c1.mifile.cn/f/i/15/stat//xmst.js"></script><script src="//s01.mifile.cn/js/base.min.js?v2016d30"></script> -->
 <script>
 (function() {
     MI.namespace('GLOBAL_CONFIG');

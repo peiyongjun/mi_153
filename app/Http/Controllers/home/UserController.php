@@ -490,7 +490,7 @@ class UserController extends Controller
         $password = $request->newpwd;
         $conpwd = $request->conpwd;
         if($pwd != $user->password){
-            session()->flash("imsg","原密码不正确");
+            session("imsg","原密码不正确");
             // return session()->get('imsg');
             return back();
         }else{
@@ -565,52 +565,44 @@ class UserController extends Controller
     {   //获取用户订单信息
         $id = $request->id;
         $db = Skus::find($id);
-        $Gname = Goods::where('id',$db->goods_id)->select('name')->first();
-        
-        return view('home.goods.checkout')->with(['db'=>$db])->with(['Gname'=>$Gname]);
+        $Gname = Goods::where('id',$db->goods_id)->first();
+        // dd($id);
+        return view('home.goods.checkout')->with(['id'=>$id])->with(['db'=>$db])->with(['Gname'=>$Gname]);
     }
     //支付接第三方接口
     public function Money(Request $request)
     {   
         //添加订单收货地址
         $gid = $request->id;
-        $db = Skus::find($gid)->first()->price;
-
+        $price = Skus::where("id",$gid)->first()->price*$request->num;
         $list = $request->dis;
         $id = $list[0];
         $upid = $list[1];
         $cid = $list[2];
+        if (isset($list[3])){
+            $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   
+        }
         $data = array();
-      $data['goods_id'] = Skus::find($gid)->first()->goods_id;
-      $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
-      $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
-      $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
-      if (isset($list[3])){
-        $data['address']= \DB::table('district')->where('id',$list[3])->first()->name;   }
-      $data['user_id'] = session()->get("user")->id;
-      $data['order_status'] = 0;
-      $data['goods_num'] = 2;
-      $data['del_name'] = $request->del_name;
-      $data['phone'] = $request->phone;
-      Orders::insert($data);
-      $od = new Orders();
-      $ppid = Orders::insertGetId($data);
-      // dd($ppid);
-        return view('home.goods.pay')->with(['data'=>$data])->with(['db'=>$db])->with(['ppid'=>$ppid]);
-    }
-    //返回订单信息id
-    public function Ajax(Request $request)
-    {
-        $attr = trim($request->a);
-        $color = trim($request->b);
-        $value = Skus::where('color',$color)->where("attr",$attr)->first();
-        return $value->id;
+        $data['goods_id'] = $gid;
+        $data['province'] = \DB::table('district')->where('id',$id)->first()->name;
+        $data['city'] = \DB::table('district')->where('id',$upid)->first()->name;
+        $data['district']= \DB::table('district')->where('id',$cid)->first()->name;
+        $data['user_id'] = session()->get("user")->id;
+        $data['order_status'] = 0;
+        $data['goods_num'] = $request->num;
+        $data['del_name'] = $request->del_name;
+        $data['phone'] = $request->phone;
+        $data['ctime'] = date("Y-m-d H:i:s",time());
+        $ppid = Orders::insertGetId($data);
+        $skus = Skus::where("id",$gid)->first();
+        $skus->num = $skus->num - 1;
+        $skus->save();
+        return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
     }
     //查询district内容
     public function find($upid=0)  
     {
         $address = \DB::table('district')->where('upid',$upid)->get();
-        // dd($address);
         return json_encode($address); 
     }
 

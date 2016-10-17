@@ -45,4 +45,9 @@ class Users extends Model
         }
         return null;//用户名 密码不存在都返回空
     }
+
+    public function hasManyUsers()
+    {
+        return $this->belongsTo("App\Models\Orders", "user_id", "id");
+    }
 }

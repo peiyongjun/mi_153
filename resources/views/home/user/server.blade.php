@@ -15,7 +15,7 @@
                     我的服务记录
                 </h1>
             </div> 
-            @if(!$services)
+            @if(!$services->count())
             <!-- 没有服务记录 -->
             <div class="box-bd">
                 <div id="J_orderList">
@@ -55,7 +55,7 @@
                                                         |
                                                     </span>
                                                     订单号：
-                                                    <a href="//order.mi.com/user/orderView/1161012895800959">
+                                                    <a href="#">
                                                         {{ $order[$v->id]->id }}  
                                                     </a>
                                                     <span class="sep">
@@ -82,7 +82,7 @@
                                                     <li>
                                                         <div class="figure figure-thumb">
                                                             <a href="{{ URL(('/detail/').($goods[$skus[$order[$v->id]->id]->id]->id)) }}" target="_blank">
-                                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80" height="80">
+                                                                <img src="{{ URL(('/Uploads/picture/').($goods[$skus[$order[$v->id]->id]->id]->img)) }}" width="80" height="80">
                                                             </a>
                                                         </div>
                                                         <p class="name">
