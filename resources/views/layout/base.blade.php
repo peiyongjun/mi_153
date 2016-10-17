@@ -25,15 +25,32 @@
 			<a rel="nofollow" href="//www.mi.com/index.html">小米商城</a><span class="sep">|</span><a rel="nofollow" href="http://www.miui.com/" target="_blank">MIUI</a><span class="sep">|</span><a rel="nofollow" href="http://www.miliao.com/" target="_blank">米聊</a><span class="sep">|</span><a rel="nofollow" href="http://game.xiaomi.com/" target="_blank">游戏</a><span class="sep">|</span><a rel="nofollow" href="http://www.duokan.com/" target="_blank">多看阅读</a><span class="sep">|</span><a rel="nofollow" href="https://i.mi.com/" target="_blank">云服务</a><span class="sep">|</span><a rel="nofollow" href="https://jr.mi.com?from=micom" target="_blank">金融</a><span class="sep">|</span><a rel="nofollow" href="//www.mi.com/c/appdownload/" target="_blank">小米网移动版</a><span class="sep">|</span><a rel="nofollow" href="//static.mi.com/feedback/" target="_blank">问题反馈</a><span class="sep">|</span><a rel="nofollow" href="#J_modal-globalSites" data-toggle="modal">Select Region</a>
 		</div>
 		<div class="topbar-cart" id="J_miniCartTrigger">
-			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/">
+			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
-			<div class="cart-menu" id="J_miniCartMenu">
-				<div class="loading">
-					<div class="loader">
-					</div>
+			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
+				<ul class="cart-list">
+				
+					<li>
+						<div class="cart-item clearfix first">
+							<a class="thumb" href="">
+							<img alt="" src=""></a>
+							<a class="name" href="">红米Pro 全网通版 3GB内存 灰色 32GB</a>
+							<span class="price">1499元 × 1</span>
+							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
+							<i class="iconfont"></i>
+							</a>
+						</div>
+					</li>
+
+				</ul>
+				<div class="cart-total clearfix">
+					<span class="total">共 <em>1</em> 件商品
+						<span class="price"><em>1499.00</em>元</span>
+					</span>
+					<a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a>
 				</div>
 			</div>
 		</div>
@@ -305,6 +322,13 @@
 		    var s = document.getElementsByTagName('script')[0];
 		    s.parentNode.insertBefore(ms, s);
 		})();
+	</script>
+	<script type="text/javascript">
+		$('#J_miniCartTrigger').mouseover(function (){
+			$('#J_miniCartMenu').attr('style','display:block');
+		}).mouseout(function (){
+			$('#J_miniCartMenu').attr('style','display:none');
+		})
 	</script>
 </body>
 </html>
