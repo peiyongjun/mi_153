@@ -89,7 +89,7 @@ class GoodsListController extends Controller
             $id = Goods::insert($data);//写入数据库
             return back()->with(["msg"=>"添加类别成功"]);
         }else{ //选择分类，添加商品
-            $data = $request->only("name","price","num","pid","goodsTitle");//获取信息
+            $data = $request->only("name","price","pid","goodsTitle");//获取信息
             $imgfile = $request->file('img');
             $detailfile = $request->file('detail');
             $specsfile = $request->file('specs');
