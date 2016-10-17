@@ -490,7 +490,7 @@ class UserController extends Controller
         $password = $request->newpwd;
         $conpwd = $request->conpwd;
         if($pwd != $user->password){
-            session()->flash("imsg","原密码不正确");
+            session("imsg","原密码不正确");
             // return session()->get('imsg');
             return back();
         }else{
