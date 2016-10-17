@@ -107,6 +107,7 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/buy/Pay',"home\UserController@Money");
     Route::get('/buy/Ajax',"home\UserController@Ajax");
     Route::get('/buy/district/{upid?}',"home\UserController@find");
+    Route::get('/buy/cart/{id}',"home\CartController@Addcart");
     // Route::get('/buy/order',"home\UserController@Del");
 });
 

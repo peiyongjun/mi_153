@@ -56,7 +56,7 @@
 			<div class="pro-choose-result hide" id="J_chooseResult">
 			</div>
 			<div class="pro-choose-result" id="J_chooseResultInit">
-				<a href="javascript:void(0);" class="btn btn-large btn-primary btn-dakeLight">加入购物车</a>
+				<a href="" class="btn btn-large btn-primary btn-dakeLight" id="cart">加入购物车</a>
 				<!-- 按钮变色在class加btn-primary -->
 				<a disabled href="" class="btn btn-large btn-dakeLight" id="next">下一步</a>
 				<!-- <span class="next-desc">请选择商品</span> -->
@@ -97,9 +97,8 @@
 			success:function(data)
 			{
 				var c = data;
-				$("#next").click(function(){
-					$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
-				});			
+				$("#next").attr('href',"/buy/checkout/"+c);//给href属性赋值
+				$("#cart").attr('href',"/buy/cart/"+c);//给href属性赋值			
 			},
 			error:function(data)
 			{
@@ -119,7 +118,6 @@
 			$("#next").attr('disabled',true);
 		}
 	}
-
 	
 </script>
 @endsection
