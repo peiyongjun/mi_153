@@ -15,7 +15,7 @@
                     我的服务记录
                 </h1>
             </div> 
-            @if(!$services)
+            @if(!$services->count())
             <!-- 没有服务记录 -->
             <div class="box-bd">
                 <div id="J_orderList">

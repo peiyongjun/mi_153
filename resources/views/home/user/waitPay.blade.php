@@ -92,8 +92,7 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
+                                    <a class="btn btn-small btn-primary"  href="javascript:doPay({{ $v->id }})">
                                         立即支付
                                     </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
@@ -110,4 +109,12 @@
     @endforeach
 </div>
 @endif
+<script type="text/javascript">
+    function doPay (id){
+        if (confirm('确认支付吗?')) {
+            window.location.href = "/validOrder/Status?id="+id;
+        } 
+    }
+</script>   
+
 @endsection
