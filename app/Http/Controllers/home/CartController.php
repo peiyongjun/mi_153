@@ -20,18 +20,34 @@ class CartController extends Controller
     {
         $skus = Skus::find($id);
         $goods = Goods::find($skus->goods_id);
-        if(!session()->get('cart') || !in_array(["skusId"=>$id,"cartAttr"=>$skus->attr,"cartColor"=>$skus->color,"cartPrice"=>$skus->price,"cartnum"=>'1'],session()->get('cart'))){
-            $cartGoods = ["skusId"=>$id,"cartAttr"=>$skus->attr,"cartColor"=>$skus->color,"cartPrice"=>$skus->price,"cartnum"=>1];
-            session()->push("cart",$cartGoods);
-        }else{
-            foreach(session()->get('cart') as $k=>$v){
-                if($v["skusId"] == $id){
-                    $cartGoods['cartnum'] = $v["cartnum"] + 1;
+        $cartGoods = ["skusId"=>$id,"cartImg"=>$goods->img,"cartName"=>$goods->name,"cartAttr"=>$skus->attr,"cartColor"=>$skus->color,"cartPrice"=>$skus->price,"cartnum"=>1];
+        // dd($cartGoods);
+        if($this->check($id)){
+            $good = session('cart');
+            foreach($good as $k => $v){
+                if($v['skusId'] == $id){
+                    $good[$k]['cartnum'] = $v['cartnum'] + 1;
                 }
             }
-            session(['cart'=>$cartGoods]);
+            session(['cart'=>$good]);
+        }else{
+            session()->push('cart',$cartGoods);
         }
         return back()->with(['skus'=>$skus])->with(['goods'=>$goods]);
+    }
+
+    public function check($id)
+    {
+        $good = session('cart');
+        if(empty($good)){
+            return false;
+        }
+        foreach($good as $k => $v){
+            if($v['skusId'] == $id){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

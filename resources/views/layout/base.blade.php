@@ -37,8 +37,8 @@
 					<li>
 						<div class="cart-item clearfix first">
 							<a class="thumb" href="">
-							<img alt="" src="\Upload\Picture\"></a>
-							<a class="name" href="">{{ $v['cartColor'] }}</a>
+							<img alt="" src="\Uploads\Picture\{{ $v['cartImg'] }}"></a>
+							<a class="name" href="">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
 							<span class="price">{{ $v['cartPrice'] }}元 × {{ $v['cartnum'] }}</span>
 							<a class="btn-del J_delItem" href="javascript: void(0);" gid="2162700009_0_buy" data-isbigtap="false">
 							<i class="iconfont"></i>
@@ -106,7 +106,7 @@
 				            	<!-- 单列信息 -->
 				                <ul class="children-list children-list-col children-list-col-1">
 				                	@foreach($data as $vv)
-									@if($vv->pid == $v->id && $vv->status != 0)	
+									@if($vv->pid == $v->id && $vv->status == 1)	
 				                    <li class="star-goods">
 				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
 				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
@@ -145,7 +145,7 @@
 						<div class="container">
 							<ul class="children-list clearfix">
 							@foreach($data as $vv)
-							@if($vv->pid == $v->id && $vv->status != 0)				
+							@if($vv->pid == $v->id && $vv->status == 1)				
 								<li class="first">
 									<div class="figure figure-thumb">
 										<a href="{{ URL(('/detail/').($vv->id)) }}">
