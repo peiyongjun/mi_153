@@ -73,8 +73,6 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get('/invalidC',"home\UserController@invalidC");
     //喜欢商品页面
     Route::get('/like', "home\UserController@like");
-    //收货地址页面
-    Route::get('/address', "home\UserController@address");
     //售后服务页面
     //服务记录
     Route::get('/server', "home\UserController@server");

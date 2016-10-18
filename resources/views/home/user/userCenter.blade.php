@@ -18,12 +18,8 @@
                     <div class="user-card">
                         <h2 class="username">{{ $user->username }}</h2>
                         <p class="tip">您好</p>
-                        <a class="link" href="{{ URL('/userSafe') }}" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-4b099f76f8f470d2', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);" target="blank">修改个人信息 &gt;</a>
-                        @if (!empty($user->photo))
-                          <img class="avatar" src="./home/Photo/{{ $user->photo }}" width="150" height="150">
-                        @else
-                          <img class="avatar" src="./home/Photo/default.jpg" width="150" height="150">
-                        @endif
+                        <a class="link" href="{{ URL('/Info') }}" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-4b099f76f8f470d2', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);" target="blank">修改个人信息 &gt;</a>
+                          <img class="avatar" src="/home/Photo/{{ $user->photo }}" width="150" height="150">
                        <!--  <img class="avatar" src="https://account.xiaomi.com/static/img/passport/photo.jpg" width="150" height="150" alt="1157822905"> -->
                     </div>
                     <div class="user-actions">

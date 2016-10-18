@@ -35,13 +35,13 @@
 </style>
 @endsection
 @section("showOrder")
-@if(!$order)
+@if(!$orders)
 <div class="box-bd">
 	<p class="empty">暂时没有符合条件的商品。</p>
 </div>
 @else
 <div class="box-bd">
-	@foreach ($order as $v)
+	@foreach ($orders as $v)
 	<div id="J_orderList">
 		<ul class="order-list">
 			<li class="uc-order-item uc-order-item-pay">
@@ -124,6 +124,7 @@
 	</div>
 	@endforeach
 </div>
+@endif
 <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -242,5 +243,4 @@ window.onload = function (){
 
 };
 </script>
-@endif
 @endsection
