@@ -49,8 +49,8 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="col-sm-12">
-					<button class="bn  bigger-120 blue" data-toggle="modal" data-target="#AddModal">
-					   <i class="icon-edit"></i><span style="font-size:13px">添加用户</span>
+							<button class="bn  bigger-120 blue" data-toggle="modal" data-target="#AddModal">
+						   		<i class="icon-edit"></i><span style="font-size:13px">添加新链接</span>
 							</button>
 						<div class="dataTables_filter" id="sample-table-2_filter">
 							<form action="" class="form-search">

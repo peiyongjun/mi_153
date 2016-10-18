@@ -46,7 +46,7 @@ class GoodsListController extends Controller
         $id = $request->id;
         // 执行下架操作
         $good = Goods::find($id);
-        if ($good->status == 1) {
+        if ($good->status != 0) {
             $good->status = '0';
         } else if($good->status == 0) {
             $good->status = '1';
