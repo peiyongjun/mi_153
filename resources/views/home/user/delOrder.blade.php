@@ -26,7 +26,11 @@
                 <div class="order-detail">
                     <div class="order-summary">
                         <div class="order-status">
+                            @if($v->order_status == 2)
+                            等待发货
+                            @elseif($v->order_status == 3)
                             等待收货
+                            @endif
                         </div>
                         <p class="order-desc J_deliverDesc">
                             21:30前支付，预计明天送达
@@ -76,8 +80,8 @@
                                         <li>
                                             <div class="figure figure-thumb">
                                                 <a href="{{ URL(('/detail/').($goods[$skus[$v->id]->id]->id)) }}" target="_blank">
-                                                    <img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80"
-                                                    height="80" alt="小米手机5s 标配全网通版 3GB内存 银色 64GB">
+                                                    <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80"
+                                                    height="80" alt="">
                                                 </a>
                                             </div>
                                             <p class="name">
@@ -92,6 +96,9 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
+                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
+                                        确认收货
+                                    </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
                                         订单详情
                                     </a>
@@ -106,4 +113,14 @@
     @endforeach
 </div>
 @endif
+<script>
+   function conDel(id){
+        nid = id;
+    }
+     $("#confirmDel").click(function(){
+        if(confirm("确认收货？")){
+            location.href = "/delivery/"+nid;
+        }
+    })
+</script>
 @endsection

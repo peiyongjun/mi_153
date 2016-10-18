@@ -97,8 +97,8 @@
 							<span class="label label-success arrowed-in arrowed-in-right">上架中</span>
 						@elseif($v->status == 0)
 							<span class="label label-danger arrowed">已下架</span>
-						@elseif($v->status == 9)
-							<span class="label label-info arrowed-right arrowed-in">无库存</span>
+						@elseif($v->status == 2)
+							<span class="label label-warning">明星单品</span>
 						@endif
 					</td>
 					<td id="num{{ $v->id }}">{{ $v->num }}</td>
@@ -125,6 +125,16 @@
 									<i class="icon-check bigger-130"></i>
 								</a>
 								&nbsp;&nbsp;
+							@endif
+							@if($v->status != 2)	
+								<a class="green" href="goods_list_all/star?id={{$v->id }}">
+									<i class="icon-bookmark bigger-130"></i>
+								</a>
+								&nbsp;&nbsp;
+							@elseif($v->status == 2)
+								<a class="red" href="goods_list_all/star?id={{$v->id }}">
+									<i class="icon-bookmark-empty bigger-130"></i>
+								</a>
 							@endif
 						</div>
 					</td>
@@ -177,11 +187,6 @@
 						<div>
 							<label for="form-field-9">单价</label>
 							<input class="form-control limited" id="form-field-9" name="price" placeholder="price">
-						</div>
-						<hr>
-						<div>
-							<label for="form-field-9">库存数量</label>
-							<input class="form-control limited" id="form-field-9" name="num" placeholder="stock">
 						</div>
 						<hr>
 						<div>
@@ -245,11 +250,6 @@
 						</div>
 						<hr>
 						<div>
-							<label for="form-field-9">库存数量</label>
-							<input class="form-control limited" id="UpdateNum" name="num">
-						</div>
-						<hr>
-						<div>
 							<label for="form-field-9">页面标题</label>
 							<input class="form-control limited" id="form-field-9" name="goodsTitle" placeholder="Title">
 						</div>
@@ -309,4 +309,4 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-@endsection
+@endsection 

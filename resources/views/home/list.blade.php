@@ -23,7 +23,7 @@
         <div class="box-bd J_box-bd">
             <ul class="clearfix">
                 @foreach($data as $vv)
-                @if($vv->pid == $v->id && $vv->status == 1)
+                @if($vv->pid == $v->id && $vv->status != 0)
                 <li>
                     <a href="{{ URL(('/detail/').($vv->id)) }}">
                         <img src='{!! asset('Uploads/picture/'."$vv->img") !!}' width="70" height="70" alt="小米5s">

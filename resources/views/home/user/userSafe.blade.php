@@ -8,7 +8,6 @@
         color:#FF6700;
     }
 </style>
-<script src = "/home/js/ajax.js"></script>
 <script type="text/javascript" src="/home/js/jquery.js"></script>
 <script type="text/javascript" src="/home/js/bootstrap-modal.js"></script>
 @endsection
@@ -98,29 +97,6 @@
         </a>
       </div>
       @endif
-    </li>
-    <li id="setMibao" class="click-row">
-      <div class="font-img-item clearfix">
-        <em class="fi-ico fi-ico-secret">
-        </em>
-        <p class="title-normal dis-inb">
-          密保问题
-        </p>
-        <p class="font-default color-active">
-          密保问题用于安全验证，建议立即设置
-        </p>
-        <span class="title-normal wap-desc color-active">
-          未设置
-        </span>
-        <i class="arrow_r">
-        </i>
-      </div>
-      <div class="ada-btn-area" id="btnSetMibao">
-        <a id="mibao_link" __href="https://sq.id.mi.com/setQuestion?userId=1157822905&amp;_locale=zh_CN"
-        class="n-btn">
-          设置
-        </a>
-      </div>
     </li>
   </ul>
 </div>

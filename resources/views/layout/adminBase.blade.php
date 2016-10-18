@@ -179,6 +179,12 @@
                                         所有商品
                                     </a>
                                 </li>
+                                <li id="skusList">
+                                    <a href="/admin/skus_list">
+                                        <i class="icon-double-angle-right"></i>
+                                        型号管理
+                                    </a>
+                                </li>
                                 <li id="goodsListOff">
                                     <a href="/admin/goods_list_off">
                                         <i class="icon-double-angle-right"></i>
@@ -214,7 +220,7 @@
                                 </li>
 							</ul>
 						</li>
-                       <li>
+                       <li id="serviceList">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-desktop"></i>
                                 <span class="menu-text"> 售后管理 </span>
@@ -222,14 +228,14 @@
                                 <b class="arrow icon-angle-down"></b>
                             </a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="elements.html">
+                                <li id="serviceList0">
+                                    <a href="/admin/untreatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         未处理售后
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="elements.html">
+                                <li id="serviceList1">
+                                    <a href="/admin/treatedServer">
                                         <i class="icon-double-angle-right"></i>
                                         已处理售后
                                     </a>

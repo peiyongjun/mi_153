@@ -10,6 +10,7 @@ class Users extends Model
 {
     //指定表名为users
     protected $table = "users";
+    public $timestamps = false;
 
     /**
      * 验证管理员登陆
@@ -43,5 +44,10 @@ class Users extends Model
             }
         }
         return null;//用户名 密码不存在都返回空
+    }
+
+    public function hasManyUsers()
+    {
+        return $this->belongsTo("App\Models\Orders", "user_id", "id");
     }
 }

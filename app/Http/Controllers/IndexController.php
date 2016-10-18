@@ -18,8 +18,10 @@ class IndexController extends Controller
     {
         $goods = new Goods();
         $list = $goods->getType();
-        $data = $goods->getAll();   
-        return view('home.index')->with(['list'=>$list])->with(["data"=>$data]);
+        $data = $goods->getAll();
+        $stars = $goods->where("status",2)->get();
+
+        return view('home.index')->with(['list'=>$list])->with(["data"=>$data])->with(['stars'=>$stars]);
     }
 
     /**

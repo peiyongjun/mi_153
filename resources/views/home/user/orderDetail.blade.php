@@ -16,8 +16,7 @@
                     订单详情
                     <small>
                         请谨防钓鱼链接或诈骗电话，
-                        <a href="http://bbs.xiaomi.cn/thread/index/tid/11508301" target="_blank"
-                        data-stat-id="b027715c015d6e08" onclick="_msq.push([&#39;trackEvent&#39;, &#39;f4b7f6b8926ce27a-b027715c015d6e08&#39;, &#39;http://bbs.xiaomi.cn/thread/index/tid/11508301&#39;, &#39;pcpid&#39;]);">
+                        <a href="http://bbs.xiaomi.cn/thread/index/tid/11508301" target="_blank">
                             了解更多&gt;
                         </a>
                     </small>
@@ -28,6 +27,7 @@
                         <span class="tag tag-subsidy">
                         </span>
                     </h2>
+                    @if($order->order_status == 0)
                     <div class="actions" id="cancel">
                         <a id="cancelOrder" class="btn btn-small btn-line-gray" title="取消订单">
                             取消订单
@@ -37,6 +37,7 @@
                             立即支付
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="box-bd" id="finish">
@@ -48,16 +49,14 @@
                                 等待付款
                                 @elseif ($order->order_status == 1)
                                 已关闭
-                                @elseif ($order->order_status == 2 || $order->order_status == 2)
+                                @elseif ($order->order_status == 2)
                                 等待收货
                                 @elseif ($order->order_status == 3)
                                 等待收货
                                 @elseif ($order->order_status == 4)
-                                退货中
+                                售后处理中
                                 @elseif ($order->order_status == 5)
-                                交易完成
-                                @elseif ($order->order_status == 6)
-                                退货完成
+                                已完成
                                 @elseif ($order->order_status == 7)
                                 待评价
                                 @endif
@@ -69,7 +68,7 @@
                                     <td class="col col-thumb">
                                         <div class="figure figure-thumb">
                                             <a target="_blank" href="{{ URL(('/detail/').($goods->id)) }}">
-                                                <img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80" height="80"
+                                                <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods->img !!}' width="80" height="80"
                                                 alt="">
                                             </a>
                                         </div>

@@ -76,8 +76,8 @@
                                         <li>
                                             <div class="figure figure-thumb">
                                                 <a href="{{ URL(('/detail/').($goods[$skus[$v->id]->id]->id)) }}" target="_blank">
-                                                    <img src="//i1.mifile.cn/a1/pms_1474955798.20758099!80x80.jpg" width="80"
-                                                    height="80" alt="小米手机5s 标配全网通版 3GB内存 银色 64GB">
+                                                    <img src='{!! asset('Uploads/picture')!!}{!! '/'.$goods[$skus[$v->id]->id]->img !!}' width="80"
+                                                    height="80">
                                                 </a>
                                             </div>
                                             <p class="name">
@@ -92,8 +92,7 @@
                                     </ul>
                                 </td>
                                 <td class="order-actions">
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
+                                    <a class="btn btn-small btn-primary"  href="javascript:doPay({{ $v->id }})">
                                         立即支付
                                     </a>
                                     <a class="btn btn-small btn-line-gray" href="{{ URL('/orderDetail/'.$v->id) }}">
@@ -110,4 +109,12 @@
     @endforeach
 </div>
 @endif
+<script type="text/javascript">
+    function doPay (id){
+        if (confirm('确认支付吗?')) {
+            window.location.href = "/validOrder/Status?id="+id;
+        } 
+    }
+</script>   
+
 @endsection

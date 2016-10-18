@@ -45,4 +45,57 @@
 			</div>
 		</div>
 	</div>
+	<!-- 明星单品 -->
+	<div class="home-star-goods xm-carousel-container" id="J_homeStar">
+		<div class="xm-plain-box">
+			<div class="box-hd">
+				<h2 class="title">
+					小米明星单品
+				</h2>
+				<div class="more"><!-- 
+					<div class="xm-controls xm-controls-line-small xm-carousel-controls">
+						<a class="control control-prev iconfont" href="javascript: void(0);">
+						</a>
+						<a class="control control-next iconfont control-disabled" href="javascript: void(0);">
+						</a>
+					</div> -->
+				</div>
+			</div>
+			<div class="box-bd">
+				<div class="xm-carousel-wrapper" style="height: 340px; overflow: hidden;">
+					<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList"
+					style="width: 2480px; margin-left: -1240px; transition: margin-left 0.5s ease;">
+						@foreach($stars as $star)
+						<li class="rainbow-item-1">
+							<a class="thumb" href="{{ URL(('/detail/').($star->id)) }}" target="_blank">
+								<img src='{!! asset('Uploads/picture/'."$star->img") !!}' alt="{{ $star->name }}" width="160" height="110">
+							</a>
+							<h3 class="title">
+								<a href="{{ URL(('/detail/').($star->id)) }}">{{ $star->name }}</a>
+							</h3>
+							<p class="desc">
+								明星单品，热卖中~！
+							</p>
+							<p class="price">{{ $star->price }}元</p>
+						</li>
+						@endforeach
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 明星单品 -->
+
+
+
+
+
+
+
+
+</div>
+
+
+
 @endsection

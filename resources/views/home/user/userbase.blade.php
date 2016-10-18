@@ -5,7 +5,8 @@
         display:none;
     }
 </style>
-<link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2016d26">
+<script type="text/javascript" src="/home/js/jquery.js"></script>
+<script type="text/javascript" src="/home/js/bootstrap-modal.js"></script>
 @yield("css")
 <link rel="stylesheet" type="text/css" href="//s01.mifile.cn/css/user/main.min.css?v=2016053001">
 <div style="background-color:#F5F5F5;height:30px">
@@ -38,8 +39,6 @@
                         <div class="box-bd">
                             <ul class="uc-nav-list">
                                 <li id='userCenter'><a href="/user">我的个人中心</a></li>
-                                <li  id='like'><a href="/like">喜欢的商品</a></li>
-                                <li id='address'><a href="/address">收货地址</a></li>
                             </ul>
                         </div>
                     </div>
@@ -60,8 +59,8 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="/userSafe" target="_blank">个人信息</a></li>
-                                <li><a href="https://account.xiaomi.com/pass/auth/security/home#service=setPassword" target="_blank">修改密码</a></li>
+                                <li><a href="/Info" target="_blank">个人信息</a></li>
+                                <li><a href="/userSafe" target="_blank">修改密码</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,7 +85,7 @@
 <!-- .modal-globalSites END -->
 
 
-<script type="text/javascript" async="" src="//c1.mifile.cn/f/i/15/stat//xmst.js"></script><script src="//s01.mifile.cn/js/base.min.js?v2016d30"></script>
+<!-- <script type="text/javascript" async="" src="//c1.mifile.cn/f/i/15/stat//xmst.js"></script><script src="//s01.mifile.cn/js/base.min.js?v2016d30"></script> -->
 <script>
 (function() {
     MI.namespace('GLOBAL_CONFIG');

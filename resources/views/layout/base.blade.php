@@ -25,17 +25,50 @@
 			<a rel="nofollow" href="//www.mi.com/index.html">小米商城</a><span class="sep">|</span><a rel="nofollow" href="http://www.miui.com/" target="_blank">MIUI</a><span class="sep">|</span><a rel="nofollow" href="http://www.miliao.com/" target="_blank">米聊</a><span class="sep">|</span><a rel="nofollow" href="http://game.xiaomi.com/" target="_blank">游戏</a><span class="sep">|</span><a rel="nofollow" href="http://www.duokan.com/" target="_blank">多看阅读</a><span class="sep">|</span><a rel="nofollow" href="https://i.mi.com/" target="_blank">云服务</a><span class="sep">|</span><a rel="nofollow" href="https://jr.mi.com?from=micom" target="_blank">金融</a><span class="sep">|</span><a rel="nofollow" href="//www.mi.com/c/appdownload/" target="_blank">小米网移动版</a><span class="sep">|</span><a rel="nofollow" href="//static.mi.com/feedback/" target="_blank">问题反馈</a><span class="sep">|</span><a rel="nofollow" href="#J_modal-globalSites" data-toggle="modal">Select Region</a>
 		</div>
 		<div class="topbar-cart" id="J_miniCartTrigger">
-			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/">
+			<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="//static.mi.com/cart/" >
 				<i class="iconfont">&#xe60c;</i>
 				购物车
+				@if(session('user') && session('cart'))
+				({{ session()->get('num') }})
+				@endif
 				<span class="cart-mini-num J_cartNum"></span>
 			</a>
-			<div class="cart-menu" id="J_miniCartMenu">
-				<div class="loading">
-					<div class="loader">
-					</div>
+			@if(session('user') && session('cart'))
+			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
+				<ul class="cart-list">
+					@foreach(session()->get('cart') as $v)
+					<li>
+						<div class="cart-item clearfix first" style="position:absolute">
+							<a class="thumb" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">
+							<img alt="" src="\Uploads\Picture\{{ $v['cartImg'] }}"></a>
+							<a class="name" href="{{ URL('/detail').'/'.$v['cartGoodsId'] }}">{{ $v['cartName'] }}　{{ $v['cartAttr'] }}{{ $v['cartColor'] }}</a>
+							<span class="price">{{ $v['cartPrice'] }}元 × {{ $v['cartnum'] }}</span>
+							<a href="{{ URL('/buy/checkout/'.$v['skusId']) }}" class="btn btn-small btn-primary" style="display:block;color:white;float:right;position:relative;top:3px;right:5px">去结算</a>
+							<a class="btn-del J_delItem" href="{{ URL('/clearCart/'.$v['skusId']) }}" gid="2162700009_0_buy" data-isbigtap="false">
+							<i class="iconfont"></i>
+							</a>
+						</div>
+					</li>
+					@endforeach
+				</ul>
+				<div class="cart-total clearfix">
+					<span class="total">共 <em>{{ session()->get('num') }}</em> 件商品
+						<span class="price"><em>{{ session()->get('total') }}</em>元</span>
+					</span>
+					<a class="btn btn-small btn-line-gray" href="{{ URL('/clearAll') }}">清空购物车</a>
 				</div>
 			</div>
+			@elseif(session('user'))
+			<div class="cart-menu" id="J_miniCartMenu" style="display: none;">
+				<ul class="cart-list">
+					<li>
+						<div class="cart-item clearfix first">
+							<p>当前没有购买任何商品</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			@endif
 		</div>
 		@if (session('user'))
 		<div class="topbar-info" id="J_userInfo">
@@ -43,10 +76,6 @@
 				<a rel="nofollow" class="user-name" href="/user" target="_blank" data-stat-id="fa66db4fed0eb581" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-fa66db4fed0eb581', '//my.mi.com/portal', 'pcpid']);">
 					<span class="name" id="username">{{ session('user')->username }}</span>
 				</a>
-			</span>
-			<span class="sep">|</span>
-			<span class="message">
-				<a rel="nofollow" href="/message" data-stat-id="7324b7edba019c56" target="_blank" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-7324b7edba019c56', '//order.mi.com/message/list', 'pcpid']);">消息通知<i class="J_miMessageTotal"></i></a>
 			</span>
 			<span class="sep">|</span>
 			<a rel="nofollow" class="link link-order" href="{{ URL('/validOrder') }}" target="_blank" data-stat-id="a9e9205e73f0742c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-a9e9205e73f0742c', '//static.mi.com/order/', 'pcpid']);">我的订单</a>
@@ -81,7 +110,7 @@
 				            	<!-- 单列信息 -->
 				                <ul class="children-list children-list-col children-list-col-1">
 				                	@foreach($data as $vv)
-									@if($vv->pid == $v->id && $vv->status == 1)	
+									@if($vv->pid == $v->id && $vv->status != 0)	
 				                    <li class="star-goods">
 				                        <a class="link" href="{{ URL(('/detail/').($vv->id)) }}">
 				                            <img class="thumb" src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="40" height="40">
@@ -120,7 +149,7 @@
 						<div class="container">
 							<ul class="children-list clearfix">
 							@foreach($data as $vv)
-							@if($vv->pid == $v->id && $vv->status == 1)				
+							@if($vv->pid == $v->id && $vv->status != 0)				
 								<li class="first">
 									<div class="figure figure-thumb">
 										<a href="{{ URL(('/detail/').($vv->id)) }}">
@@ -306,5 +335,11 @@
 		    s.parentNode.insertBefore(ms, s);
 		})();
 	</script>
-</body>
+	<script type="text/javascript">
+		$('#J_miniCartTrigger').mouseover(function (){
+			$('#J_miniCartMenu').attr('style','display:block');
+		}).mouseout(function (){
+			$('#J_miniCartMenu').attr('style','display:none');
+		})
+	</script>
 </html>

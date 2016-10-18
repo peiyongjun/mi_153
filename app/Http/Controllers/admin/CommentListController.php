@@ -72,6 +72,12 @@ class CommentListController extends Controller
     public function useful($id)
     {
     	$comment = Comments::find($id);
+        $good = Comments::find($id)->hasManyGoods()->first();
+        $goods_id = $good->id;
+        $count = Comments::where("goods_id",$goods_id)->where("useful",1)->get()->count();
+        if ($count >= 2) {
+            return back();
+        }
     	$comment->useful = 1;
     	$comment->save();
         return back();
