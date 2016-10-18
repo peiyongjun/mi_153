@@ -141,6 +141,10 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::resource("/goods_list_all","Admin\GoodsListController");
     Route::post("/goods_list_all/skus","Admin\GoodsListController@addSkus");//添加型号
     Route::get("/goods_list_off","Admin\GoodsListController@offIndex");
+    Route::get("/skus_list","Admin\GoodsListController@skusList");
+    Route::post("/skus_list","Admin\GoodsListController@updateSkus");
+    Route::get("/skus_list/toggle","Admin\GoodsListController@toggleSkus");
+
     //已取消的订单
 	Route::get('/order_list_cancel','Admin\OrderController@Offorder');
     //全部订单信息

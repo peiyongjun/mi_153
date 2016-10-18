@@ -576,7 +576,7 @@ class UserController extends Controller
     {   
         //添加订单收货地址
         $gid = $request->id;
-        $price = Skus::where("id",$gid)->first()->price*$request->num;
+        $price = (Skus::where("id",$gid)->first()->price)*($request->num);
         $list = $request->dis;
         $id = $list[0];
         $upid = $list[1];
