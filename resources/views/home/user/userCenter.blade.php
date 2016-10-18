@@ -59,7 +59,7 @@
                             <img src="//s01.mifile.cn/i/user/portal-icon-1.png" alt="">
                         </li>
                         <li>
-                            <h3>待收货的订单：<span class="num">{{ $orders->count() }}</span></h3>
+                            <h3>待收货的订单：<span class="num">{{ $order->count() }}</span></h3>
                             <a href="{{ URL('/delOrder') }}" data-stat-id="92fa860987c1c734" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-92fa860987c1c734', '//static.mi.com/order/', 'pcpid']);">查看待收货订单<i class="iconfont"></i></a>
                             <img src="//s01.mifile.cn/i/user/portal-icon-2.png" alt="">
                         </li>
