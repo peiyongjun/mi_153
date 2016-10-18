@@ -224,7 +224,7 @@
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-desktop"></i>
                                 <span class="menu-text"> 售后管理 </span>
-
+ 
                                 <b class="arrow icon-angle-down"></b>
                             </a>
                             <ul class="submenu">
@@ -248,7 +248,7 @@
                                 <span class="menu-text"> 评价管理 </span>
                             </a>
                         </li>
-                        <li id="link">
+                        <li id="linkList">
 							<a href="/admin/link">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text" id="link">友情链接</span>

@@ -22,11 +22,11 @@ class GoodsListController extends Controller
         if($request->has('name')){  //搜索条件查询
             //进行了搜索
             $name = $request->input('name');
-            $data = Goods::where("pid","!=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(6);
+            $data = Goods::where("pid","!=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(5);
             $search['name'] = $name; // 条件放进数组
         }else{
             //没有进行搜索
-            $data = Goods::where("pid","!=",0)->OrderBy("pid")->paginate(6);
+            $data = Goods::where("pid","!=",0)->OrderBy("pid")->paginate(5);
         }
         $types = Goods::where("pid","=",0)->get();
         $type = [];
@@ -165,11 +165,11 @@ class GoodsListController extends Controller
         if($request->has('name')){  //搜索条件查询
             //进行了搜索
             $name = $request->input('name');
-            $data = Goods::where("pid","!=",0)->where("status","=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(6);
+            $data = Goods::where("pid","!=",0)->where("status","=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(5);
             $search['name'] = $name; // 条件放进数组
         }else{
             //没有进行搜索
-            $data = Goods::where("pid","!=",0)->where("status","=",0)->OrderBy("pid")->paginate(6);
+            $data = Goods::where("pid","!=",0)->where("status","=",0)->OrderBy("pid")->paginate(5);
         }
         $types = Goods::where("pid","=",0)->get();
         $type = [];
@@ -200,7 +200,7 @@ class GoodsListController extends Controller
     public function skusList (Request $request)
     {
         $skus = new Skus();
-        $skus = $skus->paginate(8);
+        $skus = $skus->paginate(10);
         $goods = [];
         foreach ($skus as $sku) {
             $goods[$sku->id] = $skus->find($sku->id)->hasSkus()->first();

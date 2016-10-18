@@ -34,7 +34,6 @@ class CommentListController extends Controller
     	foreach($comments as $comment){
     		$goods[$comment->id] = Comments::find($comment->id)->hasManyGoods()->first();
     	}
-    	// dd($goods);
         return view('admin.comments_list')->with(['comments'=>$comments])->with(['users'=>$users])->with(['skus'=>$skus])->with(['goods'=>$goods]);
     }
 

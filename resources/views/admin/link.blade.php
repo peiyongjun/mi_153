@@ -34,9 +34,7 @@
 </script>
 <script type="text/javascript">
 	//侧边导航选中
-	$("#serviceList").addClass("open");
-	$("#serviceList").addClass("active");
-	$("#serviceList1").addClass("active");
+	$("#linkList").addClass("active");
 </script>
 <div class="col-xs-12">
 	<form action="" name="myform" method="post">
