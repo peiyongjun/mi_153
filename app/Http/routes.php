@@ -18,7 +18,6 @@
 //主页
 Route::get('/','IndexController@index');
 Route::get('/list','IndexController@goodslist');
-
 //商品详情页
 Route::get('/detail/{id}','DetailController@index');
 Route::get('/specs/{id}','DetailController@specs');
@@ -160,6 +159,10 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get('/treatedServer','Admin\ServiceController@treatedServer');
 
     Route::get('/alreadyS/{id}','Admin\ServiceController@alreadyS');
+    //友情链接管理
+    Route::resource('/link','Admin\LinkController');
+    // Route::post('/link','Admin\LinkController@index');
+    // Route::get('/delete','Admin\LinkController@destory');
 });
     
 /////////////////////////////////////////////////////////////////////////////////
