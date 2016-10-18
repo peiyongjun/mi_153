@@ -28,14 +28,13 @@
                     </div>
                     <div class="user-actions">
                         <ul class="action-list">
-                            <li>账户安全：<span class="level level-2">
-                                @if ($user->phone && $user->email)
-                                较高
-                                @elseif ($user->phone || $user->email)
-                                普通
-                                @else
-                                较低
-                                @endif
+                            @if ($user->phone && $user->email)
+                            <li>账户安全：<span class="level level-3">较高</li>
+                            @elseif ($user->phone || $user->email)
+                            <li>账户安全：<span class="level level-2">普通</li>
+                            @else
+                            <li>账户安全：<span class="level level-1">较低</li>
+                            @endif
                             </span></li>
                             @if($user->phone)
                             <li>绑定手机：<span class="tel"><?php  $a = $user->phone;for($i=3;$i<9;$i++){$a[$i]='*';};echo $a; ?></span></li> 
