@@ -187,6 +187,7 @@
 	<div class="site-footer">
 		<div class="container">
 			<div class="footer-service">
+			
 				<ul class="list-service clearfix">
 					<li><a rel="nofollow" href="//www.mi.com/static/fast/" target="_blank"><i class="iconfont">&#xe634;</i>预约维修服务</a></li>
 					<li><a rel="nofollow" href="//www.mi.com/service/exchange#back" target="_blank"><i class="iconfont">&#xe635;</i>7天无理由退货</a></li>
