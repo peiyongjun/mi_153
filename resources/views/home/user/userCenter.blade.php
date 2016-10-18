@@ -18,24 +18,19 @@
                     <div class="user-card">
                         <h2 class="username">{{ $user->username }}</h2>
                         <p class="tip">您好</p>
-                        <a class="link" href="{{ URL('/userSafe') }}" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-4b099f76f8f470d2', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);" target="blank">修改个人信息 &gt;</a>
-                        @if (!empty($user->photo))
-                          <img class="avatar" src="./home/Photo/{{ $user->photo }}" width="150" height="150">
-                        @else
-                          <img class="avatar" src="./home/Photo/default.jpg" width="150" height="150">
-                        @endif
+                        <a class="link" href="{{ URL('/Info') }}" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-4b099f76f8f470d2', 'https://account.xiaomi.com/pass/userInfo', 'pcpid']);" target="blank">修改个人信息 &gt;</a>
+                          <img class="avatar" src="/home/Photo/{{ $user->photo }}" width="150" height="150">
                        <!--  <img class="avatar" src="https://account.xiaomi.com/static/img/passport/photo.jpg" width="150" height="150" alt="1157822905"> -->
                     </div>
                     <div class="user-actions">
                         <ul class="action-list">
-                            <li>账户安全：<span class="level level-2">
-                                @if ($user->phone && $user->email)
-                                较高
-                                @elseif ($user->phone || $user->email)
-                                普通
-                                @else
-                                较低
-                                @endif
+                            @if ($user->phone && $user->email)
+                            <li>账户安全：<span class="level level-3">较高</li>
+                            @elseif ($user->phone || $user->email)
+                            <li>账户安全：<span class="level level-2">普通</li>
+                            @else
+                            <li>账户安全：<span class="level level-1">较低</li>
+                            @endif
                             </span></li>
                             @if($user->phone)
                             <li>绑定手机：<span class="tel"><?php  $a = $user->phone;for($i=3;$i<9;$i++){$a[$i]='*';};echo $a; ?></span></li> 

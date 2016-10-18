@@ -6,10 +6,8 @@
         color:#FF6700;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css">
+<!-- <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css"> -->
 <link rel="stylesheet" href="http://s01.mifile.cn/css/base.min.css?20160301">
-<link rel="stylesheet" href="http://s01.mifile.cn/css/user/main.min.css?20160301">
-<link rel="stylesheet" type="text/css" href="/service/css/main.min.css?20160420">
 <script src = "/home/js/ajax.js"></script>
 <script type="text/javascript" src="/home/js/jquery.js"></script>
 <script type="text/javascript" src="/home/js/bootstrap-modal.js"></script>

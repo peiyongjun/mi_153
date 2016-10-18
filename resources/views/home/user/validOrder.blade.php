@@ -113,13 +113,8 @@
                                 </td>
                                 <td class="order-actions">
                                     @if ($v->order_status == 0)
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
+                                    <a class="btn btn-small btn-primary" href="javascript:doPay({{ $v->id }})" target="_blank">
                                         立即支付
-                                    </a>
-                                    @elseif ($v->order_status == 2)
-                                    <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
-                                        确认收货
                                     </a>
                                     @elseif ($v->order_status == 3)
                                     <a class="btn btn-small btn-primary" id="confirmDel" onclick="conDel({{ $v->id }})">
@@ -214,12 +209,14 @@
 @endif
 <script>
     function conDel(id){
-        nid = id;
-    }
-     $("#confirmDel").click(function(){
         if(confirm("确认收货？")){
-            location.href = "/delivery/"+nid;
+            location.href = "/delivery/"+id;
         }
-    })
+    }
+    function doPay (id){
+        if (confirm('确认支付吗?')) {
+            window.location.href = "/validOrder/Status?id="+id;
+        } 
+    }
 </script>
 @endsection

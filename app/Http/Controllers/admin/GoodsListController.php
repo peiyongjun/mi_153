@@ -89,7 +89,7 @@ class GoodsListController extends Controller
             $id = Goods::insert($data);//写入数据库
             return back()->with(["msg"=>"添加类别成功"]);
         }else{ //选择分类，添加商品
-            $data = $request->only("name","price","num","pid","goodsTitle");//获取信息
+            $data = $request->only("name","price","pid","goodsTitle");//获取信息
             $imgfile = $request->file('img');
             $detailfile = $request->file('detail');
             $specsfile = $request->file('specs');
@@ -189,6 +189,48 @@ class GoodsListController extends Controller
         $skus = new Skus();
         $data = $request->only("attr","color","goods_id","price","num");
         $skus->insert($data);
+        return back();
+    }
+
+    /**
+     * 型号和颜色
+     *
+     * @return 返回上一视图
+     */
+    public function skusList (Request $request)
+    {
+        $skus = new Skus();
+        $skus = $skus->paginate(8);
+        $goods = [];
+        foreach ($skus as $sku) {
+            $goods[$sku->id] = $skus->find($sku->id)->hasSkus()->first();
+        }
+        return view('admin.skus_list')->with(['skus'=>$skus])->with(['goods'=>$goods]);
+    }
+
+
+    public function updateSkus (Request $request)
+    {
+        $id = $request->id;
+        $sku = Skus::find($id);
+        $sku->price = $request->price;
+        $sku->num = $request->num;
+        $sku->save();
+        return back();
+    }
+
+
+    public function toggleSkus (Request $request)
+    {
+        $id = $request->id;
+        // 执行下架操作
+        $sku = Skus::find($id);
+        if ($sku->status == 1) {
+            $sku->status = '0';
+        } else {
+            $sku->status = '1';
+        }
+        $sku->save();
         return back();
     }
 }

@@ -190,11 +190,6 @@
 						</div>
 						<hr>
 						<div>
-							<label for="form-field-9">库存数量</label>
-							<input class="form-control limited" id="form-field-9" name="num" placeholder="stock">
-						</div>
-						<hr>
-						<div>
 							<label for="form-field-9">页面标题</label>
 							<input class="form-control limited" id="form-field-9" name="goodsTitle" placeholder="Title">
 						</div>
@@ -252,11 +247,6 @@
 						<div>
 							<label for="form-field-9">单价</label>
 							<input class="form-control limited" id="updatePrice" name="price">
-						</div>
-						<hr>
-						<div>
-							<label for="form-field-9">库存数量</label>
-							<input class="form-control limited" id="UpdateNum" name="num">
 						</div>
 						<hr>
 						<div>

@@ -91,7 +91,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->where('order_status','2')->orWhere('order_status','3')->get();
+        $orders = Orders::where("user_id",$userId)->whereIn('order_status',[2,3])->get();
         // dd($orders);
         $skus = [];
         $good = [];
@@ -197,7 +197,7 @@ class UserController extends Controller
         foreach($skus as $sku){
             $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
         }
-        return view('home.user.orderComment')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+        return view('home.user.orderComment')->with(['list'=>$list])->with(["data"=>$data])->with(['orders'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
     }
 
     /**
@@ -297,7 +297,7 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        $services = Service::all();
+        $services = Service::where('user_id',session('user')->id)->get();
         $orders = [];
         $skus = [];
         $good = [];
@@ -353,6 +353,7 @@ class UserController extends Controller
         $service->username = $name;
         $service->order_id = $orders_id;
         $service->description = $description;
+        $service->user_id = session('user')->id;
         $service->save();
         $order = Orders::find($order_id);
         $order->order_status = 4;
@@ -375,6 +376,7 @@ class UserController extends Controller
         $service->username = $user->username;
         $service->order_id = $request->order_id;
         $service->description = $request->content;
+        $service->user_id = session('user')->id;
         $service->save();
         $order = Orders::find($order_id);
         $order->order_status = 4;
@@ -392,9 +394,9 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        $orderId = $id;
-        $service = Service::where("order_id",$orderId)->first();
-        $orders = Orders::where("id",$orderId)->first();
+        $Id = $id;
+        $service = Service::where("id",$Id)->first();
+        $orders = Orders::where("id",$service->order_id)->first();
         $skus = Skus::where("id",$orders->goods_id)->first();
         $good = Goods::where("id",$skus->goods_id)->first();   
         return view("home.user.serverDetail")->with(['list'=>$list])->with(["data"=>$data])->with(["order"=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['service'=>$service]);
@@ -574,7 +576,7 @@ class UserController extends Controller
     {   
         //添加订单收货地址
         $gid = $request->id;
-        $price = Skus::where("id",$gid)->first()->price*$request->num;
+        $price = (Skus::where("id",$gid)->first()->price)*($request->num);
         $list = $request->dis;
         $id = $list[0];
         $upid = $list[1];

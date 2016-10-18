@@ -83,7 +83,7 @@ class DetailController extends Controller
     {
         $attr = trim($request->attr);
         $gid = trim($request->gid);
-        $sku = Skus::where('attr',$attr)->where("goods_id",$gid)->get();
+        $sku = Skus::where('status',1)->where('attr',$attr)->where("goods_id",$gid)->get();
         return $sku;
     }
 }

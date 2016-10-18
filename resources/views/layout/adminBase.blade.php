@@ -179,6 +179,12 @@
                                         所有商品
                                     </a>
                                 </li>
+                                <li id="skusList">
+                                    <a href="/admin/skus_list">
+                                        <i class="icon-double-angle-right"></i>
+                                        型号管理
+                                    </a>
+                                </li>
                                 <li id="goodsListOff">
                                     <a href="/admin/goods_list_off">
                                         <i class="icon-double-angle-right"></i>
