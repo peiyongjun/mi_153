@@ -113,8 +113,7 @@
                                 </td>
                                 <td class="order-actions">
                                     @if ($v->order_status == 0)
-                                    <a class="btn btn-small btn-primary" href="//order.mi.com/buy/confirm.php?id=1161012895800959"
-                                    target="_blank">
+                                    <a class="btn btn-small btn-primary" href="javascript:doPay({{ $v->id }})" target="_blank">
                                         立即支付
                                     </a>
                                     @elseif ($v->order_status == 3)
@@ -213,6 +212,11 @@
         if(confirm("确认收货？")){
             location.href = "/delivery/"+id;
         }
+    }
+    function doPay (id){
+        if (confirm('确认支付吗?')) {
+            window.location.href = "/validOrder/Status?id="+id;
+        } 
     }
 </script>
 @endsection

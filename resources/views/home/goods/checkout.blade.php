@@ -43,7 +43,7 @@
                         <input type="text" name="del_name" style="width:120px;" placeholder="姓名">
                         <input type="text" name="phone" style="width:120px;" placeholder="电话">
                         <input type="hidden" name="id" value="{{ $id }}">
-                        <input type="hidden" name="num" value="">
+                        <input type="hidden" name="num" value="1">
                     </form>
             <div class="section section-options section-payment clearfix">
             </div>
@@ -94,7 +94,7 @@
                                 数量                  
                             </div>
                             <div class="col col-status">
-                                <input type="text" style="width:30px;text-align: center;" id="num" value="1">&nbsp;件
+                                <input type="text" style="width:30px;text-align: center;" id="num" name="num" value="1">&nbsp;件
                             </div>
                             <div class="col col-total">
                                 
