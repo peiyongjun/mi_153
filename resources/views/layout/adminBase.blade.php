@@ -248,6 +248,12 @@
                                 <span class="menu-text"> 评价管理 </span>
                             </a>
                         </li>
+                        <li id="link">
+							<a href="/admin/link">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text" id="link">友情链接</span>
+							</a>
+						</li>
 					</ul><!-- /.nav-list -->
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>

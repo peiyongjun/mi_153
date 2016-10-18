@@ -86,7 +86,6 @@
             },
             error:function()
             {
-                alert(222);
             },     
 		});	
 	}
@@ -115,7 +114,9 @@
 			},
 			error:function(data)
 			{
-				alert(data);
+				alert("库存不足");
+				$("#next").removeClass("btn-primary");
+				$("#next").attr('disabled',true);
 			}
 		});
 

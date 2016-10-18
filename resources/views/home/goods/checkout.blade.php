@@ -298,7 +298,7 @@
         $("input[name='num']").val($("#num").val());
         $("#showTotal").html($("#num").val()*{{ $db->price }}+'元')
         $("#showNum").html($("#num").val()+'件');
-        $("#showTotalPrice").html($("#num").val()*{{ $db->price }}+'元')
+        $("#showTotalPrice").html($("#num").val()*{{ $db->price }})
     })      
   </script>
   <script>

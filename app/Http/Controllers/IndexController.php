@@ -20,8 +20,8 @@ class IndexController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $stars = $goods->where("status",2)->get();
-
-        return view('home.index')->with(['list'=>$list])->with(["data"=>$data])->with(['stars'=>$stars]);
+        $link = \DB::table('links')->get();
+        return view('home.index')->with(['list'=>$list])->with(["data"=>$data])->with(['stars'=>$stars])->with(['link'=>$link]);
     }
 
     /**
@@ -39,4 +39,5 @@ class IndexController extends Controller
         }
         return view('home.list')->with(['list'=>$list])->with(["data"=>$data]);
     }
+  
 }

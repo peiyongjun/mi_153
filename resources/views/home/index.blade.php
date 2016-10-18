@@ -1,5 +1,21 @@
 ﻿@extends('layout.base')
 @section('content')
+<style>
+		#div1{
+	    width:150px;
+	    height:200px;
+	    background-image:url('./home/Images/1.jpg');
+	    position:absolute;
+	    left:-150px;}
+		b{
+	    width:20px;
+	    height:100px;
+	    line-height:23px;
+	    background:#D9B300;
+	    position:absolute;
+	    right:-20px;
+	    top:5px;}
+</style>
 <link rel="stylesheet" href="/home/css/index.min.css"/>
 <div class="home-hero-container container">
 	<div class="home-hero">
@@ -95,7 +111,47 @@
 
 
 </div>
+			<!-- 友情链接 -->
+			<div id="div1">
+			<b><a href="">友情链接</a></b>
+			<center>
+			@foreach($link as $kv)
+			<a href="{{ $kv->linkAdress }}">{{ $kv->name }}</a><br><br>
+			@endforeach
+			</center>
+			</div>
+			<!-- 友情链接 -->
 
+<script type="text/javascript">
+	window.onload=function(){
+    var odiv=document.getElementById('div1');
+   odiv.onmouseover=function ()
+   {
+     //第一个参数为div,left属性的目标值,第二个为 每次移动多少像素
+     startmove(0,10);
+       }
+  odiv.onmouseout=function ()
+  {
+     startmove(-150,-10);
+      }
+    }
 
+    var timer=null;
+function startmove(target,speed)
+{
+    var odiv=document.getElementById('div1');
+clearInterval(timer);
+     timer=setInterval(function (){
 
+        if(odiv.offsetLeft==target)
+        {
+            clearInterval(timer);
+            }
+            else
+            {    
+        odiv.style.left=odiv.offsetLeft+speed+'px';
+            }
+        },30)
+    }
+	</script>
 @endsection
