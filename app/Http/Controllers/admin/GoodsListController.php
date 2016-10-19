@@ -22,11 +22,11 @@ class GoodsListController extends Controller
         if($request->has('name')){  //搜索条件查询
             //进行了搜索
             $name = $request->input('name');
-            $data = Goods::where("pid","!=",0)->where("name","like","%{$name}%")->OrderBy("pid")->paginate(5);
+            $data = Goods::where("pid","!=",0)->where("name","like","%{$name}%")->orderBy("id",'desc')->paginate(5);
             $search['name'] = $name; // 条件放进数组
         }else{
             //没有进行搜索
-            $data = Goods::where("pid","!=",0)->OrderBy("pid")->paginate(5);
+            $data = Goods::where("pid","!=",0)->orderBy("id",'desc')->paginate(5);
         }
         $types = Goods::where("pid","=",0)->get();
         $type = [];

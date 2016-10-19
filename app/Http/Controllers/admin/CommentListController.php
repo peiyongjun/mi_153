@@ -21,10 +21,11 @@ class CommentListController extends Controller
      */
     public function index ()
     {
-    	$comments = Comments::paginate(5);
+    	$comments = Comments::orderBy("id",'desc')->paginate(5);
     	// dd($comments);
     	$users = [];
     	$skus = [];
+        $goods = [];
     	foreach($comments as $comment){
     		$users[$comment->id] = Comments::find($comment->id)->hasManyUsers()->first();
     	}

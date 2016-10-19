@@ -27,7 +27,7 @@ class CommentController extends Controller
         $score = 0;
         $per = 0;
         $users = [];
-        $comments = Comments::where("goods_id","=",$id)->where("status",1)->get();
+        $comments = Comments::where("goods_id","=",$id)->where("status",1)->orderBy("id",'desc')->get();
         foreach ($comments as $comment) {
             $users[$comment->id] = Comments::find($comment->id)->hasManyUsers()->first();
             $score += $comment->star;

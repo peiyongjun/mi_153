@@ -44,7 +44,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->where('order_status','!=',1)->get();
+        $orders = Orders::where("user_id",$userId)->where('order_status','!=',1)->orderBy("id",'desc')->get();
         $skus = [];
         $good = [];
         foreach($orders as $order){
@@ -68,7 +68,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->where('order_status','==',0)->get();
+        $orders = Orders::where("user_id",$userId)->where('order_status','==',0)->orderBy("id",'desc')->get();
         $skus = [];
         $good = [];
         foreach($orders as $order){
@@ -91,7 +91,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->whereIn('order_status',[2,3])->get();
+        $orders = Orders::where("user_id",$userId)->whereIn('order_status',[2,3])->orderBy("id",'desc')->get();
         // dd($orders);
         $skus = [];
         $good = [];
@@ -127,7 +127,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->where('order_status','1')->get();
+        $orders = Orders::where("user_id",$userId)->where('order_status','1')->orderBy("id",'desc')->get();
         // dd($orders);
         $skus = [];
         $good = [];
@@ -188,7 +188,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $orders = Orders::where("user_id",$userId)->where('order_status','7')->get();
+        $orders = Orders::where("user_id",$userId)->where('order_status','7')->orderBy("id",'desc')->get();
         $skus = [];
         $good = [];
         foreach($orders as $order){
@@ -211,7 +211,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $comments = Comments::where("user_id",$userId)->where("status",1)->get();
+        $comments = Comments::where("user_id",$userId)->where("status",1)->orderBy("id",'desc')->get();
         // dd($comments);
         $orders = [];//存放评价
         foreach ($comments as $comment) {
@@ -242,7 +242,7 @@ class UserController extends Controller
         $list = $goods->getType();
         $data = $goods->getAll();
         $userId = session('user')->id;
-        $comments = Comments::where("user_id",$userId)->where("status",0)->get();
+        $comments = Comments::where("user_id",$userId)->where("status",0)->orderBy("id",'desc')->get();
         // dd($comments);
         $orders = [];//存放评价
         foreach ($comments as $comment) {
@@ -297,7 +297,7 @@ class UserController extends Controller
         $goods = new Goods();
         $list = $goods->getType();
         $data = $goods->getAll();
-        $services = Service::where('user_id',session('user')->id)->get();
+        $services = Service::where('user_id',session('user')->id)->orderBy("id",'desc')->get();
         $orders = [];
         $skus = [];
         $good = [];
@@ -597,7 +597,7 @@ class UserController extends Controller
         $data['ctime'] = date("Y-m-d H:i:s",time());
         $ppid = Orders::insertGetId($data);
         $skus = Skus::where("id",$gid)->first();
-        $skus->num = $skus->num - 1;
+        $skus->num = $skus->num - $request->num;
         $skus->save();
         return view('home.goods.pay')->with(['data'=>$data])->with(['price'=>$price])->with(['ppid'=>$ppid]);
     }
