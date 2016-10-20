@@ -149,21 +149,21 @@
 						<div class="container">
 							<ul class="children-list clearfix">
 							@foreach($data as $vv)
-							@if($vv->pid == $v->id && $vv->status != 0)				
-								<li class="first">
-									<div class="figure figure-thumb">
-										<a href="{{ URL(('/detail/').($vv->id)) }}">
-											<img src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="160" height="110"/>
-										</a>
-									</div>
-									<div class="title">
-										<a href="{{ URL(('/detail/').($vv->id)) }}">{{ $vv->name }}</a>
-									</div>
-									<p class="price">
-										 {{ $vv->price }}元起
-									</p>
-								</li>
-							@endif
+								@if($vv->pid == $v->id && $vv->status != 0)				
+									<li class="first">
+										<div class="figure figure-thumb">
+											<a href="{{ URL(('/detail/').($vv->id)) }}">
+												<img src='{!! asset('Uploads/picture/'."$vv->img") !!}' alt="{{ $vv->name }}" width="160" height="110"/>
+											</a>
+										</div>
+										<div class="title">
+											<a href="{{ URL(('/detail/').($vv->id)) }}">{{ $vv->name }}</a>
+										</div>
+										<p class="price">
+											{{ $vv->price }}元起
+										</p>
+									</li>
+								@endif
 							@endforeach
 							</ul>
 						</div>

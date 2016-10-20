@@ -25,7 +25,7 @@ Route::get('/comments/{id}','home\CommentController@showInGoods');
 
 //注册页面
 Route::get('/register',"home\RegisterController@view");
-
+Route::get('/checkUsername',"home\RegisterController@checkUsername");
 Route::get('/captcha/{tmp}',"home\RegisterController@captche");
 
 Route::group(['middleware'=>'register'],function(){
@@ -34,9 +34,7 @@ Route::group(['middleware'=>'register'],function(){
 
 //登录页面
 Route::get('/login',"home\LoginController@index");
-
 Route::post('/login',"home\LoginController@doLogin");
-
 Route::get('/userlogout',"home\LoginController@logOut");
 
 //个人中心页面

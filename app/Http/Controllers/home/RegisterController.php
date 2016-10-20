@@ -39,4 +39,16 @@ class RegisterController extends Controller
         return response($builder->output())->header('Content-Type','image/jpeg');
     }
 
+    /**
+     * Ajax检测用户名
+     */
+    public function checkUsername (Request $request)
+    {
+        $username = Users::where("username",$request->username)->first();
+        if ($username) {
+            return '2';
+        } else {
+            return '1';
+        }
+    }
 }
