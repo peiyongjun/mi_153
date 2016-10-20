@@ -45,49 +45,11 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::get("/buy","DetailController@buyNow");
     //个人中心页面
     Route::get('/user', "home\UserController@index");
-    //订单页面
-    //全部有效订单
-    Route::get('/validOrder', "home\UserController@myOrder");
-    Route::get('/validOrder/Status',"home\UserController@touch");
-    //待支付订单
-    Route::get('/waitPay',"home\UserController@waitPay");
-    //待收货订单
-    Route::get('/delOrder',"home\UserController@delOrder");
-    //已取消订单
-    Route::get('/down',"home\UserController@down");
-    //订单详情页
-    Route::get('/orderDetail/{id}',"home\UserController@orderDetail");
-    //执行取消订单
-    Route::get('/cancelOrder/{id}',"home\UserController@cancelOrder");
-    //确认收货
-    Route::get('/delivery/{id}',"home\UserController@delivery");
-    //评价晒单
-    //待评价
-    Route::get('/orderComment', "home\UserController@showOrder");
-    //添加评价
-    Route::post('/addComment', "home\CommentController@addComment");
-    //已评价
-    Route::get('/alreadyC',"home\UserController@alreadyC");
-    //评价无效
-    Route::get('/invalidC',"home\UserController@invalidC");
-    //喜欢商品页面
-    Route::get('/like', "home\UserController@like");
-    //售后服务页面
-    //服务记录
-    Route::get('/server', "home\UserController@server");
-    //申请服务
-    Route::get('/service', "home\UserController@service");
-    //提交申请表
-    Route::post('/service', "home\UserController@addService");
-    //快速申请
-    Route::post('/fastApply', "home\UserController@fastApply");
-    //售后详情页
-    Route::get('/serverDetail/{id}',"home\UserController@serverDetail");
     //账户安全页面
     Route::get('/userSafe',"home\UserController@userSafe");
     //个人信息修改
     Route::get('/Info',"home\UserController@Info");
-
+    //个人信息修改
     Route::post('/Info',"home\UserController@addInfo");
     //上传头像
     Route::post('/doUpload',"home\UserController@doUpload");
@@ -99,11 +61,55 @@ Route::group(['middleware'=>'homelogin'],function(){
     Route::post('/phone',"home\UserController@phone");
     //修改手机号
     Route::post('/updatePhone',"home\UserController@updatePhone");
+
+    //订单页面
+    //全部有效订单
+    Route::get('/validOrder', "home\OrderController@validOrder");
+    Route::get('/validOrder/Status',"home\OrderController@doPay");
+    //待支付订单
+    Route::get('/waitPay',"home\OrderController@waitPay");
+    //待收货订单
+    Route::get('/delOrder',"home\OrderController@delOrder");
+    //已取消订单
+    Route::get('/down',"home\OrderController@down");
+    //订单详情页
+    Route::get('/orderDetail/{id}',"home\OrderController@orderDetail");
+    //执行取消订单
+    Route::get('/cancelOrder/{id}',"home\OrderController@cancelOrder");
+    //确认收货
+    Route::get('/delivery/{id}',"home\OrderController@delivery");
+
+
+    //评价晒单
+    //待评价
+    Route::get('/orderComment', "home\CommentController@showOrder");
+    //添加评价
+    Route::post('/addComment', "home\CommentController@addComment");
+    //已评价
+    Route::get('/alreadyC',"home\CommentController@alreadyC");
+    //评价无效
+    Route::get('/invalidC',"home\CommentController@invalidC");
+    //喜欢商品页面
+    Route::get('/like', "home\UserController@like");
+
+
+    //售后服务页面
+    //服务记录
+    Route::get('/server', "home\ServiceController@index");
+    //申请服务
+    Route::get('/service', "home\ServiceController@service");
+    //提交申请表
+    Route::post('/service', "home\ServiceController@addService");
+    //快速申请
+    Route::post('/fastApply', "home\ServiceController@fastApply");
+    //售后详情页
+    Route::get('/serverDetail/{id}',"home\ServiceController@serverDetail");
+
     //选择完成后跳转至生成订单界面
-    Route::get('/buy/checkout/{id}',"home\UserController@Checkout");
-    Route::post('/buy/Pay',"home\UserController@Money");
+    Route::get('/buy/checkout/{id}',"home\OrderController@Checkout");
+    Route::post('/buy/Pay',"home\OrderController@Money");
     Route::get('/getSkusId',"DetailController@getSkusId");
-    Route::get('/buy/district/{upid?}',"home\UserController@find");
+    Route::get('/buy/district/{upid?}',"home\OrderController@find");
     //添加购物车
     Route::get('/buy/cart/{id}',"home\CartController@Addcart");
     //清除购物车
@@ -163,9 +169,4 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     Route::get('/alreadyS/{id}','Admin\ServiceController@alreadyS');
     //友情链接管理
     Route::resource('/link','Admin\LinkController');
-    // Route::post('/link','Admin\LinkController@index');
-    // Route::get('/delete','Admin\LinkController@destory');
 });
-    
-/////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////其 它 路 由///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

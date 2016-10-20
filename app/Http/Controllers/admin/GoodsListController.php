@@ -93,6 +93,9 @@ class GoodsListController extends Controller
             $imgfile = $request->file('img');
             $detailfile = $request->file('detail');
             $specsfile = $request->file('specs');
+            if (!($imgfile && $detailfile && $specsfile)) {
+                return back();
+            }
             if($imgfile->isValid()){
                 //执行上传img
                 $ext = $imgfile->getClientOriginalExtension();//获得后缀 

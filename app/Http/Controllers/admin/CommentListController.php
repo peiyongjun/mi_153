@@ -96,4 +96,88 @@ class CommentListController extends Controller
         return back();
     }
 
+        /**
+     * 评价晒单
+     *
+     * @return 待评价商品页面
+     */
+    public function showOrder()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $orders = Orders::where("user_id",$userId)->where('order_status','7')->orderBy("id",'desc')->get();
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+        return view('home.user.orderComment')->with(['list'=>$list])->with(["data"=>$data])->with(['orders'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good]);
+    }
+
+    /**
+     * 已评价商品
+     *
+     * @return 已评价页面
+     */
+    public function alreadyC()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $comments = Comments::where("user_id",$userId)->where("status",1)->orderBy("id",'desc')->get();
+        // dd($comments);
+        $orders = [];//存放评价
+        foreach ($comments as $comment) {
+            $orders[$comment->id] = $comment::find($comment->id)->hasManyOrders()->first();
+        }
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        if($orders){
+            foreach($orders as $order){
+                $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+            }
+            foreach($skus as $sku){
+                $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+            }
+        }
+        return view('home.user.alreadyC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
+    }
+
+    /**
+     * 评价失效商品
+     *
+     * @return 评价失效页面
+     */
+    public function invalidC()
+    {
+        $goods = new Goods();
+        $list = $goods->getType();
+        $data = $goods->getAll();
+        $userId = session('user')->id;
+        $comments = Comments::where("user_id",$userId)->where("status",0)->orderBy("id",'desc')->get();
+        // dd($comments);
+        $orders = [];//存放评价
+        foreach ($comments as $comment) {
+            $orders[$comment->id] = $comment::find($comment->id)->hasManyOrders()->first();
+        }
+        // dd($orders);
+        $skus = [];
+        $good = [];
+        foreach($orders as $order){
+            $skus[$order->id] = Orders::find($order->id)->hasManySkus()->first();
+        }
+        foreach($skus as $sku){
+            $good[$sku->id] = Skus::find($sku->id)->hasSkus()->first();
+        }
+
+        return view('home.user.invalidC')->with(['list'=>$list])->with(["data"=>$data])->with(['order'=>$orders])->with(['skus'=>$skus])->with(['goods'=>$good])->with(['comment'=>$comments]);
+    }
+
 }
