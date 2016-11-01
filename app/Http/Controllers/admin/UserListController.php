@@ -16,10 +16,10 @@ class UserListController extends Controller
         $search = [];
         if($request->has('name')){
             $name = $request->input('name');
-            $info = Users::where("username","like","%{$name}%")->orderBy("status","desc")->orderBy("id")->paginate(15);
+            $info = Users::where("username","like","%{$name}%")->orderBy("status","desc")->orderBy("id",'desc')->paginate(15);
             $search['name'] = $name;
         }else{
-            $info = Users::orderBy("status","desc")->orderBy("id")->paginate(15);
+            $info = Users::orderBy("status","desc")->orderBy("id",'desc')->paginate(15);
         }
         // dd($info);
         return view("admin.user_list")->with(["info"=>$info])->with(["search"=>$search]);

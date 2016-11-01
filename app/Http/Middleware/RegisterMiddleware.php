@@ -29,8 +29,9 @@ class RegisterMiddleware
         }else if(empty($request->icode)){
             return redirect('/register');
         }else if($request->icode != session()->get('code')){
-            $mycode = session()->get("code");
             return redirect('/register')->with("msg",'验证码错误');
+        }else if($request->ecode != session()->get('ecode')){
+            return redirect('/register')->with("emsg",'邮件验证码错误');
         }
         return $next($request);
     }

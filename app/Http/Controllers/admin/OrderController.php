@@ -22,9 +22,9 @@ class OrderController extends Controller
         $where = [];
         if ($request->id) {
             $where['id'] = $request->id;
-            $orders = Orders::where('id','=',$request->id)->paginate(8);
+            $orders = Orders::where('id','=',$request->id)->orderBy("id",'desc')->paginate(8);
         }else{
-            $orders = Orders::paginate(8);
+            $orders = Orders::orderBy("id",'desc')->paginate(8);
         }
         $skus = [];
         $goods = [];
@@ -49,9 +49,9 @@ class OrderController extends Controller
         $where = [];
         if ($request->id) {
             $where['id'] = $request->id;
-            $orders = Orders::where('id','=',$request->id)->where("order_status",1)->paginate(8);
+            $orders = Orders::where('id','=',$request->id)->where("order_status",1)->orderBy("id",'desc')->paginate(8);
         }else{
-            $orders = Orders::where("order_status",1)->paginate(8);
+            $orders = Orders::where("order_status",1)->orderBy("id",'desc')->paginate(8);
         }
         $skus = [];
         $goods = [];
@@ -70,9 +70,9 @@ class OrderController extends Controller
         $where = [];
         if ($request->id) {
             $where['id'] = $request->id;
-            $orders = Orders::where('id','=',$request->id)->where("order_status",2)->paginate(8);
+            $orders = Orders::where('id','=',$request->id)->where("order_status",2)->orderBy("id",'desc')->paginate(8);
         }else{
-            $orders = Orders::where("order_status",2)->paginate(8);
+            $orders = Orders::where("order_status",2)->orderBy("id",'desc')->paginate(8);
         }
         $skus = [];
         $goods = [];

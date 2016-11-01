@@ -21,7 +21,7 @@ class ServiceController extends Controller
      */
     public function untreatedServer()
     {
-        $services = Service::where("status",0)->paginate(5);
+        $services = Service::where("status",0)->orderBy("id",'desc')->paginate(5);
         $orders = [];
         $skus = [];
         $good = [];
@@ -56,7 +56,7 @@ class ServiceController extends Controller
 
     public function treatedServer()
     {
-        $services = Service::where("status",1)->paginate(5);
+        $services = Service::where("status",1)->orderBy("id",'desc')->paginate(5);
         $orders = [];
         $skus = [];
         $good = [];
