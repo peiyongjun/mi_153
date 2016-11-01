@@ -119,11 +119,7 @@
 				'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 			},
 			url:"/sendEmail",
-			dataType:'json',
-			success:function(data)
-	        {
-	        	alert("success");
-	        }
+			dataType:'json'
 		});
 	}
 </script>

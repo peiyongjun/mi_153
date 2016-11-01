@@ -68,6 +68,5 @@ class RegisterController extends Controller
             $message->from('18647266785@163.com', '小米商城');
             $message->to($GLOBALS ['email']);
         });
-        return $GLOBALS['email'];
     }  
 }

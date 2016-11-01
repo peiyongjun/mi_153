@@ -144,7 +144,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        
+        /**
+         * 第三方类
+         */
+        iscms\Alisms\AlidayuServiceProvider::class,
     ],
 
     /*
