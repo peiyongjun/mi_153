@@ -168,3 +168,5 @@ Route::group(["prefix"=>"admin","middleware"=>"AdminLogin"],function () {//设�
     //友情链接管理
     Route::resource('/link','Admin\LinkController');
 });
+
+Route::post("/sendEmail",'Home\RegisterController@sendMail');

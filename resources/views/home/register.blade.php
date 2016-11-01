@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+	<meta name="_token" content="{{ csrf_token() }}"/>
 	<title>小米帐号 - 注册</title>
 	<link type="text/css" rel="stylesheet" href="home/css/reset.css">
 	<link type="text/css" rel="stylesheet" href="home/css/layout.css">
@@ -34,6 +35,16 @@
 									<label class="labelbox" id="checkemail" for="">
 										<input type="tel" name="email" data-type="PH" placeholder="请输入邮箱地址">
 									</label>
+									<a onclick="sendEmail();">发送邮件验证码</a>
+								</div>
+								
+								<div class="inputbg">
+									<label class="labelbox" id="checkemail" for="">
+										<input type="tel" name="ecode" data-type="PH" placeholder="请输入邮箱验证码">
+									</label>
+									@if(session('emsg'))
+										{{ session('emsg') }}
+									@endif
 								</div>
 								<div class="inputbg">
 									<label class="labelbox" id="checkpass" for="">
@@ -49,8 +60,7 @@
 									<label class="labelbox" for="">
 										<input class="code" type="text" name="icode" autocomplete="off" placeholder="图片验证码">
 									</label>
-									<img id="code" alt="图片验证码" title="看不清换一张" src="{{ URL('/captcha/time()') }}"
-									onclick="this.src='{{ URL('/captcha') }}/'+Math.random()">
+									<img id="code" alt="图片验证码" title="看不清换一张" src="{{ URL('/captcha/time()') }}" onclick="this.src='{{ URL('/captcha') }}/'+Math.random()">
 								</div>
 								@if(session('msg'))
 									<p class="login-box-msg" style="color:red;">
@@ -98,4 +108,23 @@
 	</div>
 </body>
 <script type="text/javascript" src='home/js/register.js'></script>
+<script type="text/javascript">
+	function sendEmail ()
+	{
+		var email = $("input[name='email'").val();
+		$.ajax({
+			type:"post",
+			data:{email:email},
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			},
+			url:"/sendEmail",
+			dataType:'json',
+			success:function(data)
+	        {
+	        	alert("success");
+	        }
+		});
+	}
+</script>
 </html>
